@@ -1,0 +1,24 @@
+{{- if and .Values.networkPolicies.enabled .Values.serviceMonitor.enabled (ne .Release.Namespace "monitoring") }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-prometheus
+  namespace: {{ .Release.Namespace }}
+spec:
+  policyTypes:
+    - Ingress
+  podSelector:
+    matchLabels:
+      {{- include "grafana.selectorLabels" . | nindent 6 }}
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            app.kubernetes.io/name: monitoring
+        podSelector:
+          matchLabels:
+            app: prometheus
+    - ports:
+        - protocol: TCP
+          port: {{ .Values.service.targetPort }}
+{{- end }}

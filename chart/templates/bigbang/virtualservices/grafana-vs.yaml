@@ -1,0 +1,34 @@
+{{- if and .Values.istio.enabled .Values.istio.grafana.enabled -}}
+{{- $serviceName := include "grafana.fullname" . }}
+{{- $servicePort := .Values.service.port -}}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ template "grafana.fullname" . }}-grafana
+  namespace: {{ template "grafana.namespace" . }}
+  labels:
+    app: {{ template "grafana.name" . }}-grafana
+{{ include "grafana.labels" . | indent 4 }}
+  {{- if .Values.istio.grafana.labels }}
+{{ toYaml .Values.istio.grafana.labels | indent 4 }}
+  {{- end }}
+  {{- if .Values.istio.grafana.annotations }}
+  annotations:
+{{ toYaml .Values.istio.grafana.annotations | indent 4 }}
+  {{- end }}
+spec:
+  gateways:
+  {{- range .Values.istio.grafana.gateways }}
+    - {{ . }}
+  {{- end }}
+  hosts:
+  {{- range .Values.istio.grafana.hosts }}
+    - {{ tpl . $}}
+  {{- end }}
+  http:
+    - route:
+        - destination:
+            port:
+              number: {{ .Values.istio.grafana.port | default $servicePort }}
+            host: {{ .Values.istio.grafana.service | default $serviceName }}.{{ .Values.istio.grafana.namespace | default .Release.Namespace }}.svc.cluster.local
+{{- end }}
