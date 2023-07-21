@@ -1,0 +1,26 @@
+{{- if .Values.redis.enabled -}}
+{{- /* Added manually, can be changed in-place. */ -}}
+{{- $kubeTargetVersion := default .Capabilities.KubeVersion.GitVersion .Values.kubeTargetVersionOverride }}
+{{- if and (semverCompare ">=1.14.0-0" $kubeTargetVersion) (semverCompare "<9.9.9-9" $kubeTargetVersion) .Values.defaultDashboardsEnabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ printf "%s-%s" (include "grafana.fullname" $) "redis-dashboards" | trunc 63 | trimSuffix "-" }}
+  namespace: {{ template "grafana.namespace" . }}
+  annotations:
+{{ toYaml .Values.sidecar.dashboards.annotations | indent 4 }}
+  labels:
+    {{- if $.Values.sidecar.dashboards.label }}
+    {{ $.Values.sidecar.dashboards.label }}: "1"
+    {{- end }}
+    app: grafana
+{{ include "grafana.labels" $ | indent 4 }}
+data:
+  redis-general-dashbooard.json: |
+    {{ .Files.Get "dashboards/redis/redis-general-dashboard.json" | nindent 4 }}
+  redis-streaming-dashbooard.json: |
+    {{ .Files.Get "dashboards/redis/redis-streaming-dashboard.json" | nindent 4 }}    
+  redis-prometheus-dashbooard.json: |
+    {{ .Files.Get "dashboards/redis/redis-prometheus-dashboard.json" | nindent 4 }}    
+{{- end }}
+{{- end }}

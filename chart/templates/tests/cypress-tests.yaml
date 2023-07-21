@@ -1,0 +1,7 @@
+{{- include "gluon.tests.cypress-configmap.overrides" (list . "grafana-test.cypress-configmap") }}
+{{- define "grafana-test.cypress-configmap" }}
+{{- end }}
+---
+{{- include "gluon.tests.cypress-runner.overrides" (list . "grafana-test.cypress-runner") -}}
+{{- define "grafana-test.cypress-runner" -}}
+{{- end }}
