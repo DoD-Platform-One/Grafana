@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 6.57.4-bb.0](https://img.shields.io/badge/Version-6.57.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.5.3](https://img.shields.io/badge/AppVersion-9.5.3-informational?style=flat-square)
+![Version: 6.57.4-bb.1](https://img.shields.io/badge/Version-6.57.4--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.5.3](https://img.shields.io/badge/AppVersion-9.5.3-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -108,7 +108,7 @@ helm install grafana chart/
 | service.targetPort | int | `3000` |  |
 | service.annotations | object | `{}` |  |
 | service.labels | object | `{}` |  |
-| service.portName | string | `"service"` |  |
+| service.portName | string | `"http-service"` |  |
 | service.appProtocol | string | `""` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | serviceMonitor.path | string | `"/metrics"` |  |
@@ -190,20 +190,18 @@ helm install grafana chart/
 | "grafana.ini".log.mode | string | `"console"` |  |
 | "grafana.ini".grafana_net.url | string | `"https://grafana.net"` |  |
 | "grafana.ini".server.domain | string | `"{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts \| first }}{{ else }}''{{ end }}"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ enabled" | bool | `false` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ client_id" | string | `"grafana"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ client_secret" | string | `"secret"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ scopes" | string | `"Grafana"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ auth_url" | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/auth"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ token_url" | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/token"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ api_url" | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/userinfo"` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ allow_sign_up" | bool | `true` |  |
-| "grafana.ini"."auth.generic_oauth"."¦ role_attribute_path" | string | `"Viewer"` |  |
-| "grafana.ini"."plugin.grafana-piechart-panel"."¦ path" | string | `"/var/lib/bb-plugins/piechart-panel"` |  |
-| "grafana.ini"."plugin.grafana-piechart-panel"."plugin.grafana-polystat-panel" | string | `nil` |  |
-| "grafana.ini"."plugin.grafana-piechart-panel"."¦ path" | string | `"/var/lib/bb-plugins/polystat-panel"` |  |
-| "grafana.ini"."plugin.grafana-piechart-panel"."plugin.redis-datasource" | string | `nil` |  |
-| "grafana.ini"."plugin.grafana-piechart-panel"."¦ path" | string | `"/var/lib/bb-plugins/redis-datasource"` |  |
+| "grafana.ini"."auth.generic_oauth".enabled | bool | `false` |  |
+| "grafana.ini"."auth.generic_oauth".client_id | string | `"grafana"` |  |
+| "grafana.ini"."auth.generic_oauth".client_secret | string | `"secret"` |  |
+| "grafana.ini"."auth.generic_oauth".scopes | string | `"Grafana"` |  |
+| "grafana.ini"."auth.generic_oauth".auth_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/auth"` |  |
+| "grafana.ini"."auth.generic_oauth".token_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/token"` |  |
+| "grafana.ini"."auth.generic_oauth".api_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/userinfo"` |  |
+| "grafana.ini"."auth.generic_oauth".allow_sign_up | bool | `true` |  |
+| "grafana.ini"."auth.generic_oauth".role_attribute_path | string | `"Viewer"` |  |
+| "grafana.ini"."plugin.grafana-piechart-panel".path | string | `"/var/lib/bb-plugins/piechart-panel"` |  |
+| "grafana.ini"."plugin.grafana-polystat-panel".path | string | `"/var/lib/bb-plugins/polystat-panel"` |  |
+| "grafana.ini"."plugin.redis-datasource".path | string | `"/var/lib/bb-plugins/redis-datasource"` |  |
 | ldap.enabled | bool | `false` |  |
 | ldap.existingSecret | string | `""` |  |
 | ldap.config | string | `""` |  |
@@ -370,6 +368,7 @@ helm install grafana chart/
 | prometheusRemoteWriteDashboards | bool | `true` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.ingressLabels.app | string | `"public-ingressgateway"` |  |
+| networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | domain | string | `"bigbang.dev"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.grafana.enabled | bool | `true` |  |
