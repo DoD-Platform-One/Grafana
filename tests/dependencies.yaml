@@ -1,2 +1,3 @@
 monitoring:
-  git: "https://repo1.dso.mil/big-bang/product/packages/monitoring.git"
+  git:
+    repo: "https://repo1.dso.mil/big-bang/product/packages/monitoring.git"
