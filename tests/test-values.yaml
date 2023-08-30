@@ -1,5 +1,7 @@
 bbtests:
   enabled: true
+  cypress_tnr_username: "cypress"
+  cypress_tnr_password: "tnr_w!G33ZyAt@C8"
 
 networkPolicies:
   enabled: true
