@@ -5,7 +5,15 @@ bbtests:
 
 networkPolicies:
   enabled: true
-
+datasources:
+  datasourcesbb.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      url: http://monitoring-kube-prometheus.monitoring.svc:9090
+      isDefault: true
 dashboards:
   default:
     k8s-deployment:
