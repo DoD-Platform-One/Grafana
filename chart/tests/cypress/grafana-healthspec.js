@@ -46,6 +46,17 @@ describe('Grafana Unit Testing', function () {
     cy.visit(`${Cypress.env('grafana_url')}/dashboards`)
     cy.contains("General").click()
     cy.wait(1000)
-    cy.get('h2').contains('Kubernetes / Compute Resources / Cluster').click()
+    cy.get('a').contains('Kubernetes / Compute Resources / Cluster').click()
+    //Start intercept to use later in wait to ensure data actual finishes loading
+    cy.intercept('POST', '**/query*').as('apiQuery')
+    cy.task('log', 'Waiting for data load to complete')
+    //Should not take longer than 30 seconds for this query to complete
+    //If it does then there is likely something wrong with the data source
+    cy.wait('@apiQuery', {timeout: 30000}).then((interception) => {
+      expect(interception.response.statusCode).to.equal(200);
+    })
+    cy.task('log', 'Validated data was loaded succuessfully from data source')
+    cy.get('[data-testid="data-testid Panel header CPU Utilisation"]').not(':contains("No data")')
+    cy.task('log', 'Validated data is present in UI')
   })
 })
