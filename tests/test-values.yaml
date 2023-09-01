@@ -2,7 +2,6 @@ bbtests:
   enabled: true
   cypress_tnr_username: "cypress"
   cypress_tnr_password: "tnr_w!G33ZyAt@C8"
-
 networkPolicies:
   enabled: true
 datasources:
@@ -12,7 +11,7 @@ datasources:
     - name: Prometheus
       type: prometheus
       access: proxy
-      url: http://monitoring-kube-prometheus.monitoring.svc:9090
+      url: http://monitoring-kube-prometheus-prometheus.grafana.svc.cluster.local:9090
       isDefault: true
 dashboards:
   default:
