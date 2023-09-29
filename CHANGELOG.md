@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.58.9-bb.4] - 2023-09-26
+### Changed
+- Updated Cypress test
+- Updated Gluon 0.4.1
+
 ## [6.58.9-bb.2] - 2023-08-30
 ### Changed
 - Updated Cypress test so that it verifies data is getting pulled in and is visible
