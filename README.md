@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 6.58.9-bb.4](https://img.shields.io/badge/Version-6.58.9--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.0.3](https://img.shields.io/badge/AppVersion-10.0.3-informational?style=flat-square)
+![Version: 6.60.6-bb.0](https://img.shields.io/badge/Version-6.60.6--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -68,7 +68,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"10.0.3"` |  |
+| image.tag | string | `"10.1.5"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -191,18 +191,6 @@ helm install grafana chart/
 | "grafana.ini".log.mode | string | `"console"` |  |
 | "grafana.ini".grafana_net.url | string | `"https://grafana.net"` |  |
 | "grafana.ini".server.domain | string | `"{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts \| first }}{{ else }}''{{ end }}"` |  |
-| "grafana.ini"."auth.generic_oauth".enabled | bool | `false` |  |
-| "grafana.ini"."auth.generic_oauth".client_id | string | `"grafana"` |  |
-| "grafana.ini"."auth.generic_oauth".client_secret | string | `"secret"` |  |
-| "grafana.ini"."auth.generic_oauth".scopes | string | `"Grafana"` |  |
-| "grafana.ini"."auth.generic_oauth".auth_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/auth"` |  |
-| "grafana.ini"."auth.generic_oauth".token_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/token"` |  |
-| "grafana.ini"."auth.generic_oauth".api_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/userinfo"` |  |
-| "grafana.ini"."auth.generic_oauth".allow_sign_up | bool | `true` |  |
-| "grafana.ini"."auth.generic_oauth".role_attribute_path | string | `"Viewer"` |  |
-| "grafana.ini"."plugin.grafana-piechart-panel".path | string | `"/var/lib/bb-plugins/piechart-panel"` |  |
-| "grafana.ini"."plugin.grafana-polystat-panel".path | string | `"/var/lib/bb-plugins/polystat-panel"` |  |
-| "grafana.ini"."plugin.redis-datasource".path | string | `"/var/lib/bb-plugins/redis-datasource"` |  |
 | ldap.enabled | bool | `false` |  |
 | ldap.existingSecret | string | `""` |  |
 | ldap.config | string | `""` |  |
@@ -210,7 +198,7 @@ helm install grafana chart/
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.repository | string | `"registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.25.0"` |  |
+| sidecar.image.tag | string | `"1.25.2"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
@@ -239,7 +227,6 @@ helm install grafana chart/
 | sidecar.dashboards.SCProvider | bool | `true` |  |
 | sidecar.dashboards.label | string | `"grafana_dashboard"` |  |
 | sidecar.dashboards.labelValue | string | `"1"` |  |
-| sidecar.dashboards.annotations | object | `{}` |  |
 | sidecar.dashboards.folder | string | `"/tmp/dashboards"` |  |
 | sidecar.dashboards.defaultFolderName | string | `nil` |  |
 | sidecar.dashboards.searchNamespace | string | `"ALL"` |  |
