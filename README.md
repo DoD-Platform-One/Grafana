@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 6.60.6-bb.0](https://img.shields.io/badge/Version-6.60.6--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
+![Version: 6.60.6-bb.1](https://img.shields.io/badge/Version-6.60.6--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
