@@ -1310,9 +1310,6 @@ istio:
     # Review `./docs/istio-mtls-metrics.md` for additional information.
     mode: STRICT
 
-redis:
-  enabled: false
-
 bbtests:
   enabled: false
   cypress:
