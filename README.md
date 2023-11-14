@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 6.60.6-bb.2](https://img.shields.io/badge/Version-6.60.6--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
+![Version: 6.60.6-bb.3](https://img.shields.io/badge/Version-6.60.6--bb.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -191,6 +191,18 @@ helm install grafana chart/
 | "grafana.ini".log.mode | string | `"console"` |  |
 | "grafana.ini".grafana_net.url | string | `"https://grafana.net"` |  |
 | "grafana.ini".server.domain | string | `"{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts \| first }}{{ else }}''{{ end }}"` |  |
+| "grafana.ini"."auth.generic_oauth".enabled | bool | `false` |  |
+| "grafana.ini"."auth.generic_oauth".client_id | string | `"grafana"` |  |
+| "grafana.ini"."auth.generic_oauth".client_secret | string | `"secret"` |  |
+| "grafana.ini"."auth.generic_oauth".scopes | string | `"Grafana"` |  |
+| "grafana.ini"."auth.generic_oauth".auth_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/auth"` |  |
+| "grafana.ini"."auth.generic_oauth".token_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/token"` |  |
+| "grafana.ini"."auth.generic_oauth".api_url | string | `"https://login.dso.mil/auth/realms/baby-yoda/protocol/openid-connect/userinfo"` |  |
+| "grafana.ini"."auth.generic_oauth".allow_sign_up | bool | `true` |  |
+| "grafana.ini"."auth.generic_oauth".role_attribute_path | string | `"Viewer"` |  |
+| "grafana.ini"."plugin.grafana-piechart-panel".path | string | `"/var/lib/bb-plugins/piechart-panel"` |  |
+| "grafana.ini"."plugin.grafana-polystat-panel".path | string | `"/var/lib/bb-plugins/polystat-panel"` |  |
+| "grafana.ini"."plugin.redis-datasource".path | string | `"/var/lib/bb-plugins/redis-datasource"` |  |
 | ldap.enabled | bool | `false` |  |
 | ldap.existingSecret | string | `""` |  |
 | ldap.config | string | `""` |  |

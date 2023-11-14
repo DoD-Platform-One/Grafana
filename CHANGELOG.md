@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [6.60.6-bb.3] - 2023-11-13
+### Added
+- `docs/DEVELOPMENT_MAINTENANCE.md` with upstream helm deviations
+
+### Changed
+- Added values back to `grafana.ini`
+
 ## [6.60.6-bb.2] - 2023-11-02
 ### Changed
 - Moved redis-dashboards.yaml over to Redis package
