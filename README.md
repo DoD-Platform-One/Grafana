@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 6.60.6-bb.4](https://img.shields.io/badge/Version-6.60.6--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
+![Version: 6.60.6-bb.5](https://img.shields.io/badge/Version-6.60.6--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -149,8 +149,8 @@ helm install grafana chart/
 | persistence.extraPvcLabels | object | `{}` |  |
 | persistence.inMemory.enabled | bool | `false` |  |
 | initChownData.enabled | bool | `false` |  |
-| initChownData.image.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal"` |  |
-| initChownData.image.tag | string | `"8.8"` |  |
+| initChownData.image.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal"` |  |
+| initChownData.image.tag | string | `"9.3"` |  |
 | initChownData.image.sha | string | `""` |  |
 | initChownData.image.pullPolicy | string | `"IfNotPresent"` |  |
 | initChownData.resources.limits.cpu | string | `"100m"` |  |
