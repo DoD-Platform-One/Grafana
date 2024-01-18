@@ -15,14 +15,100 @@ Grafana is a modified/customized version of an upstream chart. The below details
 
 1. Push up your changes, validate that CI passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
 
-1.  Perform the steps below for manual testing. CI provides a good set of basic smoke tests but it is beneficial to run some additional checks.
+1.  Perform the steps below for manual testing. CI provides a good set of basic smoke tests (use the `debug` label) but it is beneficial to run some additional checks.
 
 # Testing a new Grafana version
 
-1. TBD, per Codeowners
+### Deploy Grafana as a part of BigBang
+
+`overrides/testing-grafana.yaml`
+
+```yaml
+domain: bigbang.dev
+
+flux:
+  interval: 1m
+  rollback:
+    cleanupOnFail: false
+
+networkPolicies:
+  enabled: true
+
+clusterAuditor:
+  enabled: false
+
+gatekeeper:
+  enabled: false
+
+neuvector:
+  enabled: false
+
+istioOperator:
+  enabled: true
+
+istio:
+  enabled: true
+
+monitoring:
+  enabled: true
+
+grafana:
+  enabled: true
+  git:
+    tag: null
+    branch: "renovate/ironbank"
+  sso:
+    enabled: true
+    grafana:
+      client_id: platform1_a8604cc9-f5e9-4656-802d-d05624370245_bb8-grafana
+      scopes: "openid Grafana"
+
+loki:
+  enabled: true
+
+promtail:
+  enabled: true
+
+tempo:
+  enabled: true
+
+kyverno:
+  enabled: false
+
+kyvernoPolicies:
+  enabled: false
+
+kyvernoReporter:
+  enabled: false
+
+jaeger:
+  enabled: false
+
+kiali:
+  enabled: false
+
+elasticsearchKibana:
+  enabled: false
+
+eckOperator:
+  enabled: false
+
+fluentbit:
+  enabled: false
+
+twistlock:
+  enabled: false
+```
+
+- Visit `https://grafana.bigbang.dev` and login
+- Navigate to `Dashboards` and then click on `Kubernetes / Compute Resources / Cluster` and validate that data is loaded
 
 # Modifications made to upstream chart
-The following section is added to the `grafana.ini` section of `values.yaml`
+
+`values.yaml`
+
+- Ensure `assertNoLeakedSecrets: false`
+- Ensure the following section is added to the `grafana.ini`
 ```
 grafana.ini: 
   ...

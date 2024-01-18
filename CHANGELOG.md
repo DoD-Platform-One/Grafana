@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [7.2.1-bb.0] - 2023-01-18
+### Added
+- Updated grafana to 10.1.5 -> 10.2.3
+- Updated grafana-plugins 10.1.5 -> 10.2.3
+- Updated chart base to 6.60.6 -> 7.2.1
+- Updated base 2.0.0 -> 2.1.0
+- Updated k8s-sidecar 1.25.2 -> 1.25.3
+- Updated bats 1.9.0 -> v1.10.0
+- Updated cypress health test as General folder was removed
+
 ## [6.60.6-bb.5] - 2023-12-14
 ### Added
 - Upgrade ubi8-minimal:8.8 to ubi9-minimal:9.3 

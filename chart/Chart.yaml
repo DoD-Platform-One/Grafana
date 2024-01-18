@@ -1,11 +1,11 @@
 apiVersion: v2
 name: grafana
-version: 6.60.6-bb.5
-appVersion: 10.1.5
+version: 7.2.1-bb.0
+appVersion: 10.2.3
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
-home: https://grafana.net
-icon: https://raw.githubusercontent.com/grafana/grafana/master/public/img/logo_transparent_400x.png
+home: https://grafana.com
+icon: https://artifacthub.io/image/b4fed1a7-6c8f-4945-b99d-096efa3e4116
 sources:
   - https://github.com/grafana/grafana
   - https://github.com/grafana/helm-charts
@@ -17,20 +17,20 @@ annotations:
     - name: Upstream Project
       url: https://github.com/grafana/grafana
   bigbang.dev/applicationVersions: |
-    - Grafana: 10.1.5
+    - Grafana: 10.2.3
   helm.sh/images: |
     - name: grafana
-      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:10.1.5
+      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:10.2.3
     - name: k8s-sidecar
-      image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.25.2
+      image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.25.3
     - name: init-chown-data
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.3
       condition: initChownData.enabled
     - name: test-framework
-      image: registry1.dso.mil/ironbank/opensource/bats/bats:1.9.0
+      image: registry1.dso.mil/ironbank/opensource/bats/bats:v1.10.0
       condition: testFramework.enabled
     - name: base
-      image: registry1.dso.mil/ironbank/big-bang/base:2.0.0
+      image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
 maintainers:
   - name: zanhsieh
     email: zanhsieh@gmail.com
@@ -45,7 +45,7 @@ maintainers:
 type: application
 dependencies:
   - name: gluon
-    version: "0.4.1"
+    version: "0.4.4"
     repository: oci://registry1.dso.mil/bigbang
 keywords:
   - monitoring
