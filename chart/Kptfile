@@ -3,9 +3,9 @@ kind: Kptfile
 metadata:
     name: chart
 upstream:
-    type: git
-    git:
-        commit: ed4f4db0c2aae2f55f82a0d14f55e8ebebeb7a15
-        repo: https://github.com/grafana/helm-charts
-        directory: /charts/grafana
-        ref: grafana-6.60.6
+  type: git
+  git:
+    commit: dae491a3252a006186f43c4ad9904483559a2b7b
+    repo: https://github.com/grafana/helm-charts
+    directory: /charts/grafana
+    ref: grafana-7.2.1

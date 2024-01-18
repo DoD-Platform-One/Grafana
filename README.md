@@ -1,11 +1,11 @@
 # grafana
 
-![Version: 6.60.6-bb.5](https://img.shields.io/badge/Version-6.60.6--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.1.5](https://img.shields.io/badge/AppVersion-10.1.5-informational?style=flat-square)
+![Version: 7.2.1-bb.0](https://img.shields.io/badge/Version-7.2.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.2.3](https://img.shields.io/badge/AppVersion-10.2.3-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
 ## Upstream References
-* <https://grafana.net>
+* <https://grafana.com>
 
 * <https://github.com/grafana/grafana>
 * <https://github.com/grafana/helm-charts>
@@ -38,6 +38,7 @@ helm install grafana chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| global.imageRegistry | string | `"registry1.dso.mil"` | Overrides the Docker registry globally for all images |
 | global.imagePullSecrets | list | `[]` |  |
 | rbac.create | bool | `true` |  |
 | rbac.pspEnabled | bool | `false` |  |
@@ -67,8 +68,8 @@ helm install grafana chart/
 | livenessProbe.initialDelaySeconds | int | `60` |  |
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
-| image.repository | string | `"registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"10.1.5"` |  |
+| image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
+| image.tag | string | `"10.2.3"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -76,6 +77,8 @@ helm install grafana chart/
 | testFramework.tag | string | `"v1.4.1"` |  |
 | testFramework.imagePullPolicy | string | `"IfNotPresent"` |  |
 | testFramework.securityContext | object | `{}` |  |
+| dnsPolicy | string | `nil` |  |
+| dnsConfig | object | `{}` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65532` |  |
 | securityContext.runAsGroup | int | `65532` |  |
@@ -87,8 +90,8 @@ helm install grafana chart/
 | extraConfigmapMounts | list | `[]` |  |
 | extraEmptyDirMounts | list | `[]` |  |
 | extraLabels | object | `{}` |  |
-| downloadDashboardsImage.repository | string | `"registry1.dso.mil/ironbank/big-bang/base"` |  |
-| downloadDashboardsImage.tag | string | `"2.0.0"` |  |
+| downloadDashboardsImage.repository | string | `"ironbank/big-bang/base"` |  |
+| downloadDashboardsImage.tag | string | `"2.1.0"` |  |
 | downloadDashboardsImage.pullPolicy | string | `"IfNotPresent"` |  |
 | downloadDashboards.env | object | `{}` |  |
 | downloadDashboards.envFromSecret | string | `""` |  |
@@ -104,6 +107,9 @@ helm install grafana chart/
 | gossipPortName | string | `"gossip"` |  |
 | service.enabled | bool | `true` |  |
 | service.type | string | `"ClusterIP"` |  |
+| service.loadBalancerIP | string | `""` |  |
+| service.loadBalancerClass | string | `""` |  |
+| service.loadBalancerSourceRanges | list | `[]` |  |
 | service.port | int | `80` |  |
 | service.targetPort | int | `3000` |  |
 | service.annotations | object | `{}` |  |
@@ -149,7 +155,7 @@ helm install grafana chart/
 | persistence.extraPvcLabels | object | `{}` |  |
 | persistence.inMemory.enabled | bool | `false` |  |
 | initChownData.enabled | bool | `false` |  |
-| initChownData.image.repository | string | `"registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal"` |  |
+| initChownData.image.repository | string | `"ironbank/redhat/ubi/ubi9-minimal"` |  |
 | initChownData.image.tag | string | `"9.3"` |  |
 | initChownData.image.sha | string | `""` |  |
 | initChownData.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -175,6 +181,7 @@ helm install grafana chart/
 | enableServiceLinks | bool | `true` |  |
 | extraSecretMounts | list | `[]` |  |
 | extraVolumeMounts | list | `[]` |  |
+| extraVolumes | list | `[]` |  |
 | lifecycleHooks | object | `{}` |  |
 | plugins | list | `[]` |  |
 | datasources | object | `{}` |  |
@@ -209,8 +216,8 @@ helm install grafana chart/
 | smtp.existingSecret | string | `""` |  |
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
-| sidecar.image.repository | string | `"registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.25.2"` |  |
+| sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
+| sidecar.image.tag | string | `"1.25.3"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
@@ -232,6 +239,7 @@ helm install grafana chart/
 | sidecar.alerts.reloadURL | string | `"http://localhost:3000/api/admin/provisioning/alerting/reload"` |  |
 | sidecar.alerts.script | string | `nil` |  |
 | sidecar.alerts.skipReload | bool | `false` |  |
+| sidecar.alerts.initAlerts | bool | `false` |  |
 | sidecar.alerts.extraMounts | list | `[]` |  |
 | sidecar.alerts.sizeLimit | object | `{}` |  |
 | sidecar.dashboards.enabled | bool | `true` |  |
@@ -261,6 +269,7 @@ helm install grafana chart/
 | sidecar.dashboards.multicluster.etcd.enabled | bool | `true` |  |
 | sidecar.datasources.enabled | bool | `true` |  |
 | sidecar.datasources.env | object | `{}` |  |
+| sidecar.datasources.envValueFrom | object | `{}` |  |
 | sidecar.datasources.label | string | `"grafana_datasource"` |  |
 | sidecar.datasources.labelValue | string | `"1"` |  |
 | sidecar.datasources.searchNamespace | string | `nil` |  |
@@ -318,6 +327,7 @@ helm install grafana chart/
 | imageRenderer.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | imageRenderer.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | imageRenderer.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| imageRenderer.podAnnotations | object | `{}` |  |
 | imageRenderer.hostAliases | list | `[]` |  |
 | imageRenderer.priorityClassName | string | `""` |  |
 | imageRenderer.service.enabled | bool | `true` |  |
@@ -350,10 +360,13 @@ helm install grafana chart/
 | networkPolicy.allowExternal | bool | `true` |  |
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |
 | networkPolicy.egress.enabled | bool | `false` |  |
+| networkPolicy.egress.blockDNSResolution | bool | `false` |  |
 | networkPolicy.egress.ports | list | `[]` |  |
+| networkPolicy.egress.to | list | `[]` |  |
 | enableKubeBackwardCompatibility | bool | `false` |  |
 | useStatefulSet | bool | `false` |  |
 | extraObjects | list | `[]` |  |
+| assertNoLeakedSecrets | bool | `false` |  |
 | defaultDashboardsEnabled.enabled | bool | `true` |  |
 | coreDns.enabled | bool | `true` |  |
 | kubeEtcd.enabled | bool | `true` |  |
@@ -384,6 +397,12 @@ helm install grafana chart/
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_grafana_url | string | `"http://grafana:80"` |  |
+| bbtests.cypress.resources.requests.cpu | int | `2` |  |
+| bbtests.cypress.resources.requests.memory | string | `"2Gi"` |  |
+| bbtests.istio.sidecar.resources.cpu.requests | string | `"100m"` |  |
+| bbtests.istio.sidecar.resources.cpu.limits | string | `"2000m"` |  |
+| bbtests.istio.sidecar.resources.memory.requests | string | `"512Mi"` |  |
+| bbtests.istio.sidecar.resources.memory.limits | string | `"2048Mi"` |  |
 
 ## Contributing
 
