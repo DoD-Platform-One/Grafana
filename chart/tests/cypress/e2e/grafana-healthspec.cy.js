@@ -35,9 +35,8 @@ describe('Grafana Unit Testing', function () {
     // You can place the test-specific code here.
     cy.visit(`${Cypress.env('grafana_url')}/dashboards`); 
     cy.wait(1000);
-    cy.contains("Kubernetes / Compute Resources / Cluster").click();
+    cy.get('a').contains('Kubernetes / Compute Resources / Cluster').click();
     cy.wait(1000);
-    // cy.get('a').contains('Kubernetes / Compute Resources / Cluster').click();
     // Start intercept to use later in wait to ensure data actually finishes loading
     cy.intercept('POST', '**/query*').as('apiQuery');
     // Should not take longer than 30 seconds for this query to complete
