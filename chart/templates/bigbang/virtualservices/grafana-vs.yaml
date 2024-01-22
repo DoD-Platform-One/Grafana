@@ -26,6 +26,11 @@ spec:
     - {{ tpl . $}}
   {{- end }}
   http:
+    - match:
+      - uri:
+          prefix: "/metrics"
+      redirect:
+        uri: "/"
     - route:
         - destination:
             port:
