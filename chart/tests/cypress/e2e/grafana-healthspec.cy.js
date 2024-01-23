@@ -35,7 +35,7 @@ describe('Grafana Unit Testing', function () {
     // You can place the test-specific code here.
     cy.visit(`${Cypress.env('grafana_url')}/dashboards`); 
     cy.wait(1000);
-    cy.get('a').contains('Kubernetes / Compute Resources / Cluster').click();
+    cy.get('a').contains('CoreDNS').click();
     cy.wait(1000);
     // Start intercept to use later in wait to ensure data actually finishes loading
     cy.intercept('POST', '**/query*').as('apiQuery');
@@ -44,6 +44,6 @@ describe('Grafana Unit Testing', function () {
     // cy.wait('@apiQuery', { timeout: 30000 }).then((interception) => {
     //   expect(interception.response.statusCode).to equal(200);
     // });
-    cy.get('[data-testid="data-testid Panel header CPU Utilisation"]').should('not.contain', 'No data');
+    cy.get('[data-testid="data-testid Panel header Requests (total)"]').should('not.contain', 'No data');
   });
 });
