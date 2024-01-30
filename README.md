@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.2.1-bb.3](https://img.shields.io/badge/Version-7.2.1--bb.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.2.3](https://img.shields.io/badge/AppVersion-10.2.3-informational?style=flat-square)
+![Version: 7.2.1-bb.4](https://img.shields.io/badge/Version-7.2.1--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.2.3](https://img.shields.io/badge/AppVersion-10.2.3-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -384,6 +384,7 @@ helm install grafana chart/
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | domain | string | `"bigbang.dev"` |  |
 | istio.enabled | bool | `false` |  |
+| istio.hardened.enabled | bool | `false` |  |
 | istio.grafana.enabled | bool | `true` |  |
 | istio.grafana.annotations | object | `{}` |  |
 | istio.grafana.labels | object | `{}` |  |

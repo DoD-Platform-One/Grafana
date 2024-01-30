@@ -1364,6 +1364,8 @@ domain: bigbang.dev
 
 istio:
   enabled: false
+  hardened:
+    enabled: false
   grafana:
     # Toggle vs creation
     enabled: true
