@@ -39,3 +39,6 @@ dashboardProviders:
       editable: true
       options:
         path: /var/lib/grafana/dashboards
+istio:
+  hardened: 
+    enabled: true
