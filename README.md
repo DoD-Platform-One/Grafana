@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.2.1-bb.4](https://img.shields.io/badge/Version-7.2.1--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.2.3](https://img.shields.io/badge/AppVersion-10.2.3-informational?style=flat-square)
+![Version: 7.2.1-bb.5](https://img.shields.io/badge/Version-7.2.1--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.2.3](https://img.shields.io/badge/AppVersion-10.2.3-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -400,6 +400,8 @@ helm install grafana chart/
 | bbtests.cypress.envs.cypress_grafana_url | string | `"http://grafana:80"` |  |
 | bbtests.cypress.resources.requests.cpu | int | `2` |  |
 | bbtests.cypress.resources.requests.memory | string | `"2Gi"` |  |
+| bbtests.cypress.resources.limits.cpu | int | `2` |  |
+| bbtests.cypress.resources.limits.memory | string | `"2Gi"` |  |
 | bbtests.istio.sidecar.resources.cpu.requests | string | `"100m"` |  |
 | bbtests.istio.sidecar.resources.cpu.limits | string | `"2000m"` |  |
 | bbtests.istio.sidecar.resources.memory.requests | string | `"512Mi"` |  |
