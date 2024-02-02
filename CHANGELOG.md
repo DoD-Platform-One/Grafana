@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [7.2.1-bb.5] - 2024-02-02
+### Added
+- Update Gluon to 0.4.8
+
 ## [7.2.1-bb.4] - 2024-01-29
 ### Added
 - Added support for Istio Authorization Policies
