@@ -91,7 +91,7 @@ livenessProbe:
 image:
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "10.2.3"
+  tag: "10.3.1"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -487,6 +487,7 @@ envRenderSecret: {}
 ## Name is templated.
 envFromSecrets: []
 ## - name: secret-name
+##   prefix: prefix
 ##   optional: true
 
 ## The names of conifgmaps in the same kubernetes namespace which contain values to be added to the environment
@@ -495,6 +496,7 @@ envFromSecrets: []
 ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#configmapenvsource-v1-core
 envFromConfigMaps: []
 ## - name: configmap-name
+##   prefix: prefix
 ##   optional: true
 
 # Inject Kubernetes services as environment variables.
