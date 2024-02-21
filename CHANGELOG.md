@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [7.3.1-bb.0] - 2024-02-21
+### Added
+- Updated chart base to 7.3.0 -> 7.3.1
+- Updated grafana-plugins 10.3.1 -> 10.3.3
+- Updated k8s-sidecar 1.25.3 -> 1.25.4
+
 ## [7.3.0-bb.1] - 2024-02-15
 ### Changed
 - Updated the allow-all-in-namespace istio auth policy
