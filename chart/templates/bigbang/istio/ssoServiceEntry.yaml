@@ -1,0 +1,16 @@
+{{- /* Render Istio ServiceEntry for SSO */ -}}
+{{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.sso.enabled -}}
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: {{ include "grafana.hostnameFromUri" (index .Values "grafana.ini" "auth.generic_oauth" "auth_url") | replace "." "-" }}-service-entry
+  namespace: {{ $.Release.Namespace }}
+spec:
+  hosts:
+    - {{ include "grafana.hostnameFromUri" (index .Values "grafana.ini" "auth.generic_oauth" "auth_url") }}
+  location: MESH_EXTERNAL
+  ports:
+    - number: 443
+      protocol: TLS
+      name: https
+{{- end -}}
