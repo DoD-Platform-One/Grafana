@@ -11,7 +11,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: metrics
+      {{- include "grafana.selectorLabels" $ | nindent 6 }} 
   action: ALLOW
   rules:
   - from:
