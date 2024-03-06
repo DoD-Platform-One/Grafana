@@ -16,6 +16,8 @@ global:
   #   - pullSecret2
   imagePullSecrets: []
 
+openshift: false
+
 rbac:
   create: true
   ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)
