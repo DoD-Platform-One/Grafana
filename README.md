@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.1-bb.4](https://img.shields.io/badge/Version-7.3.1--bb.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.3.3](https://img.shields.io/badge/AppVersion-10.3.3-informational?style=flat-square)
+![Version: 7.3.1-bb.5](https://img.shields.io/badge/Version-7.3.1--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.3.3](https://img.shields.io/badge/AppVersion-10.3.3-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -399,6 +399,7 @@ helm install grafana chart/
 | istio.grafana.namespace | string | `""` |  |
 | istio.injection | string | `"disabled"` |  |
 | istio.mtls.mode | string | `"STRICT"` |  |
+| sso.enabled | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_grafana_url | string | `"http://grafana:80"` |  |

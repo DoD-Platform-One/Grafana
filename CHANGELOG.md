@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [7.3.1-bb.5] - 2024-03-06
+### Modified
+- Modify Sidecar to include a workloadSelector, modified values.yaml to set default for `sso.enabled` to `false`
+
 ## [7.3.1-bb.4] - 2024-03-05
 ### Changed
 - Added Openshift update for deploying grafana into Openshift cluster
@@ -67,7 +71,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [6.60.6-bb.5] - 2023-12-14
 ### Added
-- Upgrade ubi8-minimal:8.8 to ubi9-minimal:9.3 
+- Upgrade ubi8-minimal:8.8 to ubi9-minimal:9.3
 
 ## [6.60.6-bb.4] - 2023-12-07
 ### Added
