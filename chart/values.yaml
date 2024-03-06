@@ -1406,6 +1406,9 @@ istio:
     # Review `./docs/istio-mtls-metrics.md` for additional information.
     mode: STRICT
 
+sso:
+  enabled: false
+
 bbtests:
   enabled: false
   cypress:
