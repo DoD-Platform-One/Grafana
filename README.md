@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.1-bb.5](https://img.shields.io/badge/Version-7.3.1--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.3.3](https://img.shields.io/badge/AppVersion-10.3.3-informational?style=flat-square)
+![Version: 7.3.7-bb.0](https://img.shields.io/badge/Version-7.3.7--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.0](https://img.shields.io/badge/AppVersion-10.4.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -51,9 +51,10 @@ helm install grafana chart/
 | serviceAccount.name | string | `nil` |  |
 | serviceAccount.nameTest | string | `nil` |  |
 | serviceAccount.labels | object | `{}` |  |
-| serviceAccount.autoMount | bool | `true` |  |
+| serviceAccount.automountServiceAccountToken | bool | `false` |  |
 | replicas | int | `1` |  |
 | headlessService | bool | `false` |  |
+| automountServiceAccountToken | bool | `true` |  |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.maxReplicas | int | `5` |  |
@@ -70,7 +71,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"10.3.3"` |  |
+| image.tag | string | `"10.4.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -218,7 +219,7 @@ helm install grafana chart/
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.25.4"` |  |
+| sidecar.image.tag | string | `"1.26.1"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |

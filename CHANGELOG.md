@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [7.3.7-bb.0] - 2024-03-19
+### Changed
+- Updated chart base to 7.3.1 -> 7.3.7
+- Updated grafana-plugins 10.3.3 -> 10.4.0
+- Updated k8s-sidecar 1.25.4 -> 1.26.1
+
 ## [7.3.1-bb.5] - 2024-03-06
 ### Modified
 - Modify Sidecar to include a workloadSelector, modified values.yaml to set default for `sso.enabled` to `false`
