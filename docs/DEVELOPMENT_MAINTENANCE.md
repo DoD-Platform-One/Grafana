@@ -9,6 +9,8 @@ Grafana is a modified/customized version of an upstream chart. The below details
 
 1. Modify the `version` in `Chart.yaml` - you will want to append `-bb.0` to the chart version from upstream.
 
+1. Check for changes to the [dashboards provided](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14) with `kube-prometheus-stack`. Also check for changes to the following [python script from upstream](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/hack/sync_grafana_dashboards.py). If there are changes read the section below for [Syncing Dashboards](#syncing-dashboards)
+
 1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Grafana chart to x.x.x` and `Updated image versions to latest in IB (grafana: x.x.x, etc)`.
 
 1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
@@ -141,3 +143,23 @@ grafana.ini:
 The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads).
 
 This policy revokes access to the K8s API for Pods utilizing said ServiceAccounts. If a Pod truly requires access to the K8s API (for app functionality), the Pod is added to the `pods:` array of the same mutating policy. This grants the Pod access to the API, and creates a Kyverno PolicyException to prevent an alert.
+
+### Syncing Dashboards
+Since we ship the grafana package separately due to https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/110 & https://github.com/prometheus-community/helm-charts/issues/3548 where a solution never bubbled down that fixed the issue for our environments.
+
+When the dashboards and script update upstream we must pull in the new scripts from `hack/` in `kube-prometheus-stack`. Modify them so that any new values are present in this chart, and revert back the references `.Values.grafana`  to just `.Values.` since this is the grafana chart.
+
+Ensure relative locations are correct in the python script, eg: 
+```
+charts = [
+    {
+        'source': '../../monitoring/chart/files/dashboards/k8s-coredns.json', #Pointing to local BigBang monitoring chart/files/dashboard
+        'destination': '../chart/templates/dashboards/dashboards-1.14', #Pointing to this grafana package chart/templates/dashboards (eg ran from hack/ folder)
+        ...,
+    },
+    {
+        ...,
+        'destination': '../chart/templates/dashboards/dashboards-1.14',
+```
+
+Push up changes to `dashboards/dashboards-1.14` folder. Deploy in dev and ensure modified dashboards from upstream (coredns/node-exporter/etcd) are importing and showing data as before the changes/upgrades.

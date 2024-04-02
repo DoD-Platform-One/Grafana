@@ -768,7 +768,7 @@ grafana.ini:
     plugins: /var/lib/grafana/plugins
     provisioning: /etc/grafana/provisioning
   analytics:
-    check_for_updates: true
+    check_for_updates: false
   log:
     mode: console
   grafana_net:
@@ -802,6 +802,8 @@ grafana.ini:
     path: /var/lib/bb-plugins/polystat-panel
   plugin.redis-datasource:
     path: /var/lib/bb-plugins/redis-datasource
+  security: 
+    angular_support_enabled: false
 
  # auth.github:
  #    enabled: false
@@ -1369,6 +1371,7 @@ networkPolicies:
   ingressLabels:
     app: public-ingressgateway
     istio: ingressgateway
+defaultDashboardsEditable: true
 
 domain: bigbang.dev
 

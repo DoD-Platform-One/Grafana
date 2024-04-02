@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [7.3.7-bb.1] - 2024-03-29
+### Changed
+- Updating dashboards and sync script from upstream kube-prometheus-stack chart
+
 ## [7.3.7-bb.0] - 2024-03-19
 ### Changed
 - Updated chart base to 7.3.1 -> 7.3.7
