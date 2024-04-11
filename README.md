@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.7-bb.1](https://img.shields.io/badge/Version-7.3.7--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.0](https://img.shields.io/badge/AppVersion-10.4.0-informational?style=flat-square)
+![Version: 7.3.7-bb.2](https://img.shields.io/badge/Version-7.3.7--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.0](https://img.shields.io/badge/AppVersion-10.4.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -196,7 +196,7 @@ helm install grafana chart/
 | "grafana.ini".paths.logs | string | `"/var/log/grafana"` |  |
 | "grafana.ini".paths.plugins | string | `"/var/lib/grafana/plugins"` |  |
 | "grafana.ini".paths.provisioning | string | `"/etc/grafana/provisioning"` |  |
-| "grafana.ini".analytics.check_for_updates | bool | `true` |  |
+| "grafana.ini".analytics.check_for_updates | bool | `false` |  |
 | "grafana.ini".log.mode | string | `"console"` |  |
 | "grafana.ini".grafana_net.url | string | `"https://grafana.net"` |  |
 | "grafana.ini".server.domain | string | `"{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts \| first }}{{ else }}''{{ end }}"` |  |
@@ -212,6 +212,7 @@ helm install grafana chart/
 | "grafana.ini"."plugin.grafana-piechart-panel".path | string | `"/var/lib/bb-plugins/piechart-panel"` |  |
 | "grafana.ini"."plugin.grafana-polystat-panel".path | string | `"/var/lib/bb-plugins/polystat-panel"` |  |
 | "grafana.ini"."plugin.redis-datasource".path | string | `"/var/lib/bb-plugins/redis-datasource"` |  |
+| "grafana.ini".security.angular_support_enabled | bool | `false` |  |
 | ldap.enabled | bool | `false` |  |
 | ldap.existingSecret | string | `""` |  |
 | ldap.config | string | `""` |  |
@@ -384,6 +385,7 @@ helm install grafana chart/
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.ingressLabels.app | string | `"public-ingressgateway"` |  |
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
+| defaultDashboardsEditable | bool | `true` |  |
 | domain | string | `"bigbang.dev"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
