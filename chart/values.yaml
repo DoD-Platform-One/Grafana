@@ -1396,6 +1396,12 @@ istio:
     # - name: "allow-nothing"
     #   enabled: true
     #   spec: {}
+    kiali:
+      enabled: true
+      namespaces:
+      - kiali
+      principals:
+      - cluster.local/ns/kiali/sa/kiali-service-account
 
   grafana:
     # Toggle vs creation
