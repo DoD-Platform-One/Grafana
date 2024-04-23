@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.7-bb.3](https://img.shields.io/badge/Version-7.3.7--bb.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.0](https://img.shields.io/badge/AppVersion-10.4.0-informational?style=flat-square)
+![Version: 7.3.8-bb.0](https://img.shields.io/badge/Version-7.3.8--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.1](https://img.shields.io/badge/AppVersion-10.4.1-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -393,8 +393,8 @@ helm install grafana chart/
 | istio.hardened.customServiceEntries | list | `[]` |  |
 | istio.hardened.customAuthorizationPolicies | list | `[]` |  |
 | istio.hardened.kiali.enabled | bool | `true` |  |
-| istio.hardened.kiali.namespace | string | `"kiali"` |  |
-| istio.hardened.kiali.serviceAccount | string | `"kiali-kiali-kiali-operator"` |  |
+| istio.hardened.kiali.namespaces[0] | string | `"kiali"` |  |
+| istio.hardened.kiali.principals[0] | string | `"cluster.local/ns/kiali/sa/kiali-service-account"` |  |
 | istio.grafana.enabled | bool | `true` |  |
 | istio.grafana.annotations | object | `{}` |  |
 | istio.grafana.labels | object | `{}` |  |
