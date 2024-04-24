@@ -1371,6 +1371,7 @@ networkPolicies:
   ingressLabels:
     app: public-ingressgateway
     istio: ingressgateway
+  additionalPolicies: []
 defaultDashboardsEditable: true
 
 domain: bigbang.dev

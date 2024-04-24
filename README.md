@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.8-bb.0](https://img.shields.io/badge/Version-7.3.8--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.1](https://img.shields.io/badge/AppVersion-10.4.1-informational?style=flat-square)
+![Version: 7.3.8-bb.1](https://img.shields.io/badge/Version-7.3.8--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.1](https://img.shields.io/badge/AppVersion-10.4.1-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -385,6 +385,7 @@ helm install grafana chart/
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.ingressLabels.app | string | `"public-ingressgateway"` |  |
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
+| networkPolicies.additionalPolicies | list | `[]` |  |
 | defaultDashboardsEditable | bool | `true` |  |
 | domain | string | `"bigbang.dev"` |  |
 | istio.enabled | bool | `false` |  |
