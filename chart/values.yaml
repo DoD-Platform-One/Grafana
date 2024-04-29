@@ -99,7 +99,7 @@ livenessProbe:
 image:
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "10.4.0"
+  tag: "10.4.2"
   #sha: ""
   pullPolicy: IfNotPresent
 
