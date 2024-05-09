@@ -19,17 +19,17 @@
         {
             "fileMatch": ["^chart/values\\.yaml$"],
             "matchStrings": [
-              "^\\s+image:\\s+(?<depName>.+):(?<currentValue>.+)"
+              "(?:image: |repository: )(?<depName>ironbank[^\\n]+)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+))"
             ],
-            "datasourceTemplate": "docker"
+            "datasourceTemplate": "docker",
+            "registryUrlTemplate": "https://registry1.dso.mil"
         },
         {
             "fileMatch": ["^chart/values\\.yaml$"],
             "matchStrings": [
-                "image:\\s+registry:\\s+repository:\\s+[^/]+/(?<depName>.+)\\s+tag:\\s+(?<currentValue>.+)"
+                "(?:image: |repository: )(?<depName>docker[^\\n]+)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+))"
             ],
-            "datasourceTemplate": "docker",
-	        "registryUrlTemplate": "https://registry1.dso.mil"
+            "datasourceTemplate": "docker"
         },
         {
             "fileMatch": ["^chart/Chart\\.yaml$"],
