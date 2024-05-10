@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.9-bb.1](https://img.shields.io/badge/Version-7.3.9--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.2](https://img.shields.io/badge/AppVersion-10.4.2-informational?style=flat-square)
+![Version: 7.3.9-bb.2](https://img.shields.io/badge/Version-7.3.9--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.2](https://img.shields.io/badge/AppVersion-10.4.2-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -75,7 +75,7 @@ helm install grafana chart/
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
-| testFramework.image | string | `"docker.io/bats/bats"` |  |
+| testFramework.image | string | `"ironbank/opensource/bats/bats"` |  |
 | testFramework.tag | string | `"v1.4.1"` |  |
 | testFramework.imagePullPolicy | string | `"IfNotPresent"` |  |
 | testFramework.securityContext | object | `{}` |  |
