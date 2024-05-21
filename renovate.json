@@ -30,7 +30,7 @@
                 "image:\\s+repository:\\s+(?<depName>ironbank/redhat.+)\\s+tag:\\s+(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker",
-            "depNameTemplate": "registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal"
+            "registryUrlTemplate": "https://registry1.dso.mil"
         },
         {
             "fileMatch": ["^chart/values\\.yaml$"],
@@ -38,7 +38,7 @@
                 "image:\\s+repository:\\s+(?<depName>ironbank/kiwigrid.+)\\s+tag:\\s+(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker",
-            "depNameTemplate": "registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar"
+            "registryUrlTemplate": "https://registry1.dso.mil"
         },
         {
             "fileMatch": ["^chart/values\\.yaml$"],
@@ -46,15 +46,15 @@
                 "repository: (?<depName>ironbank/big-bang/grafana/grafana-plugins)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker",
-            "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins"
+            "registryUrlTemplate": "https://registry1.dso.mil"
         },
         {
             "fileMatch": ["^chart/values\\.yaml$"],
             "matchStrings": [
-                "image: (?<depName>ironbank/bats/bats)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
+                "image: (?<depName>ironbank/opensource/bats/bats)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker",
-            "depNameTemplate": "registry1.dso.mil/ironbank/bats/bats"
+            "registryUrlTemplate": "https://registry1.dso.mil"
         },
         {
             "fileMatch": ["^chart/values\\.yaml$"],
@@ -62,7 +62,7 @@
                 "image: (?<depName>ironbank/big-bang/base)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker",
-            "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/base"
+            "registryUrlTemplate": "https://registry1.dso.mil"
         },
         {
             "fileMatch": ["^chart/values\\.yaml$"],
