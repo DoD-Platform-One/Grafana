@@ -5,7 +5,7 @@
     "dependencyDashboardHeader": "- [ ] Follow steps in [package update docs](./docs/DEVELOPMENT_MAINTENANCE.md) to upgrade the package.",
     "dependencyDashboardTitle": "Renovate: Upgrade Grafana Package Dependencies",
     "draftPR": true,
-    "enabledManagers": ["regex", "helmv3"],
+    "enabledManagers": ["regex", "helmv3", "helm-values"],
     "ignorePaths": ["chart/charts/**"],
     "labels": ["renovate", "kind::maintenance"],
     "packageRules": [
@@ -24,53 +24,6 @@
         }
       ],
     "regexManagers": [
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "image:\\s+repository:\\s+(?<depName>ironbank/redhat.+)\\s+tag:\\s+(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker",
-            "registryUrlTemplate": "https://registry1.dso.mil"
-        },
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "image:\\s+repository:\\s+(?<depName>ironbank/kiwigrid.+)\\s+tag:\\s+(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker",
-            "registryUrlTemplate": "https://registry1.dso.mil"
-        },
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "repository: (?<depName>ironbank/big-bang/grafana/grafana-plugins)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker",
-            "registryUrlTemplate": "https://registry1.dso.mil"
-        },
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "image: (?<depName>ironbank/opensource/bats/bats)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker",
-            "registryUrlTemplate": "https://registry1.dso.mil"
-        },
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "image: (?<depName>ironbank/big-bang/base)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker",
-            "registryUrlTemplate": "https://registry1.dso.mil"
-        },
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "repository: (?<depName>docker[^\\n]+)\\s*\\n\\s*(?:#.*\\n)?\\s*tag:\\s*(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker"
-        },
         {
             "fileMatch": ["^chart/Chart\\.yaml$"],
             "matchStrings": [
