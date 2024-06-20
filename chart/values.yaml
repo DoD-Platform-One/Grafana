@@ -99,7 +99,7 @@ livenessProbe:
 image:
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "10.4.2"
+  tag: "11.0.0"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -117,6 +117,13 @@ testFramework:
   tag: "v1.4.1"
   imagePullPolicy: IfNotPresent
   securityContext: {}
+  resources: {}
+  #  limits:
+  #    cpu: 100m
+  #    memory: 128Mi
+  #  requests:
+  #    cpu: 100m
+  #    memory: 128Mi
 
 # dns configuration for pod
 dnsPolicy: ~
@@ -393,7 +400,7 @@ initChownData:
   ##
   image:
     repository: ironbank/redhat/ubi/ubi9-minimal
-    tag: "9.3"
+    tag: "9.4"
     sha: ""
     pullPolicy: IfNotPresent
 
@@ -862,7 +869,7 @@ smtp:
 sidecar:
   image:
     repository: ironbank/kiwigrid/k8s-sidecar
-    tag: 1.26.1
+    tag: 1.27.2
   imagePullPolicy: IfNotPresent
   resources:
     limits:
@@ -1364,6 +1371,13 @@ kubeScheduler:
   enabled: true
 nodeExporter:
   enabled: true
+  operatingSystems:
+    linux:
+      enabled: true
+    darwin:
+      enabled: true
+    windows:
+      enabled: true
 windowsMonitoring:
   enabled: true
 prometheusRemoteWriteDashboards: true

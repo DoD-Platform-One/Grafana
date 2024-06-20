@@ -26,8 +26,6 @@ Grafana is a modified/customized version of an upstream chart. The below details
 `overrides/testing-grafana.yaml`
 
 ```yaml
-domain: bigbang.dev
-
 flux:
   interval: 1m
   rollback:
@@ -64,6 +62,11 @@ grafana:
     grafana:
       client_id: platform1_a8604cc9-f5e9-4656-802d-d05624370245_bb8-grafana
       scopes: "openid Grafana"
+  values:
+    istio:
+      enabled: true
+      hardened:
+        enabled: true
 
 loki:
   enabled: true
