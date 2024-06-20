@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 7.3.9-bb.2](https://img.shields.io/badge/Version-7.3.9--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.4.2](https://img.shields.io/badge/AppVersion-10.4.2-informational?style=flat-square)
+![Version: 8.0.0-bb.0](https://img.shields.io/badge/Version-8.0.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.0.0](https://img.shields.io/badge/AppVersion-11.0.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -71,7 +71,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"10.4.2"` |  |
+| image.tag | string | `"11.0.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -79,6 +79,7 @@ helm install grafana chart/
 | testFramework.tag | string | `"v1.4.1"` |  |
 | testFramework.imagePullPolicy | string | `"IfNotPresent"` |  |
 | testFramework.securityContext | object | `{}` |  |
+| testFramework.resources | object | `{}` |  |
 | dnsPolicy | string | `nil` |  |
 | dnsConfig | object | `{}` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
@@ -158,7 +159,7 @@ helm install grafana chart/
 | persistence.inMemory.enabled | bool | `false` |  |
 | initChownData.enabled | bool | `false` |  |
 | initChownData.image.repository | string | `"ironbank/redhat/ubi/ubi9-minimal"` |  |
-| initChownData.image.tag | string | `"9.3"` |  |
+| initChownData.image.tag | string | `"9.4"` |  |
 | initChownData.image.sha | string | `""` |  |
 | initChownData.image.pullPolicy | string | `"IfNotPresent"` |  |
 | initChownData.resources.limits.cpu | string | `"100m"` |  |
@@ -221,7 +222,7 @@ helm install grafana chart/
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.26.1"` |  |
+| sidecar.image.tag | string | `"1.27.2"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
