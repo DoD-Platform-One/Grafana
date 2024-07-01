@@ -5,19 +5,38 @@ Grafana is a modified/customized version of an upstream chart. The below details
 ---
 1. Navigate to the [upstream chart repo and folder](https://github.com/grafana/helm-charts/tree/main/charts/grafana) and find the tag (e.g., `grafana-x.x.x`) that corresponds with the new chart version for this update.
 
-1. From the root of the repo run `kpt pkg update chart@<tag> --strategy alpha-git-patch` replacing `<tag>` with the tag you got in step 1. You may be prompted to resolve some conflicts - choose what makes sense (if there are BB additions/changes keep them, if there are upstream additions/changes keep them).
+2. From the root of the repo run `kpt pkg update chart@<tag> --strategy alpha-git-patch` replacing `<tag>` with the tag you got in step 1. You may be prompted to resolve some conflicts - choose what makes sense (if there are BB additions/changes keep them, if there are upstream additions/changes keep them).
 
-1. Modify the `version` in `Chart.yaml` - you will want to append `-bb.0` to the chart version from upstream.
+3. Modify the `version` in `Chart.yaml` - you will want to append `-bb.0` to the chart version from upstream.
 
-1. Check for changes to the [dashboards provided](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14) with `kube-prometheus-stack`. Also check for changes to the following [python script from upstream](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/hack/sync_grafana_dashboards.py). If there are changes read the section below for [Syncing Dashboards](#syncing-dashboards)
+4. Check for changes to the [dashboards provided](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14) with `kube-prometheus-stack`. Also check for changes to the following [python script from upstream](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/hack/sync_grafana_dashboards.py). If there are changes read the section below for [Syncing Dashboards](#syncing-dashboards)
 
-1. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Grafana chart to x.x.x` and `Updated image versions to latest in IB (grafana: x.x.x, etc)`.
+5. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Grafana chart to x.x.x` and `Updated image versions to latest in IB (grafana: x.x.x, etc)`.
 
-1. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
+6. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
 
-1. Push up your changes, validate that CI passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
+7. Push up your changes, validate that CI passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
 
-1.  Perform the steps below for manual testing. CI provides a good set of basic smoke tests (use the `debug` label) but it is beneficial to run some additional checks.
+8. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages. 
+
+    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Grafana enabled (the below is a reference, actual changes could be more depending on what changes where made to Grafana in the pakcage MR).
+
+### [test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)
+    ```yaml
+    grafana:
+      enabled: true
+      git:
+        tag: null
+        branch: <my-package-branch-that-needs-testing>
+      values:
+        istio:
+          hardened:
+            enabled: true
+      ### Additional compononents of Grafana should be changed to reflect testing changes introduced in the package MR
+    ```
+
+
+9.  Perform the steps below for manual testing. CI provides a good set of basic smoke tests (use the `debug` label) but it is beneficial to run some additional checks.
 
 # Testing a new Grafana version
 
