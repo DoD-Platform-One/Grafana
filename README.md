@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 8.0.0-bb.0](https://img.shields.io/badge/Version-8.0.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.0.0](https://img.shields.io/badge/AppVersion-11.0.0-informational?style=flat-square)
+![Version: 8.0.0-bb.1](https://img.shields.io/badge/Version-8.0.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.0.0](https://img.shields.io/badge/AppVersion-11.0.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -385,6 +385,9 @@ helm install grafana chart/
 | kubeProxy.enabled | bool | `true` |  |
 | kubeScheduler.enabled | bool | `true` |  |
 | nodeExporter.enabled | bool | `true` |  |
+| nodeExporter.operatingSystems.linux.enabled | bool | `true` |  |
+| nodeExporter.operatingSystems.darwin.enabled | bool | `true` |  |
+| nodeExporter.operatingSystems.windows.enabled | bool | `true` |  |
 | windowsMonitoring.enabled | bool | `true` |  |
 | prometheusRemoteWriteDashboards | bool | `true` |  |
 | networkPolicies.enabled | bool | `false` |  |
@@ -392,7 +395,7 @@ helm install grafana chart/
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | defaultDashboardsEditable | bool | `true` |  |
-| domain | string | `"bigbang.dev"` |  |
+| domain | string | `"dev.bigbang.mil"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
