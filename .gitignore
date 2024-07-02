@@ -6,6 +6,7 @@ certs/
 .terraform
 *.pem
 *rke2.yaml
+.python-version
 
 *tfstate*
 *terraform.lock*

@@ -1,27 +1,33 @@
-# How to upgrade the Grafana Package chart
+# Development and Maintenance Guide for the Grafana Package
 
 Grafana is a modified/customized version of an upstream chart. The below details the steps required to update to a new version of the Grafana package.
 
----
+## How to upgrade the Grafana Package chart
+
 1. Navigate to the [upstream chart repo and folder](https://github.com/grafana/helm-charts/tree/main/charts/grafana) and find the tag (e.g., `grafana-x.x.x`) that corresponds with the new chart version for this update.
 
 2. From the root of the repo run `kpt pkg update chart@<tag> --strategy alpha-git-patch` replacing `<tag>` with the tag you got in step 1. You may be prompted to resolve some conflicts - choose what makes sense (if there are BB additions/changes keep them, if there are upstream additions/changes keep them).
 
-3. Modify the `version` in `Chart.yaml` - you will want to append `-bb.0` to the chart version from upstream.
+3. See the [Big Bang Modifications](#big-bang-modifications) section below for the changes that need to be made to the [`chart/values.yaml`](#chartvaluesyaml) and [`chart/templates/_helpers.tpl`](#charttemplates_helperstpl) files.
 
-4. Check for changes to the [dashboards provided](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14) with `kube-prometheus-stack`. Also check for changes to the following [python script from upstream](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/hack/sync_grafana_dashboards.py). If there are changes read the section below for [Syncing Dashboards](#syncing-dashboards)
+4. Modify the `version` in `Chart.yaml`. You will want to append `-bb.0` to the chart version from upstream.
 
-5. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Grafana chart to x.x.x` and `Updated image versions to latest in IB (grafana: x.x.x, etc)`.
+5. Check for changes to the [dashboards provided](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14) with `kube-prometheus-stack`. Also check for changes to the following [python script from upstream](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/hack/sync_grafana_dashboards.py). If there are changes read the section below for [Syncing Dashboards](#syncing-dashboards)
 
-6. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
+6. Update `CHANGELOG.md` adding an entry for the new version and noting all changes (at minimum should include `Updated Grafana chart to x.x.x` and `Updated image versions to latest in IB (grafana: x.x.x, etc)`.
 
-7. Push up your changes, validate that CI passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
+7. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
 
-8. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages. 
+8. Push up your changes, validate that CI passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
 
-    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Grafana enabled (the below is a reference, actual changes could be more depending on what changes where made to Grafana in the pakcage MR).
+## Testing a new Grafana version
 
-### [test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)
+1. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
+
+    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Grafana enabled (the below is a reference, actual changes could be more depending on what changes were made to Grafana in the package MR).
+
+    **[test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)**
+
     ```yaml
     grafana:
       enabled: true
@@ -32,13 +38,10 @@ Grafana is a modified/customized version of an upstream chart. The below details
         istio:
           hardened:
             enabled: true
-      ### Additional compononents of Grafana should be changed to reflect testing changes introduced in the package MR
+      ### Additional components of Grafana should be changed to reflect testing changes introduced in the package MR
     ```
 
-
-9.  Perform the steps below for manual testing. CI provides a good set of basic smoke tests (use the `debug` label) but it is beneficial to run some additional checks.
-
-# Testing a new Grafana version
+2. Perform the steps below for manual testing. Our CI provides a good set of basic smoke tests (use the `debug` label), but it is beneficial to run some additional checks.
 
 ### Deploy Grafana as a part of BigBang
 
@@ -124,19 +127,157 @@ twistlock:
   enabled: false
 ```
 
-- Visit `https://grafana.bigbang.dev` and login
+- Visit `https://grafana.dev.bigbang.mil` and login
 - Navigate to `Dashboards` and then click on `Kubernetes / Compute Resources / Cluster` and validate that data is loaded
 
-# Modifications made to upstream chart
+## Big Bang Modifications
 
-`values.yaml`
+Modifications made to upstream chart
 
-- Set `sso.enabled: false`
-- Ensure `assertNoLeakedSecrets: false`
-- Ensure the following section is added to the `grafana.ini`
-```
-grafana.ini:
-  ...
+### `chart/values.yaml`
+
+- Line 3: Ensure `global.imageRegistry` is set to to `registry1.dso.mil`.
+
+  ```yaml
+  global:
+    # -- Overrides the Docker registry globally for all images
+    imageRegistry: registry1.dso.mil
+  ```
+
+- Line 19: Ensure `openshift: false` is present.
+
+  ```yaml
+  openshift: false
+  ```
+
+- Line 100-103: Ensure the `image` configuration is set to the following, where `X.Y.Z` is the correct version:
+
+  ```yaml
+  image:
+    repository: ironbank/big-bang/grafana/grafana-plugins
+    # Overrides the Grafana image tag whose default is the chart appVersion
+    tag: "X.Y.Z"
+    #sha: ""
+  ```
+
+- Line 112: Ensure `image.pullSecrets` is supplied.
+
+  ```yaml
+  pullSecrets:
+  - private-registry
+  ```
+
+- Line 115-117: Ensure the `testFramework` configuration is set to the following, where `X.Y.Z` is the correct version:
+
+  ```yaml
+  testFramework:
+    enabled: false
+    image: ironbank/opensource/bats/bats
+    tag: "v1.4.1"
+  ```
+
+- Line 140-142: Ensure the `securityContext` values for `runAsUser`, `runAsGroup`, and `fsGroup` are set to `65532`:
+
+  ```yaml
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    runAsGroup: 65532
+    fsGroup: 65532
+  ```
+
+- Line 177-179: Ensure the `downloadDashboardsImage` configuration is set to the following, where `X.Y.Z` is the correct version:
+
+  ```yaml
+  downloadDashboardsImage:
+    repository: ironbank/big-bang/base
+    tag: X.Y.Z
+    #sha: ""
+  ```
+
+- Line 185-191: Ensure the `downloadDashboards.resources` configuration is set to the following:
+
+  ```yaml
+  resources:
+    limits:
+      cpu: 20m
+      memory: 20Mi
+    requests:
+      cpu: 20m
+      memory: 20Mi
+  ```
+
+- Line 232: Ensure `service.portName` is set to `http-service`.
+
+  ```yaml
+  portName: http-service
+  ```
+
+- Line 244: Ensure `serviceMonitor.interval` is set to `1m`.
+
+  ```yaml
+  interval: 1m
+  ```
+
+- Line 302: Ensure `resources` is set to the following:
+
+  ```yaml
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    ```
+
+- Line 397: Ensure `initChownData.enabled` is set to `false`.
+
+  ```yaml
+  initChownData:
+    ## If false, data ownership will not be reset at startup
+    ## This allows the grafana-server to be run with an arbitrary user
+    ##
+    enabled: false
+  ```
+
+- Line 402-403: Ensure `initChownData.image.repository` and `initChownData.image.tag` are set to the following:
+
+  ```yaml
+  image:
+    repository: ironbank/redhat/ubi/ubi9-minimal
+    tag: "9.4"
+  ```
+
+- Line 410-416: Ensure `initChownData.resources` is set to the following:
+
+  ```yaml
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    ```
+
+- Line 428: Ensure `adminPassword` is set to `prom-operator`.
+
+  ```yaml
+  adminPassword: prom-operator
+  ```
+
+- Line 778-779: Ensure that `grafana.ini.analytics` has these values:
+
+  ```yaml
+   analytics:
+    reporting_enabled: false
+    check_for_updates: false
+  ```
+
+- Line 791-815: Ensure the following section is added to the `grafana.ini` configuration:
+
+  ```yaml
   auth.generic_oauth:
     enabled: false
     client_id: grafana    #this is a sample client_id, review docs/KEYCLOAK.md
@@ -159,29 +300,258 @@ grafana.ini:
     path: /var/lib/bb-plugins/polystat-panel
   plugin.redis-datasource:
     path: /var/lib/bb-plugins/redis-datasource
-```
+  ```
 
-### automountServiceAccountToken
+- Line 871-872: Ensure that `sidecar.image.repository` and `sidecar.image.tag` are set to the following:
+
+  ```yaml
+  sidecar:
+    image:
+      repository: ironbank/kiwigrid/k8s-sidecar
+      tag: 1.27.2
+  ```
+
+- Line 874-880: Ensure that `sidecar.resources` is set to the following:
+
+  ```yaml
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  ```
+
+- Line 938: Ensure `sidecar.dashboards.enabled` is set to `true`.
+
+  ```yaml
+  dashboards:
+    enabled: true
+  ```
+
+- Line 947: Ensure `sidecar.dashboards.labelValue` is set to `"1"`.
+
+  ```yaml
+  labelValue: "1"
+  ```
+
+- Line 957: Ensure `sidecar.dashboards.searchNameSpace` is set to `ALL`.
+
+  ```yaml
+  searchNamespace: ALL
+  ```
+
+- Line 1000-1004: Ensure `sidecar.dashboards.multicluster` is set to the following:
+
+  ```yaml
+  multicluster:
+    global:
+      enabled: true
+    etcd:
+      enabled: true
+  ```
+
+- Line 1006: Ensure `sidecar.datasources.enabled` is set to `true`.
+
+  ```yaml
+  datasources:
+    enabled: true
+  ```
+
+- Line 1015: Ensure `sidecar.datasources.labelValue` is set to `"1"`.
+
+  ```yaml
+  labelValue: "1"
+  ```
+
+- Line 1149-1150: Ensure `imageRenderer.image.registry` is removed and `imageRenderer.image.repository` is overridden.
+
+  ```yaml
+  image:
+    # image-renderer Image repository
+    repository: docker.io/grafana/grafana-image-renderer
+  ```
+
+- Line 1200: Ensure `imageRenderer.service.portName` is set to `http-web`
+
+  ```yaml
+  portName: http-web
+  ```
+
+- Line 1353: Ensure `assertNoLeakedSecrets` is set to `false`.
+
+  ```yaml
+  assertNoLeakedSecrets: false
+  ```
+
+- EOF: Add the following extra configurations to the bottom of the file:
+
+  ```yaml
+  defaultDashboardsEnabled:
+    enabled: true
+  coreDns:
+    enabled: true
+  kubeEtcd:
+    enabled: true
+  kubeApiServer:
+    enabled: true
+  kubeControllerManager:
+    enabled: true
+  kubelet:
+    enabled: true
+    namespace: kube-system
+  kubeProxy:
+    enabled: true
+  kubeScheduler:
+    enabled: true
+  nodeExporter:
+    enabled: true
+    operatingSystems:
+      linux:
+        enabled: true
+      darwin:
+        enabled: true
+      windows:
+        enabled: true
+  windowsMonitoring:
+    enabled: true
+  prometheusRemoteWriteDashboards: true
+  networkPolicies:
+    enabled: false
+    ingressLabels:
+      app: public-ingressgateway
+      istio: ingressgateway
+    additionalPolicies: []
+  defaultDashboardsEditable: true
+
+  domain: dev.bigbang.mil
+
+  istio:
+    enabled: false
+    hardened:
+      enabled: false
+      outboundTrafficPolicyMode: "REGISTRY_ONLY"
+      customServiceEntries: []
+        # - name: "allow-google"
+        #   enabled: true
+        #   spec:
+        #     hosts:
+        #       - google.com
+        #     location: MESH_EXTERNAL
+        #     ports:
+        #       - number: 443
+        #         protocol: TLS
+        #         name: https
+        #     resolution: DNS
+      customAuthorizationPolicies: []
+      # - name: "allow-nothing"
+      #   enabled: true
+      #   spec: {}
+      kiali:
+        enabled: true
+        namespaces:
+        - kiali
+        principals:
+        - cluster.local/ns/kiali/sa/kiali-service-account
+
+    grafana:
+      # Toggle vs creation
+      enabled: true
+      annotations: {}
+      labels: {}
+      gateways:
+        - istio-system/main
+      hosts:
+        - grafana.{{ .Values.domain }}
+      service: ""
+      port: ""
+      namespace: ""
+    injection: disabled
+    mtls:
+      # Note that setting this to STRICT requires additional configuration for Prometheus and monitors.
+      # Review `./docs/istio-mtls-metrics.md` for additional information.
+      mode: STRICT
+
+  sso:
+    enabled: false
+
+  bbtests:
+    enabled: false
+    cypress:
+      artifacts: true
+      envs:
+        cypress_grafana_url: 'http://grafana:80'
+      resources:
+        requests:
+          cpu: 2
+          memory: 2Gi
+        limits:
+          cpu: 2
+          memory: 2Gi
+    istio:
+      sidecar:
+        resources:
+          cpu:
+            requests: 100m
+            limits: 2000m
+          memory:
+            requests: 512Mi
+            limits: 2048Mi
+  ```
+
+### `chart/templates/_helpers.tpl`
+
+- Line 84: Set `app.kubernetes.io/instance` to `monitoring-monitoring`.
+
+  ```yaml
+  app.kubernetes.io/instance: monitoring-monitoring
+  ```
+
+- Line 104: Set `app.kubernetes.io/instance` to `monitoring-monitoring`.
+
+  ```yaml
+  app.kubernetes.io/instance: monitoring-monitoring
+  ```
+
+- EOF: Ensure this section is added to the bottom of the file:
+
+  ```yaml
+  {{/*
+  Find hostname from uri
+  */}}
+  {{- define "grafana.hostnameFromUri" -}}
+  {{- $match := . | toString | regexFind "//.*" -}}
+  {{- $hostWithPort := regexSplit "/" ($match | trimAll "//") -1 -}}
+  {{- $host := regexSplit ":" (first $hostWithPort) -1 -}}
+  {{- printf "%s" (first $host) -}}
+  {{- end -}}
+  ```
+
+## automountServiceAccountToken
+
 The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads).
 
 This policy revokes access to the K8s API for Pods utilizing said ServiceAccounts. If a Pod truly requires access to the K8s API (for app functionality), the Pod is added to the `pods:` array of the same mutating policy. This grants the Pod access to the API, and creates a Kyverno PolicyException to prevent an alert.
 
-### Syncing Dashboards
-Since we ship the grafana package separately due to https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/110 & https://github.com/prometheus-community/helm-charts/issues/3548 where a solution never bubbled down that fixed the issue for our environments.
+## Syncing Dashboards
 
-When the dashboards and script update upstream we must pull in the new scripts from `hack/` in `kube-prometheus-stack`. Modify them so that any new values are present in this chart, and revert back the references `.Values.grafana`  to just `.Values.` since this is the grafana chart.
+We ship the grafana package separately due to <https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/110> & <https://github.com/prometheus-community/helm-charts/issues/3548> as a solution never bubbled down that fixed the issue for our environments.
 
-Ensure relative locations are correct in the python script, eg: 
-```
-charts = [
-    {
-        'source': '../../monitoring/chart/files/dashboards/k8s-coredns.json', #Pointing to local BigBang monitoring chart/files/dashboard
-        'destination': '../chart/templates/dashboards/dashboards-1.14', #Pointing to this grafana package chart/templates/dashboards (eg ran from hack/ folder)
-        ...,
-    },
-    {
-        ...,
-        'destination': '../chart/templates/dashboards/dashboards-1.14',
-```
+When the dashboards and script are updated upstream, we must pull in the new scripts from `hack/` in `kube-prometheus-stack`, modify them so that any new values are present in this chart, and revert any references to `.Values.grafana` back to just `.Values.` since this is the grafana chart.
 
-Push up changes to `dashboards/dashboards-1.14` folder. Deploy in dev and ensure modified dashboards from upstream (coredns/node-exporter/etcd) are importing and showing data as before the changes/upgrades.
+Before running the Python script, ensure the relative locations are correct, eg:
+
+  ```python
+  charts = [
+      {
+          'source': '../../monitoring/chart/files/dashboards/k8s-coredns.json', #Pointing to local BigBang monitoring chart/files/dashboard
+          'destination': '../chart/templates/dashboards/dashboards-1.14', #Pointing to this grafana package chart/templates/dashboards (eg ran from hack/ folder)
+          ...,
+      },
+      {
+          ...,
+          'destination': '../chart/templates/dashboards/dashboards-1.14',
+  ```
+
+Push up any changes to the `dashboards/dashboards-1.14` folder. Deploy the chart in dev and ensure modified dashboards from upstream (coredns/node-exporter/etcd) are importing and showing data as before the changes/upgrades.

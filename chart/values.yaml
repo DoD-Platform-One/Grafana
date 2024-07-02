@@ -1389,7 +1389,7 @@ networkPolicies:
   additionalPolicies: []
 defaultDashboardsEditable: true
 
-domain: bigbang.dev
+domain: dev.bigbang.mil
 
 istio:
   enabled: false
