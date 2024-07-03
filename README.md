@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 8.2.2-bb.0](https://img.shields.io/badge/Version-8.2.2--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
+![Version: 8.2.2-bb.1](https://img.shields.io/badge/Version-8.2.2--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -399,6 +399,7 @@ helm install grafana chart/
 | defaultDashboardsEditable | bool | `true` |  |
 | domain | string | `"dev.bigbang.mil"` |  |
 | istio.enabled | bool | `false` |  |
+| istio.namespace | string | `"istio-system"` |  |
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
