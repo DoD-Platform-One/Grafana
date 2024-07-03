@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.2.2-bb.0] - 2024-07-02
+
+### Changed
+
+- Updated `ironbank/big-bang/grafana/grafana-plugins` 11.0.0 -> 11.1.0
+- Updated `ironbank/kiwigrid/k8s-sidecar` 1.27.2 -> 1.27.4
+- Updated `registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins` 11.0.0 -> 11.1.0
+- Updated `registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar` 1.27.2 -> 1.27.4
+- Fix readme version log to use chart version instead of app version
+
 ## [8.0.0-bb.1] - 2024-07-02
 
 ### Changed
