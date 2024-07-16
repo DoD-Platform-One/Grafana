@@ -1,16 +1,18 @@
 # grafana
 
-![Version: 8.2.2-bb.1](https://img.shields.io/badge/Version-8.2.2--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
+![Version: 8.3.4-bb.0](https://img.shields.io/badge/Version-8.3.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
 ## Upstream References
+
 * <https://grafana.com>
 
 * <https://github.com/grafana/grafana>
 * <https://github.com/grafana/helm-charts>
 
 ## Learn More
+
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -24,12 +26,13 @@ Kubernetes: `^1.8.0-0`
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
+
 ```bash
 helm install grafana chart/
 ```
@@ -226,7 +229,7 @@ helm install grafana chart/
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.27.4"` |  |
+| sidecar.image.tag | string | `"1.27.5"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
@@ -253,6 +256,7 @@ helm install grafana chart/
 | sidecar.alerts.sizeLimit | object | `{}` |  |
 | sidecar.dashboards.enabled | bool | `true` |  |
 | sidecar.dashboards.env | object | `{}` |  |
+| sidecar.dashboards.envValueFrom | object | `{}` |  |
 | sidecar.dashboards.SCProvider | bool | `true` |  |
 | sidecar.dashboards.label | string | `"grafana_dashboard"` |  |
 | sidecar.dashboards.labelValue | string | `"1"` |  |
@@ -365,6 +369,10 @@ helm install grafana chart/
 | imageRenderer.nodeSelector | object | `{}` |  |
 | imageRenderer.tolerations | list | `[]` |  |
 | imageRenderer.affinity | object | `{}` |  |
+| imageRenderer.extraConfigmapMounts | list | `[]` |  |
+| imageRenderer.extraSecretMounts | list | `[]` |  |
+| imageRenderer.extraVolumeMounts | list | `[]` |  |
+| imageRenderer.extraVolumes | list | `[]` |  |
 | networkPolicy.enabled | bool | `false` |  |
 | networkPolicy.ingress | bool | `true` |  |
 | networkPolicy.allowExternal | bool | `true` |  |
