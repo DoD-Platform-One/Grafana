@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+
+## [8.3.4-bb.0] - 2024-07-15
+
+### Changed
+
+- ironbank/kiwigrid/k8s-sidecar updated from 1.27.4 to 1.27.5
+
 ## [8.2.2-bb.1] - 2024-07-02
 
 ### Removed

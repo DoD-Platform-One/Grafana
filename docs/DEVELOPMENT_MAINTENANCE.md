@@ -207,19 +207,19 @@ Modifications made to upstream chart
       memory: 20Mi
   ```
 
-- Line 232: Ensure `service.portName` is set to `http-service`.
+- Line 240: Ensure `service.portName` is set to `http-service`.
 
   ```yaml
   portName: http-service
   ```
 
-- Line 244: Ensure `serviceMonitor.interval` is set to `1m`.
+- Line 252: Ensure `serviceMonitor.interval` is set to `1m`.
 
   ```yaml
   interval: 1m
   ```
 
-- Line 302: Ensure `resources` is set to the following:
+- Line 310: Ensure `resources` is set to the following:
 
   ```yaml
   resources:
@@ -231,7 +231,7 @@ Modifications made to upstream chart
       memory: 256Mi
     ```
 
-- Line 397: Ensure `initChownData.enabled` is set to `false`.
+- Line 410: Ensure `initChownData.enabled` is set to `false`.
 
   ```yaml
   initChownData:
@@ -241,7 +241,7 @@ Modifications made to upstream chart
     enabled: false
   ```
 
-- Line 402-403: Ensure `initChownData.image.repository` and `initChownData.image.tag` are set to the following:
+- Line 415-416: Ensure `initChownData.image.repository` and `initChownData.image.tag` are set to the following:
 
   ```yaml
   image:
@@ -249,7 +249,7 @@ Modifications made to upstream chart
     tag: "9.4"
   ```
 
-- Line 410-416: Ensure `initChownData.resources` is set to the following:
+- Line 423-429: Ensure `initChownData.resources` is set to the following:
 
   ```yaml
   resources:
@@ -261,13 +261,13 @@ Modifications made to upstream chart
       memory: 128Mi
     ```
 
-- Line 428: Ensure `adminPassword` is set to `prom-operator`.
+- Line 441: Ensure `adminPassword` is set to `prom-operator`.
 
   ```yaml
   adminPassword: prom-operator
   ```
 
-- Line 778-779: Ensure that `grafana.ini.analytics` has these values:
+- Line 790-792: Ensure that `grafana.ini.analytics` has these values:
 
   ```yaml
    analytics:
@@ -275,7 +275,7 @@ Modifications made to upstream chart
     check_for_updates: false
   ```
 
-- Line 791-815: Ensure the following section is added to the `grafana.ini` configuration:
+- Line 804-827: Ensure the following section is added to the `grafana.ini` configuration:
 
   ```yaml
   auth.generic_oauth:
@@ -300,18 +300,20 @@ Modifications made to upstream chart
     path: /var/lib/bb-plugins/polystat-panel
   plugin.redis-datasource:
     path: /var/lib/bb-plugins/redis-datasource
+  security: 
+    angular_support_enabled: false  
   ```
 
-- Line 871-872: Ensure that `sidecar.image.repository` and `sidecar.image.tag` are set to the following:
+- Line 884-885: Ensure that `sidecar.image.repository` and `sidecar.image.tag` are set to the following:
 
   ```yaml
   sidecar:
     image:
       repository: ironbank/kiwigrid/k8s-sidecar
-      tag: 1.27.2
+      tag: 1.27.5
   ```
 
-- Line 874-880: Ensure that `sidecar.resources` is set to the following:
+- Line 887-893: Ensure that `sidecar.resources` is set to the following:
 
   ```yaml
   resources:
@@ -323,26 +325,26 @@ Modifications made to upstream chart
       memory: 100Mi
   ```
 
-- Line 938: Ensure `sidecar.dashboards.enabled` is set to `true`.
+- Line 951: Ensure `sidecar.dashboards.enabled` is set to `true`.
 
   ```yaml
   dashboards:
     enabled: true
   ```
 
-- Line 947: Ensure `sidecar.dashboards.labelValue` is set to `"1"`.
+- Line 973: Ensure `sidecar.dashboards.labelValue` is set to `"1"`.
 
   ```yaml
   labelValue: "1"
   ```
 
-- Line 957: Ensure `sidecar.dashboards.searchNameSpace` is set to `ALL`.
+- Line 983: Ensure `sidecar.dashboards.searchNameSpace` is set to `ALL`.
 
   ```yaml
   searchNamespace: ALL
   ```
 
-- Line 1000-1004: Ensure `sidecar.dashboards.multicluster` is set to the following:
+- Line 1028-1032: Ensure `sidecar.dashboards.multicluster` is set to the following:
 
   ```yaml
   multicluster:
@@ -352,20 +354,20 @@ Modifications made to upstream chart
       enabled: true
   ```
 
-- Line 1006: Ensure `sidecar.datasources.enabled` is set to `true`.
+- Line 1034: Ensure `sidecar.datasources.enabled` is set to `true`.
 
   ```yaml
   datasources:
     enabled: true
   ```
 
-- Line 1015: Ensure `sidecar.datasources.labelValue` is set to `"1"`.
+- Line 1055: Ensure `sidecar.datasources.labelValue` is set to `"1"`.
 
   ```yaml
   labelValue: "1"
   ```
 
-- Line 1149-1150: Ensure `imageRenderer.image.registry` is removed and `imageRenderer.image.repository` is overridden.
+- Line 1188-1190: Ensure `imageRenderer.image.registry` is removed and `imageRenderer.image.repository` is overridden.
 
   ```yaml
   image:
@@ -373,13 +375,13 @@ Modifications made to upstream chart
     repository: docker.io/grafana/grafana-image-renderer
   ```
 
-- Line 1200: Ensure `imageRenderer.service.portName` is set to `http-web`
+- Line 124-: Ensure `imageRenderer.service.portName` is set to `http-web`
 
   ```yaml
   portName: http-web
   ```
 
-- Line 1353: Ensure `assertNoLeakedSecrets` is set to `false`.
+- Line 1405: Ensure `assertNoLeakedSecrets` is set to `false`.
 
   ```yaml
   assertNoLeakedSecrets: false
@@ -526,6 +528,14 @@ Modifications made to upstream chart
   {{- $host := regexSplit ":" (first $hostWithPort) -1 -}}
   {{- printf "%s" (first $host) -}}
   {{- end -}}
+  ```
+
+### `hack/sync_grafana_dashboards.py`
+
+- Line 92: Change the value of `condition_map['prometheus_remote_write']` to be:
+
+  ```python
+    'prometheus-remote-write': ' .Values.prometheusRemoteWriteDashboards',
   ```
 
 ## automountServiceAccountToken

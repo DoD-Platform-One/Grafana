@@ -29,17 +29,17 @@ def change_style(style, representer):
 
 refs = {
     # https://github.com/prometheus-operator/kube-prometheus
-    'ref.kube-prometheus': 'd3fa80ee966b01491bc4afffcd7caf26b593d73e',
+    'ref.kube-prometheus': 'b5b59bc0b45508b85647eb7a84b96dc167be15f1',
     # https://github.com/kubernetes-monitoring/kubernetes-mixin
-    'ref.kubernetes-mixin': '71b2d8bed1aabd363bd7728f01a8edda445cb684',
+    'ref.kubernetes-mixin': 'de834e9a291b49396125768f041e2078763f48b5',
     # https://github.com/etcd-io/etcd
-    'ref.etcd': '786da8731e6ebc61d3482048fdfa64e505da1f8f',
+    'ref.etcd': '1c22e7b36bc5d8543f1646212f2960f9fe503b8c',
 }
 
 # Source files list
 charts = [
     {
-        'source': '../../monitoring/chart/files/dashboards/k8s-coredns.json',
+        'source': '../../../monitoring/main/chart/files/dashboards/k8s-coredns.json',
         'destination': '../chart/templates/dashboards/dashboards-1.14',
         'type': 'dashboard_json',
         'min_kubernetes': '1.14.0-0',
@@ -89,7 +89,7 @@ condition_map = {
     'node-cluster-rsrc-use': ' (or .Values.nodeExporter.enabled .Values.nodeExporter.forceDeployDashboards)',
     'nodes': ' (and (or .Values.nodeExporter.enabled .Values.nodeExporter.forceDeployDashboards) .Values.nodeExporter.operatingSystems.linux.enabled)',
     'nodes-darwin': ' (and (or .Values.nodeExporter.enabled .Values.nodeExporter.forceDeployDashboards) .Values.nodeExporter.operatingSystems.darwin.enabled)',
-    'prometheus-remote-write': ' .Values.prometheus.prometheusSpec.remoteWriteDashboards',
+    'prometheus-remote-write': ' .Values.prometheusRemoteWriteDashboards',
     'k8s-coredns': ' .Values.coreDns.enabled',
     'k8s-windows-cluster-rsrc-use': ' .Values.windowsMonitoring.enabled',
     'k8s-windows-node-rsrc-use': ' .Values.windowsMonitoring.enabled',
@@ -174,6 +174,7 @@ def patch_dashboards_json(content, multicluster_key):
         overwrite_list = []
         for variable in content_struct['templating']['list']:
             if variable['name'] == 'cluster':
+                variable['allValue'] = '.*'
                 variable['hide'] = ':multicluster:'
             overwrite_list.append(variable)
         content_struct['templating']['list'] = overwrite_list
@@ -195,19 +196,19 @@ def patch_dashboards_json(content, multicluster_key):
 
 def patch_json_set_timezone_as_variable(content):
     # content is no more in json format, so we have to replace using regex
-    return re.sub(r'"timezone"\s*:\s*"(?:\\.|[^\"])*"', '"timezone": "`}}{{ .Values.defaultDashboardsTimezone }}{{`"', content, flags=re.IGNORECASE)
+    return re.sub(r'"timezone"\s*:\s*"(?:\\.|[^\"])*"', '"timezone": "`}}{{ .Values.grafana.defaultDashboardsTimezone }}{{`"', content, flags=re.IGNORECASE)
 
 
 def patch_json_set_editable_as_variable(content):
     # content is no more in json format, so we have to replace using regex
-    return re.sub(r'"editable"\s*:\s*(?:true|false)', '"editable":`}}{{ .Values.defaultDashboardsEditable }}{{`', content, flags=re.IGNORECASE)
+    return re.sub(r'"editable"\s*:\s*(?:true|false)', '"editable":`}}{{ .Values.grafana.defaultDashboardsEditable }}{{`', content, flags=re.IGNORECASE)
 
 
 def jsonnet_import_callback(base, rel):
-    if "github.com" in base:
-        base = os.getcwd() + '/vendor/' + base[base.find('github.com'):]
-    elif "github.com" in rel:
+    if "github.com" in rel:
         base = os.getcwd() + '/vendor/'
+    elif "github.com" in base:
+        base = os.getcwd() + '/vendor/' + base[base.find('github.com'):]
 
     if os.path.isfile(base + rel):
         return base + rel, open(base + rel).read().encode('utf-8')
@@ -250,6 +251,8 @@ def write_group_to_file(resource_name, content, url, destination, min_kubernetes
 
 
 def main():
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     init_yaml_styles()
     # read the rules, create a new template file per group
     for chart in charts:
