@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.3.4-bb.1] - 2024-07-24
+
+### Changed
+
+- Added update helm dep step to DEVELOPMENT_MAINTENANCE
+- Updated gluon helm dependency from 0.4.10 to 0.5.0
+
 ## [8.3.4-bb.0] - 2024-07-15
 
 ### Changed
