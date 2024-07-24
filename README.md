@@ -1,18 +1,16 @@
 # grafana
 
-![Version: 8.3.4-bb.0](https://img.shields.io/badge/Version-8.3.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
+![Version: 8.3.4-bb.1](https://img.shields.io/badge/Version-8.3.4--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
 ## Upstream References
-
 * <https://grafana.com>
 
 * <https://github.com/grafana/grafana>
 * <https://github.com/grafana/helm-charts>
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -26,13 +24,12 @@ Kubernetes: `^1.8.0-0`
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install grafana chart/
 ```
