@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.3.4-bb.2] - 2024-07-24
+
+### Changed
+
+- Updated `templates/deployment.yaml` and `templates/statefulset.yaml` to use `tpl` for `.Values.podLabels` to allow setting Kiali required `app` and `version` labels
+- Set `app` and `version` label defaults via `.Values.podLabels`
+
 ## [8.3.4-bb.1] - 2024-07-24
 
 ### Changed
