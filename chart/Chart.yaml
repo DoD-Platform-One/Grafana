@@ -1,6 +1,6 @@
 apiVersion: v2
 name: grafana
-version: 8.3.6-bb.0
+version: 8.3.6-bb.1
 appVersion: 11.1.0
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
@@ -18,6 +18,9 @@ annotations:
       url: https://github.com/grafana/grafana
   bigbang.dev/applicationVersions: |
     - Grafana: 11.1.0
+  bigbang.dev/upstreamReleaseNotesMarkdown: |
+    * [Find our upstream chart's CHANGELOG here](https://github.com/grafana/helm-charts/tree/main/charts/grafana#upgrading-an-existing-release-to-a-new-major-version)
+    * [and our upstream application release notes here](https://grafana.com/docs/grafana/latest/release-notes/)
   helm.sh/images: |
     - name: grafana
       image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.1.0
