@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.3.6-bb.1] - 2024-08-01
+
+### Changed
+
+- Remove redundant items from `test/test-values.yaml`
+
 ## [8.3.6-bb.0] - 2024-07-25
 
 ### Changed
@@ -80,12 +86,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Updated Grafana chart to 7.3.9
 - Updated image versions to latest in IB (grafana: 10.4.2)
 - Custom network policies
-
-## [7.3.7-bb.3] - 2024-04-17
-
-### Changed
-
-- Adding an authorization policy to allow kiali traffic through when istio hardening is enabled
 
 ## [7.3.7-bb.3] - 2024-04-17
 
