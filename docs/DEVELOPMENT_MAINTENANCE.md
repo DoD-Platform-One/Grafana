@@ -72,6 +72,9 @@ istioOperator:
 
 istio:
   enabled: true
+  values:
+    hardened:
+      enabled: true
 
 monitoring:
   enabled: true
