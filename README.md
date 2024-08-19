@@ -1,12 +1,11 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.3.6-bb.1](https://img.shields.io/badge/Version-8.3.6--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.0](https://img.shields.io/badge/AppVersion-11.1.0-informational?style=flat-square)
+![Version: 8.4.4-bb.0](https://img.shields.io/badge/Version-8.4.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.3](https://img.shields.io/badge/AppVersion-11.1.3-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
 ## Upstream References
-
 * <https://grafana.com>
 
 * <https://github.com/grafana/grafana>
@@ -18,7 +17,6 @@ The leading tool for querying and visualizing time series and metrics.
 * [and our upstream application release notes here](https://grafana.com/docs/grafana/latest/release-notes/)
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -32,13 +30,12 @@ Kubernetes: `^1.8.0-0`
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install grafana chart/
 ```
@@ -80,7 +77,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"11.1.0"` |  |
+| image.tag | string | `"11.1.3"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -216,7 +213,7 @@ helm install grafana chart/
 | "grafana.ini".analytics.check_for_updates | bool | `false` |  |
 | "grafana.ini".log.mode | string | `"console"` |  |
 | "grafana.ini".grafana_net.url | string | `"https://grafana.net"` |  |
-| "grafana.ini".server.domain | string | `"{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts \| first }}{{ else }}''{{ end }}"` |  |
+| "grafana.ini".server.domain | string | `"{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ tpl (.Values.ingress.hosts \| first) . }}{{ else }}''{{ end }}"` |  |
 | "grafana.ini"."auth.generic_oauth".enabled | bool | `false` |  |
 | "grafana.ini"."auth.generic_oauth".client_id | string | `"grafana"` |  |
 | "grafana.ini"."auth.generic_oauth".client_secret | string | `"secret"` |  |
@@ -453,3 +450,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+
