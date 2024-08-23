@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.4.4-bb.0](https://img.shields.io/badge/Version-8.4.4--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.3](https://img.shields.io/badge/AppVersion-11.1.3-informational?style=flat-square)
+![Version: 8.4.6-bb.0](https://img.shields.io/badge/Version-8.4.6--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.4](https://img.shields.io/badge/AppVersion-11.1.4-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -77,7 +77,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"11.1.3"` |  |
+| image.tag | string | `"11.1.4"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
