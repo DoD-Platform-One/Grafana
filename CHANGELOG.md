@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.4.6-bb.0] - 2024-08-20
+### Changed
+- ironbank/big-bang/grafana/grafana-plugins updated from 11.1.3 to 11.1.4
+
 ## [8.4.4-bb.0] - 2024-08-09
 ### Changed
 - gluon updated from 0.5.2 to 0.5.3
