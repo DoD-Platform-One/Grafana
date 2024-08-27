@@ -212,14 +212,6 @@ Modifications made to upstream chart
       memory: 20Mi
   ```
 
-- Line 213-215: Set required `app` and `version` label defaults for Kiali
-
-  ```
-  podLabels:
-    app: monitoring-grafana
-    version: "{{ .Chart.AppVersion }}"
-  ```
-
 - Line 240: Ensure `service.portName` is set to `http-service`.
 
   ```yaml
