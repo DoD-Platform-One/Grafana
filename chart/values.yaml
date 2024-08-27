@@ -211,9 +211,7 @@ downloadDashboards:
   # argocd.argoproj.io/sync-options: Replace=true
 
 ## Pod Labels
-podLabels:
-  app: monitoring-grafana
-  version: "{{ .Chart.AppVersion }}"
+podLabels: {}
 
 podPortName: grafana
 gossipPortName: gossip

@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.4.6-bb.0](https://img.shields.io/badge/Version-8.4.6--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.4](https://img.shields.io/badge/AppVersion-11.1.4-informational?style=flat-square)
+![Version: 8.4.6-bb.1](https://img.shields.io/badge/Version-8.4.6--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.4](https://img.shields.io/badge/AppVersion-11.1.4-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -112,8 +112,7 @@ helm install grafana chart/
 | downloadDashboards.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | downloadDashboards.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | downloadDashboards.envValueFrom | object | `{}` |  |
-| podLabels.app | string | `"monitoring-grafana"` |  |
-| podLabels.version | string | `"{{ .Chart.AppVersion }}"` |  |
+| podLabels | object | `{}` |  |
 | podPortName | string | `"grafana"` |  |
 | gossipPortName | string | `"gossip"` |  |
 | service.enabled | bool | `true` |  |
