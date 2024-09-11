@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.4.6-bb.1](https://img.shields.io/badge/Version-8.4.6--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.1.4](https://img.shields.io/badge/AppVersion-11.1.4-informational?style=flat-square)
+![Version: 8.5.1-bb.0](https://img.shields.io/badge/Version-8.5.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.2.0](https://img.shields.io/badge/AppVersion-11.2.0-informational?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -77,7 +77,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"11.1.4"` |  |
+| image.tag | string | `"11.2.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -233,7 +233,7 @@ helm install grafana chart/
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.27.5"` |  |
+| sidecar.image.tag | string | `"1.27.6"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
@@ -333,6 +333,8 @@ helm install grafana chart/
 | imageRenderer.autoscaling.targetCPU | string | `"60"` |  |
 | imageRenderer.autoscaling.targetMemory | string | `""` |  |
 | imageRenderer.autoscaling.behavior | object | `{}` |  |
+| imageRenderer.serverURL | string | `""` |  |
+| imageRenderer.renderingCallbackURL | string | `""` |  |
 | imageRenderer.image.repository | string | `"docker.io/grafana/grafana-image-renderer"` |  |
 | imageRenderer.image.tag | string | `"latest"` |  |
 | imageRenderer.image.sha | string | `""` |  |

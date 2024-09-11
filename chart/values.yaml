@@ -99,7 +99,7 @@ livenessProbe:
 image:
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "11.1.4"
+  tag: "11.2.0"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -368,7 +368,7 @@ extraContainerVolumes: []
 #    emptyDir: {}
 
 ## Enable persistence using Persistent Volume Claims
-## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
 persistence:
   type: pvc
@@ -884,7 +884,7 @@ smtp:
 sidecar:
   image:
     repository: ironbank/kiwigrid/k8s-sidecar
-    tag: 1.27.5
+    tag: 1.27.6
   imagePullPolicy: IfNotPresent
   resources:
     limits:
@@ -1187,6 +1187,10 @@ imageRenderer:
     targetCPU: "60"
     targetMemory: ""
     behavior: {}
+  # The url of remote image renderer if it is not in the same namespace with the grafana instance
+  serverURL: ""
+  # The callback url of grafana instances if it is not in the same namespace with the remote image renderer
+  renderingCallbackURL: ""
   image:
     # image-renderer Image repository
     repository: docker.io/grafana/grafana-image-renderer
