@@ -1,7 +1,7 @@
 apiVersion: v2
 name: grafana
-version: 8.5.1-bb.0
-appVersion: 11.2.0
+version: 8.5.2-bb.0
+appVersion: 11.2.1
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
 home: https://grafana.com
@@ -17,15 +17,15 @@ annotations:
     - name: Upstream Project
       url: https://github.com/grafana/grafana
   bigbang.dev/applicationVersions: |
-    - Grafana: 11.2.0
+    - Grafana: 11.2.1
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     * [Find our upstream chart's CHANGELOG here](https://github.com/grafana/helm-charts/tree/main/charts/grafana#upgrading-an-existing-release-to-a-new-major-version)
     * [and our upstream application release notes here](https://grafana.com/docs/grafana/latest/release-notes/)
   helm.sh/images: |
     - name: grafana
-      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.2.0
+      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.2.1
     - name: k8s-sidecar
-      image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.27.6
+      image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.28.0
     - name: init-chown-data
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.4
       condition: initChownData.enabled

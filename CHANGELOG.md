@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.5.2-bb.0] - 2024-10-01
+
+### Changed
+- ironbank/big-bang/grafana/grafana-plugins updated from 11.2.0 to 11.2.1
+- ironbank/kiwigrid/k8s-sidecar updated from 1.27.6 to 1.28.0
+
 ## [8.5.1-bb.0] - 2024-09-06
 
 ### Changed

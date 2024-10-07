@@ -99,7 +99,7 @@ livenessProbe:
 image:
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "11.2.0"
+  tag: "11.2.1"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -884,7 +884,7 @@ smtp:
 sidecar:
   image:
     repository: ironbank/kiwigrid/k8s-sidecar
-    tag: 1.27.6
+    tag: 1.28.0
   imagePullPolicy: IfNotPresent
   resources:
     limits:
