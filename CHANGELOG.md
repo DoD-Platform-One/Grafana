@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.5.2-bb.1] - 2024-10-11
+
+### Added
+- Added authoriztaion policy for kiali
+
 ## [8.5.2-bb.0] - 2024-10-01
 
 ### Changed
