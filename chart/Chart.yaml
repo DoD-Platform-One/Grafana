@@ -16,6 +16,7 @@ annotations:
       url: https://github.com/grafana/helm-charts
     - name: Upstream Project
       url: https://github.com/grafana/grafana
+  bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
     - Grafana: 11.3.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
