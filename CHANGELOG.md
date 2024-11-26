@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - gluon updated from 0.5.8 to 0.5.10
 - ironbank/big-bang/grafana/grafana-plugins updated from 11.2.2 to 11.3.0
 - ironbank/redhat/ubi/ubi9-minimal updated from 9.4 to 9.5
+- Added the maintenance track annotation and badge
 
 ## [8.5.5-bb.0] - 2024-10-15
 ### Changed
