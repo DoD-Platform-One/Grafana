@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.8.2-bb.0] - 2024-12-24
+### Changed
+- ironbank/big-bang/grafana/grafana-plugins updated from 11.3.1 to 11.4.0
+- ironbank/kiwigrid/k8s-sidecar updated from 1.28.0 to 1.28.4
+- ironbank/opensource/bats/bats updated from v1.11.0 to 1.11.1
+
 ## [8.6.2-bb.0] - 2024-11-26
 ### Changed
 - gluon updated from 0.5.10 to 0.5.12
