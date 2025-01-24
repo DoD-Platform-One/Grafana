@@ -4,42 +4,42 @@
     "dependencyDashboard": true,
     "dependencyDashboardTitle": "Renovate: Upgrade Grafana Package Dependencies",
     "draftPR": true,
-    "enabledManagers": ["regex", "helmv3", "helm-values"],
+    "enabledManagers": ["custom.regex", "helm-values", "helmv3"],
     "ignorePaths": ["chart/charts/**"],
-    "labels": ["renovate", "kind::maintenance"],
+    "labels": ["renovate", "kind::maintenance", "team::Observability", "grafana"],
     "packageRules": [
-        {
-          "matchDatasources": ["docker"],
-          "groupName": "Ironbank",
-          "registryUrls": ["https://registry1.dso.mil"],
-          "postUpgradeTasks": {
-            "commands": [
-                "match-chart-yaml-appversion",
-                "regenerate-helm-docs",
-                "bump-changelog '- {{{replace 'registry1.dso.mil/' '' depName}}} updated from {{{currentVersion}}} to {{{newVersion}}}'"
-            ],
-            "fileFilters": ["chart/Chart.yaml", "README.md", "CHANGELOG.md"]
-          }
+      {
+        "matchDatasources": ["docker"],
+        "groupName": "Ironbank",
+        "registryUrls": ["https://registry1.dso.mil"],
+        "postUpgradeTasks": {
+          "commands": [
+            "match-chart-yaml-appversion",
+            "regenerate-helm-docs",
+            "bump-changelog '- {{{replace 'registry1.dso.mil/' '' depName}}} updated from {{{currentVersion}}} to {{{newVersion}}}'"
+          ],
+          "fileFilters": ["chart/Chart.yaml", "README.md", "CHANGELOG.md"]
         }
-      ],
-    "regexManagers": [
-        {
-            "fileMatch": ["^chart/Chart\\.yaml$"],
-            "matchStrings": [
-                "- Grafana:\\s+(?<currentValue>.+)",
-                "appVersion:\\s+(?<currentValue>.+)" 
-            ],
-            "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins",
-            "datasourceTemplate": "docker"
-        },
-        {
-            "fileMatch": ["^chart/Chart\\.yaml$"],
-            "matchStrings": [
-                "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker"
-        }
+      }
+    ],
+    "customManagers": [
+      {
+        "customType": "regex",
+        "fileMatch": ["^chart/Chart\\.yaml$"],
+        "matchStrings": [
+          "- Grafana:\\s+(?<currentValue>.+)",
+          "appVersion:\\s+(?<currentValue>.+)"
+        ],
+        "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins",
+        "datasourceTemplate": "docker"
+      },
+      {
+        "customType": "regex",
+        "fileMatch": ["^chart/Chart\\.yaml$"],
+        "matchStrings": ["image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"],
+        "datasourceTemplate": "docker"
+      }
     ],
     "separateMajorMinor": false,
     "postUpdateOptions": ["helmUpdateSubChartArchives"]
-}
+  }
