@@ -39,7 +39,7 @@ refs = {
 # Source files list
 charts = [
     {
-        'source': '../../../monitoring/main/chart/files/dashboards/k8s-coredns.json',
+        'source': '../../monitoring/chart/files/dashboards/k8s-coredns.json',
         'destination': '../chart/templates/dashboards/dashboards-1.14',
         'type': 'dashboard_json',
         'min_kubernetes': '1.14.0-0',

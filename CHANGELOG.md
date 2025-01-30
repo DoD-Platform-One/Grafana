@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.8.2-bb.2] - 2025-01-28
+### Changed
+- grafana chart updated from 8.8.2 to 8.8.5
+- gluon updated from 0.5.12 to 0.5.14
+- ironbank/kiwigrid/k8s-sidecar updated from 1.29.0 to 1.29.1
+
 ## [8.8.2-bb.1] - 2025-01-11
 ### Changed
 - ironbank/kiwigrid/k8s-sidecar updated from 1.28.4 to 1.29.0

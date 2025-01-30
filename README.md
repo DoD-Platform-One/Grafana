@@ -1,15 +1,15 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.8.2-bb.1](https://img.shields.io/badge/Version-8.8.2--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.4.0](https://img.shields.io/badge/AppVersion-11.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 8.8.5-bb.0](https://img.shields.io/badge/Version-8.8.5--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.4.0](https://img.shields.io/badge/AppVersion-11.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
 ## Upstream References
-- <https://grafana.com>
 
-* <https://github.com/grafana/grafana>
-* <https://github.com/grafana/helm-charts>
+- <https://grafana.com>
+- <https://github.com/grafana/grafana>
+- <https://github.com/grafana/helm-charts>
 
 ## Upstream Release Notes
 
@@ -130,6 +130,7 @@ helm install grafana chart/
 | service.labels | object | `{}` |  |
 | service.portName | string | `"http-service"` |  |
 | service.appProtocol | string | `""` |  |
+| service.sessionAffinity | string | `""` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | serviceMonitor.path | string | `"/metrics"` |  |
 | serviceMonitor.labels | object | `{}` |  |
@@ -240,7 +241,7 @@ helm install grafana chart/
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.29.0"` |  |
+| sidecar.image.tag | string | `"1.29.1"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
