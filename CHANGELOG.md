@@ -4,7 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
-## [8.8.2-bb.2] - 2025-01-28
+## [8.8.5-bb.1] - 2025-02-03
+### Changed
+- Added support for istio Operatorless network policy values
+
+## [8.8.5-bb.0] - 2025-01-28
 ### Changed
 - grafana chart updated from 8.8.2 to 8.8.5
 - gluon updated from 0.5.12 to 0.5.14
