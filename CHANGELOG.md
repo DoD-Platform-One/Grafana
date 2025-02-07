@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.9.0-bb.0] - 2025-02-05
+### Changed
+- grafana chart updated from 8.8.5 to 8.9.0
+- grafana updated from 11.4.0 to 11.5.1
+- grafana-plugins updated from 11.4.0 to 11.5.1
+
 ## [8.8.5-bb.1] - 2025-02-03
 ### Changed
 - Added support for istio Operatorless network policy values
