@@ -1,45 +1,56 @@
 {
-    "baseBranches": ["main"],
-    "configWarningReuseIssue": false,
-    "dependencyDashboard": true,
-    "dependencyDashboardTitle": "Renovate: Upgrade Grafana Package Dependencies",
-    "draftPR": true,
-    "enabledManagers": ["custom.regex", "helm-values", "helmv3"],
-    "ignorePaths": ["chart/charts/**"],
-    "labels": ["renovate", "kind::maintenance", "team::Observability", "grafana"],
-    "packageRules": [
-      {
-        "matchDatasources": ["docker"],
-        "groupName": "Ironbank",
-        "registryUrls": ["https://registry1.dso.mil"],
-        "postUpgradeTasks": {
-          "commands": [
-            "match-chart-yaml-appversion",
-            "regenerate-helm-docs",
-            "bump-changelog '- {{{replace 'registry1.dso.mil/' '' depName}}} updated from {{{currentVersion}}} to {{{newVersion}}}'"
-          ],
-          "fileFilters": ["chart/Chart.yaml", "README.md", "CHANGELOG.md"]
-        }
-      }
-    ],
-    "customManagers": [
-      {
-        "customType": "regex",
-        "fileMatch": ["^chart/Chart\\.yaml$"],
-        "matchStrings": [
-          "- Grafana:\\s+(?<currentValue>.+)",
-          "appVersion:\\s+(?<currentValue>.+)"
+  "baseBranches": ["main"],
+  "configWarningReuseIssue": false,
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate: Upgrade Grafana Package Dependencies",
+  "draftPR": true,
+  "enabledManagers": ["custom.regex", "helm-values", "helmv3"],
+  "ignorePaths": ["chart/charts/**"],
+  "labels": ["renovate", "kind::maintenance", "team::Observability", "grafana"],
+  "postUpdateOptions": ["helmUpdateSubChartArchives"],
+  "separateMajorMinor": false,
+  "packageRules": [
+    {
+      "matchDatasources": ["docker", "helm"],
+      "groupName": "Ironbank",
+      "postUpgradeTasks": {
+        "commands": [
+          "regenerate-helm-docs",
+          "bump-changelog '- {{{replace 'registry1.dso.mil/' '' depName}}} updated from {{{currentVersion}}} to {{{newVersion}}}'"
         ],
-        "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins",
-        "datasourceTemplate": "docker"
-      },
-      {
-        "customType": "regex",
-        "fileMatch": ["^chart/Chart\\.yaml$"],
-        "matchStrings": ["image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"],
-        "datasourceTemplate": "docker"
+        "executionMode": "update",
+        "fileFilters": ["chart/Chart.yaml", "README.md", "CHANGELOG.md"]
       }
-    ],
-    "separateMajorMinor": false,
-    "postUpdateOptions": ["helmUpdateSubChartArchives"]
-  }
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update app version chart annotations",
+      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "matchStrings": [
+        "- Grafana:\\s+(?<currentValue>.+)",
+        "appVersion:\\s+(?<currentValue>.+)"
+      ],
+      "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update docker image references",
+      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "matchStrings": ["image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update chart version",
+      "fileMatch": ["^chart/Chart\\.yaml$"],
+      "matchStrings": ["version:\\s+(?<currentValue>.+)-bb\\.\\d+"],
+      "autoReplaceStringTemplate": "version: {{newValue}}-bb.0",
+      "depNameTemplate": "grafana",
+      "datasourceTemplate": "helm",
+      "registryUrlTemplate": "https://grafana.github.io/helm-charts"
+    }
+  ] 
+}
