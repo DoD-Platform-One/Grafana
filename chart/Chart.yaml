@@ -1,6 +1,6 @@
 apiVersion: v2
 name: grafana
-version: 8.10.1-bb.0
+version: 8.10.4-bb.0
 appVersion: 11.5.2
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
@@ -26,7 +26,7 @@ annotations:
     - name: grafana
       image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.5.2
     - name: k8s-sidecar
-      image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.0
+      image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.2
     - name: init-chown-data
       image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.5
       condition: initChownData.enabled

@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.10.4-bb.0] (2025-03-20)
+### Changed
+- grafana chart updated from 8.10.1 to 8.10.4
+- ironbank/kiwigrid/k8s-sidecar updated from 1.30.0 to 1.30.2
+
 ## [8.10.1-bb.0] - 2025-02-21
 ### Changed
 - ironbank/big-bang/grafana/grafana-plugins updated from 11.5.1 to 11.5.2
