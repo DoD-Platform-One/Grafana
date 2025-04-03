@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.11.0-bb.0] (2025-03-29)
+### Changed
+- grafana updated from 8.10.4 to 8.11.0
+
 ## [8.10.4-bb.1] (2025-03-26)
 ### Changed
 - Added netpol for backstage integration

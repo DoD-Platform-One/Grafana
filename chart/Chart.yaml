@@ -1,7 +1,7 @@
 apiVersion: v2
 name: grafana
-version: 8.10.4-bb.1
-appVersion: 11.5.2
+version: 8.11.0-bb.0
+appVersion: 11.6.0
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
 home: https://grafana.com
@@ -18,13 +18,13 @@ annotations:
       url: https://github.com/grafana/grafana
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
-    - Grafana: 11.5.2
+    - Grafana: 11.6.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find our upstream chart's CHANGELOG here](https://github.com/grafana/helm-charts/tree/main/charts/grafana#upgrading-an-existing-release-to-a-new-major-version)
     - [and our upstream application release notes here](https://grafana.com/docs/grafana/latest/release-notes/)
   helm.sh/images: |
     - name: grafana
-      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.5.2
+      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:11.6.0
     - name: k8s-sidecar
       image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.2
     - name: init-chown-data
