@@ -1,33 +1,37 @@
-bbtests:
+#########################
+# Disable Core Packages #
+#########################
+# grafana:
+#   enabled: false
+# monitoring:
+#   enabled: false
+kyvernoReporter:
+  enabled: false
+neuvector:
+  enabled: false
+loki:
+  enabled: false
+promtail:
+  enabled: false
+tempo:
+  enabled: false
+kiali:
+  enabled: false
+addons:
+  minioOperator:
+    enabled: false
+########################
+# Required for package #
+########################
+grafana:
   enabled: true
-  cypress_tnr_username: "cypress"
-  cypress_tnr_password: "tnr_w!G33ZyAt@C8"
-networkPolicies:
+monitoring:
   enabled: true
-datasources:
-  datasourcesbb.yaml:
-    apiVersion: 1
-    datasources:
-    - name: Prometheus
-      type: prometheus
-      access: proxy
-      url: http://monitoring-kube-prometheus-prometheus.grafana.svc.cluster.local:9090
-      isDefault: true
-dashboards:
-  default:
-    k8s-deployment:
-      gnetId: 741
-      revision: 1
-      datasource: Prometheus
-dashboardProviders:
-  dashboardproviders.yaml:
-    apiVersion: 1
-    providers:
-    - name: 'default'
-      orgId: 1
-      folder: ''
-      type: file
-      disableDeletion: false
-      editable: true
-      options:
-        path: /var/lib/grafana/dashboards
+kyverno:
+  values:
+    bbtests:
+      enabled: false
+kyvernoPolicies:
+  values:
+    bbtests:
+      enabled: false
