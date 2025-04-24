@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.12.1-bb.0] (2025-04-18)
+### Changed
+- gluon updated from 0.5.14 to 0.5.15
+- grafana chart updated from 8.11.0 to 8.12.1
+
 ## [8.11.0-bb.0] (2025-03-29)
 ### Changed
 - grafana updated from 8.10.4 to 8.11.0

@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: a93a3d9f518f2b1a11b5d164f9026a1e044925a3
+    commit: 2baf42b72538dadeb33f72cab340e77dfeb9f213
     repo: https://github.com/grafana/helm-charts
     directory: /charts/grafana
-    ref: grafana-8.11.0
+    ref: grafana-8.12.0

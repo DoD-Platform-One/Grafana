@@ -555,7 +555,7 @@ We ship the grafana package separately due to <https://repo1.dso.mil/big-bang/pr
 
 When the dashboards and script are updated upstream, we must pull in the new scripts from `hack/` in `kube-prometheus-stack`, modify them so that any new values are present in this chart, and revert any references to `.Values.grafana` back to just `.Values.` since this is the grafana chart.
 
-Before running the Python script, ensure the relative locations are correct, eg:
+Before running the Python script, ensure the relative locations are correct in hack/sync_grafana_dashboards.py file, eg:
 
   ```python
   charts = [
