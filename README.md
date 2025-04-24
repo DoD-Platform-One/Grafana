@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.11.0-bb.0](https://img.shields.io/badge/Version-8.11.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.6.0](https://img.shields.io/badge/AppVersion-11.6.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 8.12.1-bb.0](https://img.shields.io/badge/Version-8.12.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.6.0](https://img.shields.io/badge/AppVersion-11.6.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -79,7 +79,7 @@ helm install grafana chart/
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"11.5.2"` |  |
+| image.tag | string | `"11.6.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -262,6 +262,7 @@ helm install grafana chart/
 | sidecar.alerts.searchNamespace | string | `nil` |  |
 | sidecar.alerts.watchMethod | string | `"WATCH"` |  |
 | sidecar.alerts.resource | string | `"both"` |  |
+| sidecar.alerts.resourceName | string | `""` |  |
 | sidecar.alerts.reloadURL | string | `"http://localhost:3000/api/admin/provisioning/alerting/reload"` |  |
 | sidecar.alerts.script | string | `nil` |  |
 | sidecar.alerts.skipReload | bool | `false` |  |
@@ -280,6 +281,7 @@ helm install grafana chart/
 | sidecar.dashboards.watchMethod | string | `"WATCH"` |  |
 | sidecar.dashboards.resource | string | `"both"` |  |
 | sidecar.dashboards.folderAnnotation | string | `nil` |  |
+| sidecar.dashboards.resourceName | string | `""` |  |
 | sidecar.dashboards.reloadURL | string | `"http://localhost:3000/api/admin/provisioning/dashboards/reload"` |  |
 | sidecar.dashboards.script | string | `nil` |  |
 | sidecar.dashboards.skipReload | bool | `false` |  |
@@ -303,6 +305,7 @@ helm install grafana chart/
 | sidecar.datasources.searchNamespace | string | `nil` |  |
 | sidecar.datasources.watchMethod | string | `"WATCH"` |  |
 | sidecar.datasources.resource | string | `"both"` |  |
+| sidecar.datasources.resourceName | string | `""` |  |
 | sidecar.datasources.reloadURL | string | `"http://localhost:3000/api/admin/provisioning/datasources/reload"` |  |
 | sidecar.datasources.script | string | `nil` |  |
 | sidecar.datasources.skipReload | bool | `false` |  |
@@ -316,6 +319,7 @@ helm install grafana chart/
 | sidecar.plugins.searchNamespace | string | `nil` |  |
 | sidecar.plugins.watchMethod | string | `"WATCH"` |  |
 | sidecar.plugins.resource | string | `"both"` |  |
+| sidecar.plugins.resourceName | string | `""` |  |
 | sidecar.plugins.reloadURL | string | `"http://localhost:3000/api/admin/provisioning/plugins/reload"` |  |
 | sidecar.plugins.script | string | `nil` |  |
 | sidecar.plugins.skipReload | bool | `false` |  |
@@ -329,6 +333,7 @@ helm install grafana chart/
 | sidecar.notifiers.searchNamespace | string | `nil` |  |
 | sidecar.notifiers.watchMethod | string | `"WATCH"` |  |
 | sidecar.notifiers.resource | string | `"both"` |  |
+| sidecar.notifiers.resourceName | string | `""` |  |
 | sidecar.notifiers.reloadURL | string | `"http://localhost:3000/api/admin/provisioning/notifications/reload"` |  |
 | sidecar.notifiers.script | string | `nil` |  |
 | sidecar.notifiers.skipReload | bool | `false` |  |
