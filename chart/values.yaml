@@ -97,9 +97,10 @@ livenessProbe:
 # schedulerName: "default-scheduler"
 
 image:
+  registry: registry1.dso.mil
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "11.6.0"
+  tag: "11.6.1"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -113,8 +114,10 @@ image:
 
 testFramework:
   enabled: false
-  image: ironbank/opensource/bats/bats
-  tag: "v1.4.1"
+  image:
+    registry: registry1.dso.mil
+    repository: ironbank/opensource/bats/bats
+    tag: "1.11.1"
   imagePullPolicy: IfNotPresent
   securityContext: {}
   containerSecurityContext: {}
@@ -176,6 +179,7 @@ extraLabels: {}
 # priorityClassName:
 
 downloadDashboardsImage:
+  registry: registry1.dso.mil
   repository: ironbank/big-bang/base
   tag: 2.1.0
   #sha: ""
@@ -413,6 +417,8 @@ persistence:
   type: pvc
   enabled: false
   # storageClassName: default
+  ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
+  volumeName: ""
   accessModes:
     - ReadWriteOnce
   size: 10Gi
@@ -452,6 +458,7 @@ initChownData:
   ## initChownData container image
   ##
   image:
+    registry: registry1.dso.mil
     repository: ironbank/redhat/ubi/ubi9-minimal
     tag: "9.5"
     sha: ""
@@ -958,8 +965,9 @@ smtp:
 ## Requires at least Grafana 5 to work and can't be used together with parameters dashboardProviders, datasources and dashboards
 sidecar:
   image:
+    registry: registry1.dso.mil
     repository: ironbank/kiwigrid/k8s-sidecar
-    tag: 1.30.2
+    tag: 1.30.3
   imagePullPolicy: IfNotPresent
   resources:
     limits:
@@ -1038,7 +1046,9 @@ sidecar:
     #
     # Endpoint to send request to reload alerts
     reloadURL: "http://localhost:3000/api/admin/provisioning/alerting/reload"
-    # Absolute path to shell script to execute after a alert got reloaded
+    # Absolute path to a script to execute after a configmap got reloaded.
+    # It runs before calls to REQ_URI. If the file is not executable it will be passed to sh.
+    # Otherwise, it's executed as is. Shebangs known to work are #!/bin/sh and #!/usr/bin/env python
     script: null
     skipReload: false
     # This is needed if skipReload is true, to load any alerts defined at startup time.
@@ -1115,7 +1125,9 @@ sidecar:
     #
     # Endpoint to send request to reload alerts
     reloadURL: "http://localhost:3000/api/admin/provisioning/dashboards/reload"
-    # Absolute path to shell script to execute after a configmap got reloaded
+    # Absolute path to a script to execute after a configmap got reloaded.
+    # It runs before calls to REQ_URI. If the file is not executable it will be passed to sh.
+    # Otherwise, it's executed as is. Shebangs known to work are #!/bin/sh and #!/usr/bin/env python
     script: null
     skipReload: false
     # watchServerTimeout: request to the server, asking it to cleanly close the connection after that.
@@ -1224,7 +1236,9 @@ sidecar:
     #
     # Endpoint to send request to reload datasources
     reloadURL: "http://localhost:3000/api/admin/provisioning/datasources/reload"
-    # Absolute path to shell script to execute after a datasource got reloaded
+    # Absolute path to a script to execute after a configmap got reloaded.
+    # It runs before calls to REQ_URI. If the file is not executable it will be passed to sh.
+    # Otherwise, it's executed as is. Shebangs known to work are #!/bin/sh and #!/usr/bin/env python
     script: null
     skipReload: false
     # This is needed if skipReload is true, to load any datasources defined at startup time.
@@ -1290,7 +1304,9 @@ sidecar:
     #
     # Endpoint to send request to reload plugins
     reloadURL: "http://localhost:3000/api/admin/provisioning/plugins/reload"
-    # Absolute path to shell script to execute after a plugin got reloaded
+    # Absolute path to a script to execute after a configmap got reloaded.
+    # It runs before calls to REQ_URI. If the file is not executable it will be passed to sh.
+    # Otherwise, it's executed as is. Shebangs known to work are #!/bin/sh and #!/usr/bin/env python
     script: null
     skipReload: false
     # Deploy the datasource sidecar as an initContainer in addition to a container.
@@ -1356,7 +1372,9 @@ sidecar:
     #
     # Endpoint to send request to reload notifiers
     reloadURL: "http://localhost:3000/api/admin/provisioning/notifications/reload"
-    # Absolute path to shell script to execute after a notifier got reloaded
+    # Absolute path to a script to execute after a configmap got reloaded.
+    # It runs before calls to REQ_URI. If the file is not executable it will be passed to sh.
+    # Otherwise, it's executed as is. Shebangs known to work are #!/bin/sh and #!/usr/bin/env python
     script: null
     skipReload: false
     # Deploy the notifier sidecar as an initContainer in addition to a container.
@@ -1393,12 +1411,15 @@ imageRenderer:
   # The callback url of grafana instances if it is not in the same namespace with the remote image renderer
   renderingCallbackURL: ""
   image:
+    registry: registry1.dso.mil
     # image-renderer Image repository
-    repository: docker.io/grafana/grafana-image-renderer
+    repository: ironbank/opensource/grafana/grafana-image-renderer
     # image-renderer Image tag
-    tag: latest
+    tag: 3.12.5
     # image-renderer Image sha (optional)
     sha: ""
+    # image-renderer Image pull secrets (optional)
+    pullSecrets: []
     # image-renderer ImagePullPolicy
     pullPolicy: Always
   # extra environment variables

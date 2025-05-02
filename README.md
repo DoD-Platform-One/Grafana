@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.12.1-bb.0](https://img.shields.io/badge/Version-8.12.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.6.0](https://img.shields.io/badge/AppVersion-11.6.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 8.14.0-bb.0](https://img.shields.io/badge/Version-8.14.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.6.1](https://img.shields.io/badge/AppVersion-11.6.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -78,13 +78,15 @@ helm install grafana chart/
 | livenessProbe.initialDelaySeconds | int | `60` |  |
 | livenessProbe.timeoutSeconds | int | `30` |  |
 | livenessProbe.failureThreshold | int | `10` |  |
+| image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"11.6.0"` |  |
+| image.tag | string | `"11.6.1"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
-| testFramework.image | string | `"ironbank/opensource/bats/bats"` |  |
-| testFramework.tag | string | `"v1.4.1"` |  |
+| testFramework.image.registry | string | `"registry1.dso.mil"` |  |
+| testFramework.image.repository | string | `"ironbank/opensource/bats/bats"` |  |
+| testFramework.image.tag | string | `"1.11.1"` |  |
 | testFramework.imagePullPolicy | string | `"IfNotPresent"` |  |
 | testFramework.securityContext | object | `{}` |  |
 | testFramework.containerSecurityContext | object | `{}` |  |
@@ -102,6 +104,7 @@ helm install grafana chart/
 | extraConfigmapMounts | list | `[]` |  |
 | extraEmptyDirMounts | list | `[]` |  |
 | extraLabels | object | `{}` |  |
+| downloadDashboardsImage.registry | string | `"registry1.dso.mil"` |  |
 | downloadDashboardsImage.repository | string | `"ironbank/big-bang/base"` |  |
 | downloadDashboardsImage.tag | string | `"2.1.0"` |  |
 | downloadDashboardsImage.pullPolicy | string | `"IfNotPresent"` |  |
@@ -170,6 +173,7 @@ helm install grafana chart/
 | extraContainerVolumes | list | `[]` |  |
 | persistence.type | string | `"pvc"` |  |
 | persistence.enabled | bool | `false` |  |
+| persistence.volumeName | string | `""` |  |
 | persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
 | persistence.size | string | `"10Gi"` |  |
 | persistence.finalizers[0] | string | `"kubernetes.io/pvc-protection"` |  |
@@ -178,6 +182,7 @@ helm install grafana chart/
 | persistence.inMemory.enabled | bool | `false` |  |
 | persistence.lookupVolumeName | bool | `true` |  |
 | initChownData.enabled | bool | `false` |  |
+| initChownData.image.registry | string | `"registry1.dso.mil"` |  |
 | initChownData.image.repository | string | `"ironbank/redhat/ubi/ubi9-minimal"` |  |
 | initChownData.image.tag | string | `"9.5"` |  |
 | initChownData.image.sha | string | `""` |  |
@@ -242,8 +247,9 @@ helm install grafana chart/
 | smtp.existingSecret | string | `""` |  |
 | smtp.userKey | string | `"user"` |  |
 | smtp.passwordKey | string | `"password"` |  |
+| sidecar.image.registry | string | `"registry1.dso.mil"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.30.2"` |  |
+| sidecar.image.tag | string | `"1.30.3"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.limits.cpu | string | `"100m"` |  |
 | sidecar.resources.limits.memory | string | `"100Mi"` |  |
@@ -353,9 +359,11 @@ helm install grafana chart/
 | imageRenderer.autoscaling.behavior | object | `{}` |  |
 | imageRenderer.serverURL | string | `""` |  |
 | imageRenderer.renderingCallbackURL | string | `""` |  |
-| imageRenderer.image.repository | string | `"docker.io/grafana/grafana-image-renderer"` |  |
-| imageRenderer.image.tag | string | `"latest"` |  |
+| imageRenderer.image.registry | string | `"registry1.dso.mil"` |  |
+| imageRenderer.image.repository | string | `"ironbank/opensource/grafana/grafana-image-renderer"` |  |
+| imageRenderer.image.tag | string | `"3.12.5"` |  |
 | imageRenderer.image.sha | string | `""` |  |
+| imageRenderer.image.pullSecrets | list | `[]` |  |
 | imageRenderer.image.pullPolicy | string | `"Always"` |  |
 | imageRenderer.env.HTTP_HOST | string | `"0.0.0.0"` |  |
 | imageRenderer.env.XDG_CONFIG_HOME | string | `"/tmp/.chromium"` |  |
