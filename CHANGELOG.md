@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [8.13.1-bb.0] (2025-04-26)
+### Changed
+- gluon updated from 0.5.15 to 0.5.16
+- grafana updated from 8.12.1 to 8.14.0
+- ironbank/big-bang/grafana/grafana-plugins updated from 11.6.0 to 11.6.1
+- ironbank/kiwigrid/k8s-sidecar updated from 1.30.2 to 1.30.3
+- ironbank/opensource/bats/bats updated from v1.4.1 to 1.11.1
+- grafana-image-renderer changed from public image (docker.io/grafana/grafana-image-renderer:latest) to Iron Bank (ironbank/opensource/grafana/grafana-image-renderer:3.12.5)
+
 ## [8.12.1-bb.0] (2025-04-18)
 ### Changed
 - gluon updated from 0.5.14 to 0.5.15

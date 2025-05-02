@@ -24,7 +24,7 @@ Grafana is a modified/customized version of an upstream chart. The below details
 
 ## Testing a new Grafana version
 
-1. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
+1. (_Optional, only required if package changes are expected to have cascading effects on bigbang umbrella chart_) As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
 
     - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Grafana enabled (the below is a reference, actual changes could be more depending on what changes were made to Grafana in the package MR).
 
@@ -35,7 +35,7 @@ Grafana is a modified/customized version of an upstream chart. The below details
       enabled: true
       git:
         tag: null
-        branch: <my-package-branch-that-needs-testing>
+        branch: "renovate/ironbank"
       values:
         istio:
           hardened:
@@ -132,7 +132,7 @@ twistlock:
   enabled: false
 ```
 
-- Visit `https://grafana.dev.bigbang.mil` and login
+- Login to [Grafana](https://grafana.dev.bigbang.mil)
 - Navigate to `Dashboards` and then click on `Kubernetes / Compute Resources / Cluster` and validate that data is loaded
 
 ## Big Bang Modifications
@@ -141,7 +141,7 @@ Modifications made to upstream chart
 
 ### `chart/values.yaml`
 
-- Line 3: Ensure `global.imageRegistry` is set to to `registry1.dso.mil`.
+- Ensure `global.imageRegistry` is set to to `registry1.dso.mil`.
 
   ```yaml
   global:
@@ -149,39 +149,42 @@ Modifications made to upstream chart
     imageRegistry: registry1.dso.mil
   ```
 
-- Line 19: Ensure `openshift: false` is present.
+- Ensure `openshift: false` is present.
 
   ```yaml
   openshift: false
   ```
 
-- Line 100-103: Ensure the `image` configuration is set to the following, where `X.Y.Z` is the correct version:
+- Ensure the `image` configuration is set to the following, where `X.Y.Z` is the correct version:
 
   ```yaml
   image:
+    registry: registry1.dso.mil
     repository: ironbank/big-bang/grafana/grafana-plugins
     # Overrides the Grafana image tag whose default is the chart appVersion
     tag: "X.Y.Z"
     #sha: ""
   ```
 
-- Line 112: Ensure `image.pullSecrets` is supplied.
+- Ensure `image.pullSecrets` is supplied.
 
   ```yaml
   pullSecrets:
   - private-registry
   ```
 
-- Line 115-117: Ensure the `testFramework` configuration is set to the following, where `X.Y.Z` is the correct version:
+- Ensure the `testFramework` configuration is set to the following, where `X.Y.Z` is the correct version:
 
   ```yaml
   testFramework:
     enabled: false
-    image: ironbank/opensource/bats/bats
-    tag: "v1.4.1"
+    image:
+      registry: registry1.dso.mil
+      repository: ironbank/opensource/bats/bats
+      tag: "X.Y.Z"
   ```
 
-- Line 140-142: Ensure the `securityContext` values for `runAsUser`, `runAsGroup`, and `fsGroup` are set to `65532`:
+- Ensure the `securityContext` values for `runAsUser`, `runAsGroup`, and `fsGroup` are set to `65532`:
 
   ```yaml
   securityContext:
@@ -191,16 +194,17 @@ Modifications made to upstream chart
     fsGroup: 65532
   ```
 
-- Line 177-179: Ensure the `downloadDashboardsImage` configuration is set to the following, where `X.Y.Z` is the correct version:
+- Ensure the `downloadDashboardsImage` configuration is set to the following, where `X.Y.Z` is the correct version:
 
   ```yaml
   downloadDashboardsImage:
+    registry: registry1.dso.mil
     repository: ironbank/big-bang/base
     tag: X.Y.Z
     #sha: ""
   ```
 
-- Line 185-191: Ensure the `downloadDashboards.resources` configuration is set to the following:
+- Ensure the `downloadDashboards.resources` configuration is set to the following:
 
   ```yaml
   resources:
@@ -212,19 +216,19 @@ Modifications made to upstream chart
       memory: 20Mi
   ```
 
-- Line 241: Ensure `service.portName` is set to `http-service`.
+- Ensure `service.portName` is set to `http-service`.
 
   ```yaml
   portName: http-service
   ```
 
-- Line 253: Ensure `serviceMonitor.interval` is set to `1m`.
+- Ensure `serviceMonitor.interval` is set to `1m`.
 
   ```yaml
   interval: 1m
   ```
 
-- Line 347: Ensure `resources` is set to the following:
+- Ensure `resources` is set to the following:
 
   ```yaml
   resources:
@@ -236,7 +240,7 @@ Modifications made to upstream chart
       memory: 256Mi
     ```
 
-- Line 443: Ensure `initChownData.enabled` is set to `false`.
+- Ensure `initChownData.enabled` is set to `false`.
 
   ```yaml
   initChownData:
@@ -246,15 +250,18 @@ Modifications made to upstream chart
     enabled: false
   ```
 
-- Line 452-453: Ensure `initChownData.image.repository` and `initChownData.image.tag` are set to the following:
+- Ensure `initChownData.image` is set to the following, where `X.Y` is the correct version:
 
   ```yaml
   image:
+    registry: registry1.dso.mil
     repository: ironbank/redhat/ubi/ubi9-minimal
-    tag: "9.5"
+    tag: "X.Y"
+    sha: ""
+    pullPolicy: IfNotPresent
   ```
 
-- Line 423-429: Ensure `initChownData.resources` is set to the following:
+- Ensure `initChownData.resources` is set to the following:
 
   ```yaml
   resources:
@@ -266,13 +273,13 @@ Modifications made to upstream chart
       memory: 128Mi
     ```
 
-- Line 478: Ensure `adminPassword` is set to `prom-operator`.
+- Ensure `adminPassword` is set to `prom-operator`.
 
   ```yaml
   adminPassword: prom-operator
   ```
 
-- Line 828-830: Ensure that `grafana.ini.analytics` has these values:
+- Ensure that `grafana.ini.analytics` has these values:
 
   ```yaml
    analytics:
@@ -280,7 +287,7 @@ Modifications made to upstream chart
     check_for_updates: false
   ```
 
-- Line 842-865: Ensure the following section is added to the `grafana.ini` configuration:
+- Ensure the following section is added to the `grafana.ini` configuration:
 
   ```yaml
   auth.generic_oauth:
@@ -309,16 +316,17 @@ Modifications made to upstream chart
     angular_support_enabled: false  
   ```
 
-- Line 922-923: Ensure that `sidecar.image.repository` and `sidecar.image.tag` are set to the following:
+- Ensure that `sidecar.image` is set to the following, where `X.Y.Z` is the correct version:
 
   ```yaml
   sidecar:
     image:
+      registry: registry1.dso.mil
       repository: ironbank/kiwigrid/k8s-sidecar
-      tag: 1.27.5
+      tag: X.Y.Z
   ```
 
-- Line 925-931: Ensure that `sidecar.resources` is set to the following:
+- Ensure that `sidecar.resources` is set to the following:
 
   ```yaml
   resources:
@@ -330,26 +338,26 @@ Modifications made to upstream chart
       memory: 100Mi
   ```
 
-- Line 989: Ensure `sidecar.dashboards.enabled` is set to `true`.
+- Ensure `sidecar.dashboards.enabled` is set to `true`.
 
   ```yaml
   dashboards:
     enabled: true
   ```
 
-- Line 1011: Ensure `sidecar.dashboards.labelValue` is set to `"1"`.
+- Ensure `sidecar.dashboards.labelValue` is set to `"1"`.
 
   ```yaml
   labelValue: "1"
   ```
 
-- Line 1021: Ensure `sidecar.dashboards.searchNameSpace` is set to `ALL`.
+- Ensure `sidecar.dashboards.searchNameSpace` is set to `ALL`.
 
   ```yaml
   searchNamespace: ALL
   ```
 
-- Line 1066-1070: Ensure `sidecar.dashboards.multicluster` is set to the following:
+- Ensure `sidecar.dashboards.multicluster` is set to the following:
 
   ```yaml
   multicluster:
@@ -359,40 +367,49 @@ Modifications made to upstream chart
       enabled: true
   ```
 
-- Line 1072: Ensure `sidecar.datasources.enabled` is set to `true`.
+- Ensure `sidecar.datasources.enabled` is set to `true`.
 
   ```yaml
   datasources:
     enabled: true
   ```
 
-- Line 1093: Ensure `sidecar.datasources.labelValue` is set to `"1"`.
+- Ensure `sidecar.datasources.labelValue` is set to `"1"`.
 
   ```yaml
   labelValue: "1"
   ```
 
-- Line 1236-1238: Ensure `imageRenderer.image.registry` is removed and `imageRenderer.image.repository` is overridden.
+- Ensure `imageRenderer.image` is set to the following, where `X.Y.Z` is the correct version.
 
   ```yaml
   image:
+    registry: registry1.dso.mil
     # image-renderer Image repository
-    repository: docker.io/grafana/grafana-image-renderer
+    repository: ironbank/opensource/grafana/grafana-image-renderer
+    # image-renderer Image tag
+    tag: X.Y.Z
+    # image-renderer Image sha (optional)
+    sha: ""
+    # image-renderer Image pull secrets (optional)
+    pullSecrets: []
+    # image-renderer ImagePullPolicy
+    pullPolicy: Always
   ```
 
-- Line 1288: Ensure `imageRenderer.service.portName` is set to `http-web`
+- Ensure `imageRenderer.service.portName` is set to `http-web`
 
   ```yaml
   portName: http-web
   ```
 
-- Line 1453: Ensure `assertNoLeakedSecrets` is set to `false`.
+- Ensure `assertNoLeakedSecrets` is set to `false`.
 
   ```yaml
   assertNoLeakedSecrets: false
   ```
 
-- EOF: Add the following extra configurations to the bottom of the file:
+- Add the following extra configurations to the bottom of the file:
 
   ```yaml
   defaultDashboardsEnabled:
@@ -509,19 +526,19 @@ Modifications made to upstream chart
 
 ### `chart/templates/_helpers.tpl`
 
-- Line 84: Set `app.kubernetes.io/instance` to `monitoring-monitoring`.
+- Set `app.kubernetes.io/instance` to `monitoring-monitoring`.
 
   ```yaml
   app.kubernetes.io/instance: monitoring-monitoring
   ```
 
-- Line 104: Set `app.kubernetes.io/instance` to `monitoring-monitoring`.
+- Set `app.kubernetes.io/instance` to `monitoring-monitoring`.
 
   ```yaml
   app.kubernetes.io/instance: monitoring-monitoring
   ```
 
-- EOF: Ensure this section is added to the bottom of the file:
+- Ensure this section is added to the bottom of the file:
 
   ```yaml
   {{/*
@@ -537,7 +554,7 @@ Modifications made to upstream chart
 
 ### `hack/sync_grafana_dashboards.py`
 
-- Line 92: Change the value of `condition_map['prometheus_remote_write']` to be:
+- Change the value of `condition_map['prometheus_remote_write']` to be:
 
   ```python
     'prometheus-remote-write': ' .Values.prometheusRemoteWriteDashboards',
