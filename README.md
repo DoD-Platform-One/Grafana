@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 8.14.0-bb.0](https://img.shields.io/badge/Version-8.14.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 11.6.1](https://img.shields.io/badge/AppVersion-11.6.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.0.0-bb.0](https://img.shields.io/badge/Version-9.0.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.0](https://img.shields.io/badge/AppVersion-12.0.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -80,7 +80,7 @@ helm install grafana chart/
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"11.6.1"` |  |
+| image.tag | string | `"12.0.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -191,10 +191,12 @@ helm install grafana chart/
 | initChownData.resources.limits.memory | string | `"128Mi"` |  |
 | initChownData.resources.requests.cpu | string | `"100m"` |  |
 | initChownData.resources.requests.memory | string | `"128Mi"` |  |
+| initChownData.securityContext.readOnlyRootFilesystem | bool | `false` |  |
 | initChownData.securityContext.runAsNonRoot | bool | `false` |  |
 | initChownData.securityContext.runAsUser | int | `0` |  |
 | initChownData.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | initChownData.securityContext.capabilities.add[0] | string | `"CHOWN"` |  |
+| initChownData.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | adminUser | string | `"admin"` |  |
 | adminPassword | string | `"prom-operator"` |  |
 | admin.existingSecret | string | `""` |  |
@@ -216,6 +218,7 @@ helm install grafana chart/
 | alerting | object | `{}` |  |
 | notifiers | object | `{}` |  |
 | dashboardProviders | object | `{}` |  |
+| defaultCurlOptions | string | `"-skf"` |  |
 | dashboards | object | `{}` |  |
 | dashboardsConfigMaps | object | `{}` |  |
 | "grafana.ini".paths.data | string | `"/var/lib/grafana/"` |  |
