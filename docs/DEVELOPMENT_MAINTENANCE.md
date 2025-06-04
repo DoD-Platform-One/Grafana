@@ -58,8 +58,10 @@ flux:
 networkPolicies:
   enabled: true
 
-clusterAuditor:
-  enabled: false
+alloy:
+  enabled: true
+  alloyLogs:
+    enabled: true
 
 gatekeeper:
   enabled: false
@@ -98,9 +100,6 @@ grafana:
 loki:
   enabled: true
 
-promtail:
-  enabled: true
-
 tempo:
   enabled: true
 
@@ -111,9 +110,6 @@ kyvernoPolicies:
   enabled: false
 
 kyvernoReporter:
-  enabled: false
-
-jaeger:
   enabled: false
 
 kiali:
