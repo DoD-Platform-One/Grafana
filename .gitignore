@@ -34,4 +34,7 @@ ignore/*
 # Local History for Visual Studio Code
 .history/
 
+# hackdir
+hack/etcd.git/ 
+hack/kubernetes-mixin.git/
 

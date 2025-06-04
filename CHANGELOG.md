@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [9.2.2-bb.0] (2025-06-03)
+### Changed
+- gluon updated from 0.5.19 to 0.6.2
+- grafana updated from 9.0.0 to 9.2.2
 
 ## [9.0.0-bb.0] (2025-05-13)
 ### Changed
