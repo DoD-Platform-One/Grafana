@@ -72,6 +72,7 @@ podDisruptionBudget: {}
 #  apiVersion: ""
 #  minAvailable: 1
 #  maxUnavailable: 1
+#  unhealthyPodEvictionPolicy: IfHealthyBudget
 
 ## See `kubectl explain deployment.spec.strategy` for more
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
@@ -100,7 +101,7 @@ image:
   registry: registry1.dso.mil
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "12.0.0"
+  tag: "12.0.1"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -117,7 +118,7 @@ testFramework:
   image:
     registry: registry1.dso.mil
     repository: ironbank/opensource/bats/bats
-    tag: "1.11.1"
+    tag: "1.12.0"
   imagePullPolicy: IfNotPresent
   securityContext: {}
   containerSecurityContext: {}
@@ -460,7 +461,7 @@ initChownData:
   image:
     registry: registry1.dso.mil
     repository: ironbank/redhat/ubi/ubi9-minimal
-    tag: "9.5"
+    tag: "9.6"
     sha: ""
     pullPolicy: IfNotPresent
 
@@ -1010,6 +1011,19 @@ sidecar:
     enabled: false
     # Additional environment variables for the alerts sidecar
     env: {}
+    ## "valueFrom" environment variable references that will be added to deployment pods. Name is templated.
+    ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#envvarsource-v1-core
+    ## Renders in container spec as:
+    ##   env:
+    ##     ...
+    ##     - name: <key>
+    ##       valueFrom:
+    ##         <value rendered as YAML>
+    envValueFrom: {}
+    #  ENV_NAME:
+    #    configMapKeyRef:
+    #      name: configmap-name
+    #      key: value_key
     # Do not reprocess already processed unchanged resources on k8s API reconnect.
     # ignoreAlreadyProcessed: true
     # label that the configmaps with alert are marked with (can be templated)
@@ -1431,7 +1445,7 @@ imageRenderer:
     # image-renderer Image repository
     repository: ironbank/opensource/grafana/grafana-image-renderer
     # image-renderer Image tag
-    tag: 3.12.5
+    tag: 3.12.6
     # image-renderer Image sha (optional)
     sha: ""
     # image-renderer Image pull secrets (optional)
