@@ -1,10 +1,10 @@
 #########################
 # Disable Core Packages #
 #########################
-# grafana:
-#   enabled: false
-# monitoring:
-#   enabled: false
+bbctl:
+  enabled: false
+alloy:
+  enabled: false
 kyvernoReporter:
   enabled: false
 neuvector:
