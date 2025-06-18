@@ -353,9 +353,9 @@ route:
     additionalRules: []
 
 resources:
-  limits:
-    cpu: 100m
-    memory: 256Mi
+#  limits:
+#    cpu: 100m
+#    memory: 256Mi
   requests:
     cpu: 100m
     memory: 256Mi
@@ -469,9 +469,9 @@ initChownData:
   ## Ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
   resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
+#    limits:
+#      cpu: 100m
+#      memory: 128Mi
     requests:
       cpu: 100m
       memory: 128Mi
@@ -915,7 +915,7 @@ grafana.ini:
     path: /var/lib/bb-plugins/polystat-panel
   plugin.redis-datasource:
     path: /var/lib/bb-plugins/redis-datasource
-  security: 
+  security:
     angular_support_enabled: false
 
  # auth.github:
@@ -987,9 +987,9 @@ sidecar:
     tag: 1.30.3
   imagePullPolicy: IfNotPresent
   resources:
-    limits:
-      cpu: 100m
-      memory: 100Mi
+#    limits:
+#      cpu: 100m
+#      memory: 100Mi
     requests:
       cpu: 100m
       memory: 100Mi

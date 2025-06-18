@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 9.2.2-bb.0](https://img.shields.io/badge/Version-9.2.2--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.1](https://img.shields.io/badge/AppVersion-12.0.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.2.2-bb.1](https://img.shields.io/badge/Version-9.2.2--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.1](https://img.shields.io/badge/AppVersion-12.0.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -160,8 +160,6 @@ helm install grafana chart/
 | route.main.enabled | bool | `false` | Enables or disables the route |
 | route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion, e.g. gateway.networking.k8s.io/v1 or gateway.networking.k8s.io/v1alpha2 |
 | route.main.kind | string | `"HTTPRoute"` | Set the route kind Valid options are GRPCRoute, HTTPRoute, TCPRoute, TLSRoute, UDPRoute |
-| resources.limits.cpu | string | `"100m"` |  |
-| resources.limits.memory | string | `"256Mi"` |  |
 | resources.requests.cpu | string | `"100m"` |  |
 | resources.requests.memory | string | `"256Mi"` |  |
 | nodeSelector | object | `{}` |  |
@@ -187,8 +185,6 @@ helm install grafana chart/
 | initChownData.image.tag | string | `"9.6"` |  |
 | initChownData.image.sha | string | `""` |  |
 | initChownData.image.pullPolicy | string | `"IfNotPresent"` |  |
-| initChownData.resources.limits.cpu | string | `"100m"` |  |
-| initChownData.resources.limits.memory | string | `"128Mi"` |  |
 | initChownData.resources.requests.cpu | string | `"100m"` |  |
 | initChownData.resources.requests.memory | string | `"128Mi"` |  |
 | initChownData.securityContext.readOnlyRootFilesystem | bool | `false` |  |
@@ -254,8 +250,6 @@ helm install grafana chart/
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
 | sidecar.image.tag | string | `"1.30.3"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
-| sidecar.resources.limits.cpu | string | `"100m"` |  |
-| sidecar.resources.limits.memory | string | `"100Mi"` |  |
 | sidecar.resources.requests.cpu | string | `"100m"` |  |
 | sidecar.resources.requests.memory | string | `"100Mi"` |  |
 | sidecar.securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -266,6 +260,7 @@ helm install grafana chart/
 | sidecar.livenessProbe | object | `{}` |  |
 | sidecar.alerts.enabled | bool | `false` |  |
 | sidecar.alerts.env | object | `{}` |  |
+| sidecar.alerts.envValueFrom | object | `{}` |  |
 | sidecar.alerts.label | string | `"grafana_alert"` |  |
 | sidecar.alerts.labelValue | string | `""` |  |
 | sidecar.alerts.searchNamespace | string | `nil` |  |
