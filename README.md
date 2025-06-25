@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 9.2.2-bb.1](https://img.shields.io/badge/Version-9.2.2--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.1](https://img.shields.io/badge/AppVersion-12.0.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.2.7-bb.0](https://img.shields.io/badge/Version-9.2.7--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.2](https://img.shields.io/badge/AppVersion-12.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -80,7 +80,7 @@ helm install grafana chart/
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"12.0.1"` |  |
+| image.tag | string | `"12.0.2"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -359,7 +359,7 @@ helm install grafana chart/
 | imageRenderer.renderingCallbackURL | string | `""` |  |
 | imageRenderer.image.registry | string | `"registry1.dso.mil"` |  |
 | imageRenderer.image.repository | string | `"ironbank/opensource/grafana/grafana-image-renderer"` |  |
-| imageRenderer.image.tag | string | `"3.12.6"` |  |
+| imageRenderer.image.tag | string | `"3.12.7"` |  |
 | imageRenderer.image.sha | string | `""` |  |
 | imageRenderer.image.pullSecrets | list | `[]` |  |
 | imageRenderer.image.pullPolicy | string | `"Always"` |  |

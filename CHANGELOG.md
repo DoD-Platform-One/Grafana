@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [9.2.7-bb.0] (2025-06-21)
+### Changed
+- grafana updated from 9.2.2 to 9.2.7
+- registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins updated from 12.0.1 to 12.0.2
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from 3.12.6 to 3.12.7
+
 ## [9.2.2-bb.1] (2025-06-18)
 ### Removed
 - Removed (via comments) default resource limits in `values.yaml` on grafana and sidecar containers to improve dashboard loading performance.
@@ -11,6 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - gluon updated from 0.5.19 to 0.6.2
 - grafana updated from 9.0.0 to 9.2.2
+- registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins from 12.0.0 to 12.0.1
+- registry1.dso.mil/ironbank/opensource/bats/bats updated from 1.11.1 to 1.12.0
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from 3.12.5 to 3.12.6
+- registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal updated from 9.5 to 9.6
 
 ## [9.0.0-bb.0] (2025-05-13)
 ### Changed

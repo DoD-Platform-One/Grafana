@@ -50,6 +50,16 @@ Grafana is a modified/customized version of an upstream chart. The below details
 `overrides/testing-grafana.yaml`
 
 ```yaml
+istiod:
+  enabled: true
+  values:
+    hardened:
+      enabled: true
+istioCRDs:
+  enabled: true
+istioGateway:
+  enabled: true
+
 flux:
   interval: 1m
   rollback:
@@ -69,17 +79,38 @@ gatekeeper:
 neuvector:
   enabled: false
 
-istioOperator:
-  enabled: true
-
-istio:
-  enabled: true
-  values:
-    hardened:
-      enabled: true
-
 monitoring:
   enabled: true
+
+loki:
+  enabled: true
+
+tempo:
+  enabled: true
+
+kyverno:
+  enabled: true
+
+kyvernoPolicies:
+  enabled: true
+
+kyvernoReporter:
+  enabled: true
+
+kiali:
+  enabled: false
+
+elasticsearchKibana:
+  enabled: false
+
+eckOperator:
+  enabled: false
+
+fluentbit:
+  enabled: false
+
+twistlock:
+  enabled: false
 
 grafana:
   enabled: true
@@ -96,36 +127,6 @@ grafana:
       enabled: true
       hardened:
         enabled: true
-
-loki:
-  enabled: true
-
-tempo:
-  enabled: true
-
-kyverno:
-  enabled: false
-
-kyvernoPolicies:
-  enabled: false
-
-kyvernoReporter:
-  enabled: false
-
-kiali:
-  enabled: false
-
-elasticsearchKibana:
-  enabled: false
-
-eckOperator:
-  enabled: false
-
-fluentbit:
-  enabled: false
-
-twistlock:
-  enabled: false
 ```
 
 - Login to [Grafana](https://grafana.dev.bigbang.mil)
@@ -228,9 +229,9 @@ Modifications made to upstream chart
 
   ```yaml
   resources:
-    limits:
-      cpu: 100m
-      memory: 256Mi
+#    limits:
+#      cpu: 100m
+#      memory: 256Mi
     requests:
       cpu: 100m
       memory: 256Mi
@@ -261,9 +262,9 @@ Modifications made to upstream chart
 
   ```yaml
   resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
+#    limits:
+#      cpu: 100m
+#      memory: 128Mi
     requests:
       cpu: 100m
       memory: 128Mi
@@ -308,8 +309,8 @@ Modifications made to upstream chart
     path: /var/lib/bb-plugins/polystat-panel
   plugin.redis-datasource:
     path: /var/lib/bb-plugins/redis-datasource
-  security: 
-    angular_support_enabled: false  
+  security:
+    angular_support_enabled: false
   ```
 
 - Ensure that `sidecar.image` is set to the following, where `X.Y.Z` is the correct version:
@@ -326,9 +327,9 @@ Modifications made to upstream chart
 
   ```yaml
   resources:
-    limits:
-      cpu: 100m
-      memory: 100Mi
+#    limits:
+#      cpu: 100m
+#      memory: 100Mi
     requests:
       cpu: 100m
       memory: 100Mi
