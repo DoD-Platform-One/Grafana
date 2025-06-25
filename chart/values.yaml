@@ -101,7 +101,7 @@ image:
   registry: registry1.dso.mil
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "12.0.1"
+  tag: "12.0.2"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -1087,7 +1087,7 @@ sidecar:
     # Additional alerts sidecar volume mounts
     extraMounts: []
     # Sets the size limit of the alert sidecar emptyDir volume
-    sizeLimit: {}
+    sizeLimit: ""
   dashboards:
     enabled: true
     # Additional environment variables for the dashboards sidecar
@@ -1191,7 +1191,7 @@ sidecar:
     # Additional dashboards sidecar volume mounts
     extraMounts: []
     # Sets the size limit of the dashboard sidecar emptyDir volume
-    sizeLimit: {}
+    sizeLimit: ""
     multicluster:
       global:
         enabled: true
@@ -1277,7 +1277,7 @@ sidecar:
     # Additional datasources sidecar volume mounts
     extraMounts: []
     # Sets the size limit of the datasource sidecar emptyDir volume
-    sizeLimit: {}
+    sizeLimit: ""
   plugins:
     enabled: false
     # Additional environment variables for the plugins sidecar
@@ -1345,7 +1345,7 @@ sidecar:
     # Additional plugins sidecar volume mounts
     extraMounts: []
     # Sets the size limit of the plugin sidecar emptyDir volume
-    sizeLimit: {}
+    sizeLimit: ""
   notifiers:
     enabled: false
     # Additional environment variables for the notifierssidecar
@@ -1413,7 +1413,7 @@ sidecar:
     # Additional notifiers sidecar volume mounts
     extraMounts: []
     # Sets the size limit of the notifier sidecar emptyDir volume
-    sizeLimit: {}
+    sizeLimit: ""
 
 ## Override the deployment namespace
 ##
@@ -1445,7 +1445,7 @@ imageRenderer:
     # image-renderer Image repository
     repository: ironbank/opensource/grafana/grafana-image-renderer
     # image-renderer Image tag
-    tag: 3.12.6
+    tag: 3.12.7
     # image-renderer Image sha (optional)
     sha: ""
     # image-renderer Image pull secrets (optional)
