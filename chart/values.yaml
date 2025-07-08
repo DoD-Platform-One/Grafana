@@ -18,6 +18,12 @@ global:
 
 openshift: false
 
+# -- Toggle creation of Enterprise License Secret
+# See https://docs-bigbang.dso.mil/latest/packages/grafana/docs/enterprise
+enterprise:
+  createSecret: false
+  license: null
+
 rbac:
   create: true
   ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)

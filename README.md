@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 9.2.7-bb.0](https://img.shields.io/badge/Version-9.2.7--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.2](https://img.shields.io/badge/AppVersion-12.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.2.7-bb.1](https://img.shields.io/badge/Version-9.2.7--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.2](https://img.shields.io/badge/AppVersion-12.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -49,6 +49,7 @@ helm install grafana chart/
 | global.imageRegistry | string | `"registry1.dso.mil"` | Overrides the Docker registry globally for all images |
 | global.imagePullSecrets | list | `[]` |  |
 | openshift | bool | `false` |  |
+| enterprise | object | `{"createSecret":false,"license":null}` | Toggle creation of Enterprise License Secret |
 | rbac.create | bool | `true` |  |
 | rbac.pspEnabled | bool | `false` |  |
 | rbac.pspUseAppArmor | bool | `false` |  |
@@ -272,7 +273,7 @@ helm install grafana chart/
 | sidecar.alerts.skipReload | bool | `false` |  |
 | sidecar.alerts.initAlerts | bool | `false` |  |
 | sidecar.alerts.extraMounts | list | `[]` |  |
-| sidecar.alerts.sizeLimit | object | `{}` |  |
+| sidecar.alerts.sizeLimit | string | `""` |  |
 | sidecar.dashboards.enabled | bool | `true` |  |
 | sidecar.dashboards.env | object | `{}` |  |
 | sidecar.dashboards.envValueFrom | object | `{}` |  |
@@ -298,7 +299,7 @@ helm install grafana chart/
 | sidecar.dashboards.provider.allowUiUpdates | bool | `false` |  |
 | sidecar.dashboards.provider.foldersFromFilesStructure | bool | `false` |  |
 | sidecar.dashboards.extraMounts | list | `[]` |  |
-| sidecar.dashboards.sizeLimit | object | `{}` |  |
+| sidecar.dashboards.sizeLimit | string | `""` |  |
 | sidecar.dashboards.multicluster.global.enabled | bool | `true` |  |
 | sidecar.dashboards.multicluster.etcd.enabled | bool | `true` |  |
 | sidecar.datasources.enabled | bool | `true` |  |
@@ -315,7 +316,7 @@ helm install grafana chart/
 | sidecar.datasources.skipReload | bool | `false` |  |
 | sidecar.datasources.initDatasources | bool | `false` |  |
 | sidecar.datasources.extraMounts | list | `[]` |  |
-| sidecar.datasources.sizeLimit | object | `{}` |  |
+| sidecar.datasources.sizeLimit | string | `""` |  |
 | sidecar.plugins.enabled | bool | `false` |  |
 | sidecar.plugins.env | object | `{}` |  |
 | sidecar.plugins.label | string | `"grafana_plugin"` |  |
@@ -329,7 +330,7 @@ helm install grafana chart/
 | sidecar.plugins.skipReload | bool | `false` |  |
 | sidecar.plugins.initPlugins | bool | `false` |  |
 | sidecar.plugins.extraMounts | list | `[]` |  |
-| sidecar.plugins.sizeLimit | object | `{}` |  |
+| sidecar.plugins.sizeLimit | string | `""` |  |
 | sidecar.notifiers.enabled | bool | `false` |  |
 | sidecar.notifiers.env | object | `{}` |  |
 | sidecar.notifiers.label | string | `"grafana_notifier"` |  |
@@ -343,7 +344,7 @@ helm install grafana chart/
 | sidecar.notifiers.skipReload | bool | `false` |  |
 | sidecar.notifiers.initNotifiers | bool | `false` |  |
 | sidecar.notifiers.extraMounts | list | `[]` |  |
-| sidecar.notifiers.sizeLimit | object | `{}` |  |
+| sidecar.notifiers.sizeLimit | string | `""` |  |
 | namespaceOverride | string | `""` |  |
 | revisionHistoryLimit | int | `10` |  |
 | imageRenderer.deploymentStrategy | object | `{}` |  |
