@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 9.2.7-bb.1](https://img.shields.io/badge/Version-9.2.7--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.2](https://img.shields.io/badge/AppVersion-12.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.2.10-bb.0](https://img.shields.io/badge/Version-9.2.10--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.2](https://img.shields.io/badge/AppVersion-12.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -249,7 +249,7 @@ helm install grafana chart/
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.registry | string | `"registry1.dso.mil"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.30.3"` |  |
+| sidecar.image.tag | string | `"1.30.6"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.requests.cpu | string | `"100m"` |  |
 | sidecar.resources.requests.memory | string | `"100Mi"` |  |
@@ -360,7 +360,7 @@ helm install grafana chart/
 | imageRenderer.renderingCallbackURL | string | `""` |  |
 | imageRenderer.image.registry | string | `"registry1.dso.mil"` |  |
 | imageRenderer.image.repository | string | `"ironbank/opensource/grafana/grafana-image-renderer"` |  |
-| imageRenderer.image.tag | string | `"3.12.7"` |  |
+| imageRenderer.image.tag | string | `"3.12.9"` |  |
 | imageRenderer.image.sha | string | `""` |  |
 | imageRenderer.image.pullSecrets | list | `[]` |  |
 | imageRenderer.image.pullPolicy | string | `"Always"` |  |

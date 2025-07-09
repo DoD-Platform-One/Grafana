@@ -50,6 +50,10 @@ Grafana is a modified/customized version of an upstream chart. The below details
 `overrides/testing-grafana.yaml`
 
 ```yaml
+sso:
+  name: P1 SSO
+  url: https://login.dso.mil/auth/realms/baby-yoda
+
 istiod:
   enabled: true
   values:
