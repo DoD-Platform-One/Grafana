@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [9.2.10-bb.0] (2025-07-08)
+### Changed
+- gluon updated from 0.6.2 to 0.6.3
+- grafana updated from 9.2.7 to 9.2.10
+- registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar updated from 1.30.3 to 1.30.6
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from 3.12.7 to 3.12.9
+
 ## [9.2.7-bb.1] (2025-07-07)
 ### Added
 - Added ability to enable Grafana Enterprise and optional enterprise license secret template.
