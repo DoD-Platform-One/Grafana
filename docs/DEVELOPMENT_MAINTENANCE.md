@@ -86,6 +86,9 @@ neuvector:
 monitoring:
   enabled: true
 
+minioOperator:
+  enabled: true
+
 loki:
   enabled: true
 
@@ -412,8 +415,9 @@ Modifications made to upstream chart
 
 - Add the following extra configurations to the bottom of the file:
 
-  ```yaml
-  defaultDashboardsEnabled:
+    ```yaml
+  # -- kube-prometheus-stack dashboard backward-compatibility values
+  alertmanager:
     enabled: true
   coreDns:
     enabled: true
@@ -423,32 +427,49 @@ Modifications made to upstream chart
     enabled: true
   kubeControllerManager:
     enabled: true
-  kubelet:
-    enabled: true
-    namespace: kube-system
-  kubeProxy:
-    enabled: true
   kubeScheduler:
+    enabled: true
+  kubeProxy:
     enabled: true
   nodeExporter:
     enabled: true
     operatingSystems:
       linux:
         enabled: true
+      aix:
+        enabled: true
       darwin:
         enabled: true
       windows:
         enabled: true
+  kubelet:
+    enabled: true
+    namespace: kube-system
   windowsMonitoring:
     enabled: true
-  prometheusRemoteWriteDashboards: true
+  grafana:
+    forceDeployDashboards:
+      enabled: true
+    defaultDashboardsEnabled:
+      enabled: true
+    operator:
+      dashboardsConfigMapRefEnabled: false
+      annotations: {}
+      matchLabels: {}
+    prometheusRemoteWriteDashboards: true
+    defaultDashboardsEditable: true
+    sidecar:
+      dashboards:
+        label: grafana_dashboard
+        labelValue: "1"
+        annotations: {}
+
   networkPolicies:
     enabled: false
     ingressLabels:
       app: public-ingressgateway
       istio: ingressgateway
     additionalPolicies: []
-  defaultDashboardsEditable: true
 
   domain: dev.bigbang.mil
 
@@ -569,11 +590,13 @@ This policy revokes access to the K8s API for Pods utilizing said ServiceAccount
 
 ## Syncing Dashboards
 
-We ship the grafana package separately due to <https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/110> & <https://github.com/prometheus-community/helm-charts/issues/3548> as a solution never bubbled down that fixed the issue for our environments.
+Context: We ship the grafana package separately due to <https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/110> & <https://github.com/prometheus-community/helm-charts/issues/3548> as a solution never bubbled down that fixed the issue for our environments.
 
-When the dashboards and script are updated upstream, we must pull in the new scripts from `hack/` in `kube-prometheus-stack`, modify them so that any new values are present in this chart, and revert any references to `.Values.grafana` back to just `.Values.` since this is the grafana chart.
-
-Before running the Python script, ensure the relative locations are correct in hack/sync_grafana_dashboards.py file, eg:
+1. Check for changes to the [kube-prometheus-stack dashboards](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14)
+    - If the dashboards have been updated since the last renovate - continue with the steps below.
+2. Check for changes to the [sync_grafana_dashboards.py](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/hack/sync_grafana_dashboards.py) script.
+    - If the `sync_grafana_dashboards.py` script has been updated, pull in the latest copy into your branch. A simple copy/paste will suffice.
+3. Before running the Python script, ensure the relative locations are correct in `hack/sync_grafana_dashboards.py` file, eg:
 
   ```python
   charts = [
@@ -586,5 +609,7 @@ Before running the Python script, ensure the relative locations are correct in h
           ...,
           'destination': '../chart/templates/dashboards/dashboards-1.14',
   ```
-
-Push up any changes to the `dashboards/dashboards-1.14` folder. Deploy the chart in dev and ensure modified dashboards from upstream (coredns/node-exporter/etcd) are importing and showing data as before the changes/upgrades.
+4. Run the `hack/sync_grafana_dashboards.py` script.
+    - For first time users, you may need to setup a virtual python environment, and install the required pip packages through `pip3 install -r requirements.txt`
+5. Push up any changes to the `dashboards/dashboards-1.14` folder. Deploy the chart in dev and ensure modified dashboards from upstream are importing and showing data as before the changes/upgrades.
+    - If any dashboards are missing, they may be silently failing to render. You may need to review the dashboard helm logic and confirm the values are set appropriately. ◊

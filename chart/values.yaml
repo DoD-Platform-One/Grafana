@@ -107,7 +107,7 @@ image:
   registry: registry1.dso.mil
   repository: ironbank/big-bang/grafana/grafana-plugins
   # Overrides the Grafana image tag whose default is the chart appVersion
-  tag: "12.0.2"
+  tag: "12.1.0"
   #sha: ""
   pullPolicy: IfNotPresent
 
@@ -418,7 +418,7 @@ extraContainerVolumes: []
 #    emptyDir: {}
 
 ## Enable persistence using Persistent Volume Claims
-## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 ##
 persistence:
   type: pvc
@@ -990,7 +990,7 @@ sidecar:
   image:
     registry: registry1.dso.mil
     repository: ironbank/kiwigrid/k8s-sidecar
-    tag: 1.30.6
+    tag: 1.30.7
   imagePullPolicy: IfNotPresent
   resources:
 #    limits:
@@ -1451,7 +1451,7 @@ imageRenderer:
     # image-renderer Image repository
     repository: ironbank/opensource/grafana/grafana-image-renderer
     # image-renderer Image tag
-    tag: 3.12.9
+    tag: v4.0.10
     # image-renderer Image sha (optional)
     sha: ""
     # image-renderer Image pull secrets (optional)
@@ -1687,7 +1687,9 @@ extraObjects: []
 # you can disable this check by setting assertNoLeakedSecrets to false.
 assertNoLeakedSecrets: false
 
-defaultDashboardsEnabled:
+## DO NOT CHANGE
+# -- kube-prometheus-stack dashboard backward-compatibility values
+alertmanager:
   enabled: true
 coreDns:
   enabled: true
@@ -1697,32 +1699,50 @@ kubeApiServer:
   enabled: true
 kubeControllerManager:
   enabled: true
-kubelet:
-  enabled: true
-  namespace: kube-system
-kubeProxy:
-  enabled: true
 kubeScheduler:
+  enabled: true
+kubeProxy:
   enabled: true
 nodeExporter:
   enabled: true
   operatingSystems:
     linux:
       enabled: true
+    aix:
+      enabled: true
     darwin:
       enabled: true
     windows:
       enabled: true
+kubelet:
+  enabled: true
+  namespace: kube-system
 windowsMonitoring:
   enabled: true
-prometheusRemoteWriteDashboards: true
+grafana:
+  forceDeployDashboards:
+    enabled: true
+  defaultDashboardsEnabled:
+    enabled: true
+  operator:
+    dashboardsConfigMapRefEnabled: false
+    annotations: {}
+    matchLabels: {}
+  prometheusRemoteWriteDashboards: true
+  defaultDashboardsEditable: true
+  sidecar:
+    dashboards:
+      label: grafana_dashboard
+      labelValue: "1"
+      annotations: {}
+# --
+
 networkPolicies:
   enabled: false
   ingressLabels:
     app: public-ingressgateway
     istio: ingressgateway
   additionalPolicies: []
-defaultDashboardsEditable: true
 
 domain: dev.bigbang.mil
 
