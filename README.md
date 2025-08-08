@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 9.2.10-bb.0](https://img.shields.io/badge/Version-9.2.10--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.0.2](https://img.shields.io/badge/AppVersion-12.0.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.3.1-bb.0](https://img.shields.io/badge/Version-9.3.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.1.0](https://img.shields.io/badge/AppVersion-12.1.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -49,7 +49,7 @@ helm install grafana chart/
 | global.imageRegistry | string | `"registry1.dso.mil"` | Overrides the Docker registry globally for all images |
 | global.imagePullSecrets | list | `[]` |  |
 | openshift | bool | `false` |  |
-| enterprise | object | `{"createSecret":false,"license":null}` | Toggle creation of Enterprise License Secret |
+| enterprise | object | `{"createSecret":false,"license":null}` | Toggle creation of Enterprise License Secret See https://docs-bigbang.dso.mil/latest/packages/grafana/docs/enterprise |
 | rbac.create | bool | `true` |  |
 | rbac.pspEnabled | bool | `false` |  |
 | rbac.pspUseAppArmor | bool | `false` |  |
@@ -81,7 +81,7 @@ helm install grafana chart/
 | livenessProbe.failureThreshold | int | `10` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/big-bang/grafana/grafana-plugins"` |  |
-| image.tag | string | `"12.0.2"` |  |
+| image.tag | string | `"12.1.0"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | testFramework.enabled | bool | `false` |  |
@@ -249,7 +249,7 @@ helm install grafana chart/
 | smtp.passwordKey | string | `"password"` |  |
 | sidecar.image.registry | string | `"registry1.dso.mil"` |  |
 | sidecar.image.repository | string | `"ironbank/kiwigrid/k8s-sidecar"` |  |
-| sidecar.image.tag | string | `"1.30.6"` |  |
+| sidecar.image.tag | string | `"1.30.7"` |  |
 | sidecar.imagePullPolicy | string | `"IfNotPresent"` |  |
 | sidecar.resources.requests.cpu | string | `"100m"` |  |
 | sidecar.resources.requests.memory | string | `"100Mi"` |  |
@@ -360,7 +360,7 @@ helm install grafana chart/
 | imageRenderer.renderingCallbackURL | string | `""` |  |
 | imageRenderer.image.registry | string | `"registry1.dso.mil"` |  |
 | imageRenderer.image.repository | string | `"ironbank/opensource/grafana/grafana-image-renderer"` |  |
-| imageRenderer.image.tag | string | `"3.12.9"` |  |
+| imageRenderer.image.tag | string | `"v4.0.10"` |  |
 | imageRenderer.image.sha | string | `""` |  |
 | imageRenderer.image.pullSecrets | list | `[]` |  |
 | imageRenderer.image.pullPolicy | string | `"Always"` |  |

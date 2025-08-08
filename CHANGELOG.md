@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [9.3.1-bb.0] (2025-08-04)
+### Added
+- Added `templates/bigbang/_helpers.tpl` to ensure backwards compatibility with the values in the `kube-prometheus-stack` dashboards.
+
+### Changed
+- Updated to latest [kube-prometheus stack dashboards](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/templates/grafana/dashboards-1.14)
+- Moved `.Values` related to kube-prometheus-stack dashboards under .Values.grafana for backwards compatibility, and moved them into their own section within `values.yaml` for transparency
+- gluon updated from 0.6.3 to 0.7.0
+- grafana updated from 9.2.10 to 9.3.1
+- registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins updated from 12.0.2 to 12.1.0
+- registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar updated from 1.30.6 to 1.30.7
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from 3.12.9 to v4.0.10
+
 ## [9.2.10-bb.0] (2025-07-08)
 ### Changed
 - gluon updated from 0.6.2 to 0.6.3
