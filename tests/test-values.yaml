@@ -1,25 +1,3 @@
-#########################
-# Disable Core Packages #
-#########################
-bbctl:
-  enabled: false
-alloy:
-  enabled: false
-kyvernoReporter:
-  enabled: false
-neuvector:
-  enabled: false
-loki:
-  enabled: false
-promtail:
-  enabled: false
-tempo:
-  enabled: false
-kiali:
-  enabled: false
-addons:
-  minioOperator:
-    enabled: false
 ########################
 # Required for package #
 ########################
