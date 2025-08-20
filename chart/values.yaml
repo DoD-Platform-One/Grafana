@@ -1719,6 +1719,7 @@ kubelet:
   namespace: kube-system
 windowsMonitoring:
   enabled: true
+prometheusRemoteWriteDashboards: true
 grafana:
   forceDeployDashboards:
     enabled: true
@@ -1728,7 +1729,6 @@ grafana:
     dashboardsConfigMapRefEnabled: false
     annotations: {}
     matchLabels: {}
-  prometheusRemoteWriteDashboards: true
   defaultDashboardsEditable: true
   sidecar:
     dashboards:

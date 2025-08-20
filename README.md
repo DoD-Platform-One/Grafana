@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 9.3.1-bb.0](https://img.shields.io/badge/Version-9.3.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.1.0](https://img.shields.io/badge/AppVersion-12.1.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 9.3.1-bb.1](https://img.shields.io/badge/Version-9.3.1--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.1.0](https://img.shields.io/badge/AppVersion-12.1.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -419,26 +419,35 @@ helm install grafana chart/
 | useStatefulSet | bool | `false` |  |
 | extraObjects | list | `[]` |  |
 | assertNoLeakedSecrets | bool | `false` |  |
-| defaultDashboardsEnabled.enabled | bool | `true` |  |
+| alertmanager | object | `{"enabled":true}` | kube-prometheus-stack dashboard backward-compatibility values |
 | coreDns.enabled | bool | `true` |  |
 | kubeEtcd.enabled | bool | `true` |  |
 | kubeApiServer.enabled | bool | `true` |  |
 | kubeControllerManager.enabled | bool | `true` |  |
-| kubelet.enabled | bool | `true` |  |
-| kubelet.namespace | string | `"kube-system"` |  |
-| kubeProxy.enabled | bool | `true` |  |
 | kubeScheduler.enabled | bool | `true` |  |
+| kubeProxy.enabled | bool | `true` |  |
 | nodeExporter.enabled | bool | `true` |  |
 | nodeExporter.operatingSystems.linux.enabled | bool | `true` |  |
+| nodeExporter.operatingSystems.aix.enabled | bool | `true` |  |
 | nodeExporter.operatingSystems.darwin.enabled | bool | `true` |  |
 | nodeExporter.operatingSystems.windows.enabled | bool | `true` |  |
+| kubelet.enabled | bool | `true` |  |
+| kubelet.namespace | string | `"kube-system"` |  |
 | windowsMonitoring.enabled | bool | `true` |  |
 | prometheusRemoteWriteDashboards | bool | `true` |  |
+| grafana.forceDeployDashboards.enabled | bool | `true` |  |
+| grafana.defaultDashboardsEnabled.enabled | bool | `true` |  |
+| grafana.operator.dashboardsConfigMapRefEnabled | bool | `false` |  |
+| grafana.operator.annotations | object | `{}` |  |
+| grafana.operator.matchLabels | object | `{}` |  |
+| grafana.defaultDashboardsEditable | bool | `true` |  |
+| grafana.sidecar.dashboards.label | string | `"grafana_dashboard"` |  |
+| grafana.sidecar.dashboards.labelValue | string | `"1"` |  |
+| grafana.sidecar.dashboards.annotations | object | `{}` |  |
 | networkPolicies.enabled | bool | `false` |  |
 | networkPolicies.ingressLabels.app | string | `"public-ingressgateway"` |  |
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
-| defaultDashboardsEditable | bool | `true` |  |
 | domain | string | `"dev.bigbang.mil"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.namespace | string | `"istio-system"` |  |
