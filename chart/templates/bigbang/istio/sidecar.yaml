@@ -4,13 +4,15 @@ apiVersion: networking.istio.io/v1beta1
 kind: Sidecar
 metadata:
   name: {{ .Release.Name }}-sidecar
-  namespace: {{.Release.Namespace}}
+  namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "grafana.labels" $ | nindent 4 }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: {{ .Values.upstream.nameOverride }}
 spec:
   workloadSelector:
     labels:
-      {{- include "grafana.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ .Values.upstream.nameOverride }}
   outboundTrafficPolicy:
     mode: {{ .Values.istio.hardened.outboundTrafficPolicyMode }}
 {{- end }}

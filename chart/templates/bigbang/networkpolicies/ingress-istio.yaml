@@ -24,5 +24,6 @@ spec:
       protocol: TCP
   podSelector:
     matchLabels:
-      {{- include "grafana.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: {{ .Values.upstream.nameOverride }}
 {{- end }}

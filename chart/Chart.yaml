@@ -1,6 +1,6 @@
 apiVersion: v2
 name: grafana
-version: 9.3.1-bb.1
+version: 9.3.1-bb.2
 appVersion: 12.1.0
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
@@ -10,12 +10,6 @@ sources:
   - https://github.com/grafana/grafana
   - https://github.com/grafana/helm-charts
 annotations:
-  "artifacthub.io/license": Apache-2.0
-  "artifacthub.io/links": |
-    - name: Chart Source
-      url: https://github.com/grafana/helm-charts
-    - name: Upstream Project
-      url: https://github.com/grafana/grafana
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
     - Grafana: 12.1.0
@@ -37,24 +31,15 @@ annotations:
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: image-renderer
       image: registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer:v4.0.10
-maintainers:
-  - name: zanhsieh
-    email: zanhsieh@gmail.com
-  - name: rtluckie
-    email: rluckie@cisco.com
-  - name: maorfr
-    email: maor.friedman@redhat.com
-  - name: Xtigyro
-    email: miroslav.hadzhiev@gmail.com
-  - name: torstenwalter
-    email: mail@torstenwalter.de
-  - name: jkroepke
-    email: github@jkroepke.de
 type: application
 dependencies:
   - name: gluon
     version: "0.7.0"
     repository: oci://registry1.dso.mil/bigbang
+  - name: grafana
+    version: 9.3.1
+    repository: https://grafana.github.io/helm-charts
+    alias: upstream
 keywords:
   - monitoring
   - metric

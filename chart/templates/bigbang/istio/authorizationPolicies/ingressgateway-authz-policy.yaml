@@ -11,7 +11,8 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "grafana.selectorLabels" $ | nindent 6 }} 
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+      app.kubernetes.io/name: {{ $.Values.upstream.nameOverride }}
   action: ALLOW
   rules:
   - from:

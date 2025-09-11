@@ -43,14 +43,14 @@ charts = [
         'destination': '../chart/templates/dashboards/dashboards-1.14',
         'type': 'dashboard_json',
         'min_kubernetes': '1.14.0-0',
-        'multicluster_key': '.Values.sidecar.dashboards.multicluster.global.enabled',
+        'multicluster_key': '.Values.upstream.sidecar.dashboards.multicluster.global.enabled',
     },
     {
         'source': 'https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/%s/manifests/grafana-dashboardDefinitions.yaml' % (refs['ref.kube-prometheus'],),
         'destination': '../chart/templates/dashboards/dashboards-1.14',
         'type': 'yaml',
         'min_kubernetes': '1.14.0-0',
-        'multicluster_key': '.Values.sidecar.dashboards.multicluster.global.enabled',
+        'multicluster_key': '.Values.upstream.sidecar.dashboards.multicluster.global.enabled',
     },
     {
         'git': 'https://github.com/kubernetes-monitoring/kubernetes-mixin.git',
@@ -61,7 +61,7 @@ charts = [
         'min_kubernetes': '1.14.0-0',
         'type': 'jsonnet_mixin',
         'mixin_vars': {},
-        'multicluster_key': '.Values.sidecar.dashboards.multicluster.global.enabled',
+        'multicluster_key': '.Values.upstream.sidecar.dashboards.multicluster.global.enabled',
     },
     {
         'git': 'https://github.com/etcd-io/etcd.git',
@@ -72,7 +72,7 @@ charts = [
         'min_kubernetes': '1.14.0-0',
         'type': 'jsonnet_mixin',
         'mixin_vars': {'_config+': {}},
-        'multicluster_key': '(or .Values.sidecar.dashboards.multicluster.global.enabled .Values.sidecar.dashboards.multicluster.etcd.enabled)'
+        'multicluster_key': '(or .Values.upstream.sidecar.dashboards.multicluster.global.enabled .Values.upstream.sidecar.dashboards.multicluster.etcd.enabled)'
     },
 ]
 
@@ -102,13 +102,13 @@ condition_map = {
 
 replacement_map = {
     'var-namespace=$__cell_1': {
-        'replacement': 'var-namespace=`}}{{ if .Values.sidecar.dashboards.enableNewTablePanelSyntax }}${__data.fields.namespace}{{ else }}$__cell_1{{ end }}{{`',
+        'replacement': 'var-namespace=`}}{{ if .Values.upstream.sidecar.dashboards.enableNewTablePanelSyntax }}${__data.fields.namespace}{{ else }}$__cell_1{{ end }}{{`',
     },
     'var-type=$__cell_2': {
-        'replacement': 'var-type=`}}{{ if .Values.sidecar.dashboards.enableNewTablePanelSyntax }}${__data.fields.workload_type}{{ else }}$__cell_2{{ end }}{{`',
+        'replacement': 'var-type=`}}{{ if .Values.upstream.sidecar.dashboards.enableNewTablePanelSyntax }}${__data.fields.workload_type}{{ else }}$__cell_2{{ end }}{{`',
     },
     '=$__cell': {
-        'replacement': '=`}}{{ if .Values.sidecar.dashboards.enableNewTablePanelSyntax }}${__value.text}{{ else }}$__cell{{ end }}{{`',
+        'replacement': '=`}}{{ if .Values.upstream.sidecar.dashboards.enableNewTablePanelSyntax }}${__value.text}{{ else }}$__cell{{ end }}{{`',
     },
     'job=\\"prometheus-k8s\\",namespace=\\"monitoring\\"': {
         'replacement': '',
