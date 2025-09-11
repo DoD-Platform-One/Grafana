@@ -1,0 +1,33 @@
+{{- if include "grafana.shouldDeployUpgradeResources" . }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-upgrade
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      serviceAccountName: {{ .Release.Name }}-upgrade-sa
+      automountServiceAccountToken: true
+      containers:
+      - name: {{ .Release.Name }}-upgrade
+        image: {{ $.Values.autoRollingUpgrade.image.repository }}:{{ $.Values.autoRollingUpgrade.image.tag }}
+        command:
+        - /bin/sh
+        - -ec
+        - |
+          echo "Starting deployment deletion in namespace {{ .Release.Namespace }}..."
+          # Delete the deployment and check if successful
+          if kubectl delete deploy -l app.kubernetes.io/name=grafana -n {{ .Release.Namespace }} --timeout=60s; then
+            echo "[INFO] Deployments deleted successfully."
+          else
+            echo "[ERROR] Failed to delete deployments." >&2
+            exit 1  # Exit with error if the deletion fails
+          fi
+{{- end }}

@@ -3,11 +3,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
-  name: {{ include "grafana.hostnameFromUri" (index .Values "grafana.ini" "auth.generic_oauth" "auth_url") | replace "." "-" }}-service-entry
+  name: {{ include "grafana.hostnameFromUri" (index .Values.upstream "grafana.ini" "auth.generic_oauth" "auth_url") | replace "." "-" }}-service-entry
   namespace: {{ $.Release.Namespace }}
 spec:
   hosts:
-    - {{ include "grafana.hostnameFromUri" (index .Values "grafana.ini" "auth.generic_oauth" "auth_url") }}
+    - {{ include "grafana.hostnameFromUri" (index .Values.upstream "grafana.ini" "auth.generic_oauth" "auth_url") }}
   location: MESH_EXTERNAL
   ports:
     - number: 443

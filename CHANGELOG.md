@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [9.3.1-bb.2] (2025-08-21)
+### Added
+- Added additional templates to `templates/bigbang/upgrade/9.3.1-bb.1` to automatically handle deletion of the Grafana deployment due to immutable
+  fields for the 9.3.1-bb.1 chart upgrade
+
+### Changed
+- Refactored chart to Big Bang passthrough chart pattern
+
 ## [9.3.1-bb.1] (2025-08-20)
 ### Changed
 - Fixed issue with Prometheus / Remote-Write dashboard not populating in Grafana.

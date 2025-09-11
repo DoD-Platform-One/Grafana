@@ -1,0 +1,84 @@
+sso:
+  name: P1 SSO
+  url: https://login.dso.mil/auth/realms/baby-yoda
+
+istiod:
+  enabled: true
+  values:
+    hardened:
+      enabled: true
+istioCRDs:
+  enabled: true
+istioGateway:
+  enabled: true
+
+flux:
+  interval: 1m
+  rollback:
+    cleanupOnFail: false
+
+networkPolicies:
+  enabled: true
+
+alloy:
+  enabled: true
+  alloyLogs:
+    enabled: true
+
+gatekeeper:
+  enabled: false
+
+neuvector:
+  enabled: false
+
+monitoring:
+  enabled: true
+
+minioOperator:
+  enabled: true
+
+loki:
+  enabled: true
+
+tempo:
+  enabled: true
+
+kyverno:
+  enabled: true
+
+kyvernoPolicies:
+  enabled: true
+
+kyvernoReporter:
+  enabled: true
+
+kiali:
+  enabled: false
+
+elasticsearchKibana:
+  enabled: false
+
+eckOperator:
+  enabled: false
+
+fluentbit:
+  enabled: false
+
+twistlock:
+  enabled: false
+
+grafana:
+  enabled: true
+  git:
+    tag: null
+    branch: "renovate/ironbank"
+  sso:
+    enabled: true
+    grafana:
+      client_id: platform1_a8604cc9-f5e9-4656-802d-d05624370245_bb8-grafana
+      scopes: "openid Grafana"
+  values:
+    istio:
+      enabled: true
+      hardened:
+        enabled: true

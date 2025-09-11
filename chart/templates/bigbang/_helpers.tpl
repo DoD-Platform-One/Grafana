@@ -46,5 +46,12 @@ heritage: {{ $.Release.Service | quote }}
 {{- end }}
 {{- end }}
 
-
-
+{{/*
+Find hostname from uri
+*/}}
+{{- define "grafana.hostnameFromUri" -}}
+{{- $match := . | toString | regexFind "//.*" -}}
+{{- $hostWithPort := regexSplit "/" ($match | trimAll "//") -1 -}}
+{{- $host := regexSplit ":" (first $hostWithPort) -1 -}}
+{{- printf "%s" (first $host) -}}
+{{- end -}}

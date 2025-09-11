@@ -12,5 +12,5 @@ spec:
         namespaces:
         - {{ .Release.Namespace }}
         principals:
-        - cluster.local/ns/{{ .Release.Namespace }}/sa/{{ template "grafana.serviceAccountName" . }}
+        - cluster.local/ns/{{ .Release.Namespace }}/sa/{{ include "grafana.serviceAccountName" .Subcharts.upstream }}
 {{- end }}

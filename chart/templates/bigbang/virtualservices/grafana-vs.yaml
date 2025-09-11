@@ -1,6 +1,6 @@
 {{- if and .Values.istio.enabled .Values.istio.grafana.enabled -}}
-{{- $serviceName := include "grafana.fullname" . }}
-{{- $servicePort := .Values.service.port -}}
+{{- $serviceName := include "grafana.fullname" .Subcharts.upstream }}
+{{- $servicePort := .Values.upstream.service.port -}}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -8,7 +8,7 @@ metadata:
   namespace: {{ template "grafana.namespace" . }}
   labels:
     app: {{ template "grafana.name" . }}-grafana
-{{ include "grafana.labels" . | indent 4 }}
+{{ include "grafana.labels" .Subcharts.upstream | indent 4 }}
   {{- if .Values.istio.grafana.labels }}
 {{ toYaml .Values.istio.grafana.labels | indent 4 }}
   {{- end }}
