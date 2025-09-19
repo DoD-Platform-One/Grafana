@@ -85,6 +85,7 @@ networkPolicies:
 domain: dev.bigbang.mil
 
 autoRollingUpgrade:
+  # -- Enable BigBang specific autoRollingUpgrade support
   enabled: true
   image:
     repository: registry1.dso.mil/ironbank/big-bang/base
@@ -163,7 +164,8 @@ bbtests:
           requests: 512Mi
           limits: 2048Mi
 
-# Ref: https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+# -- Values to pass to [the upstream grafana chart](https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml)
+# @default -- Upstream chart values
 upstream:
   fullnameOverride: "monitoring-grafana"
   nameOverride: "grafana"
