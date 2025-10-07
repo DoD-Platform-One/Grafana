@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.0.0-bb.0] (2025-10-01)
+### Changed
+- grafana updated from 9.3.1 to 10.0.0
+- gluon updated from 0.7.0 to 0.9.2
+- registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins updated from 12.1.0 to 12.2.0
+- registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar updated from 1.30.7 to 1.30.10
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from v4.0.10 to v4.0.15
+- Updated ImagePullPolicy to Always to ensure nightly IB image rebuilds are pulled
+- Updated istio custom resources apiVersion to v1 instead of v1beta1
+
 ## [9.3.1-bb.2] (2025-08-21)
 ### Added
 - Added additional templates to `templates/bigbang/upgrade/9.3.1-bb.1` to automatically handle deletion of the Grafana deployment due to immutable

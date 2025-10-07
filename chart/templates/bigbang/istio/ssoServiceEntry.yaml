@@ -1,6 +1,6 @@
 {{- /* Render Istio ServiceEntry for SSO */ -}}
 {{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.sso.enabled -}}
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: {{ include "grafana.hostnameFromUri" (index .Values.upstream "grafana.ini" "auth.generic_oauth" "auth_url") | replace "." "-" }}-service-entry

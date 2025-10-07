@@ -1,7 +1,7 @@
 {{- if and .Values.istio.enabled .Values.istio.grafana.enabled -}}
 {{- $serviceName := include "grafana.fullname" .Subcharts.upstream }}
 {{- $servicePort := .Values.upstream.service.port -}}
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: {{ template "grafana.fullname" . }}-grafana
