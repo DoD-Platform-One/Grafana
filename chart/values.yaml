@@ -73,14 +73,18 @@ grafana:
       label: grafana_dashboard
       labelValue: "1"
       annotations: {}
-# --
-
+# -- [bb-common Network Policies configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/network-policies/README.md?ref_type=heads)
 networkPolicies:
-  enabled: false
-  ingressLabels:
-    app: public-ingressgateway
-    istio: ingressgateway
-  additionalPolicies: []
+  enabled: true
+  prependReleaseName: true
+  egress:
+    from:
+      grafana:
+        to:
+          cidr: 
+            0.0.0.0/0: true
+          definition:
+            kubeAPI: true
 
 domain: dev.bigbang.mil
 

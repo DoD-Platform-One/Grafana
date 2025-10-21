@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 10.0.0-bb.0](https://img.shields.io/badge/Version-10.0.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.2.0](https://img.shields.io/badge/AppVersion-12.2.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 10.0.0-bb.1](https://img.shields.io/badge/Version-10.0.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.2.0](https://img.shields.io/badge/AppVersion-12.2.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -75,10 +75,7 @@ helm install grafana chart/
 | grafana.sidecar.dashboards.label | string | `"grafana_dashboard"` |  |
 | grafana.sidecar.dashboards.labelValue | string | `"1"` |  |
 | grafana.sidecar.dashboards.annotations | object | `{}` |  |
-| networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.ingressLabels.app | string | `"public-ingressgateway"` |  |
-| networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
-| networkPolicies.additionalPolicies | list | `[]` |  |
+| networkPolicies | object | `{"egress":{"from":{"grafana":{"to":{"cidr":{"0.0.0.0/0":true},"definition":{"kubeAPI":true}}}}},"enabled":true,"prependReleaseName":true}` | [bb-common Network Policies configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/network-policies/README.md?ref_type=heads) |
 | domain | string | `"dev.bigbang.mil"` |  |
 | autoRollingUpgrade.enabled | bool | `true` | Enable BigBang specific autoRollingUpgrade support |
 | autoRollingUpgrade.image.repository | string | `"registry1.dso.mil/ironbank/big-bang/base"` |  |
