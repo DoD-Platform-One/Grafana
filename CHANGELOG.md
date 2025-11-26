@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.1.2-bb.0] (2025-10-29)
+### Changed
+- grafana updated from 10.0.0 to 10.1.2
+- gluon updated from 0.9.2 to 0.9.5
+- registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins updated from 12.2.0 to 12.2.1
+- registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar updated from 1.30.10 to 1.30.11
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from v4.0.15 to v4.1.2
+
 ## [10.0.0-bb.1] (2025-10-10)
 ### Changed
 - integrate bb-common with grafana networkpolicies.
