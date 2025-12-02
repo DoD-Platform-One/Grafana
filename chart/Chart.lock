@@ -1,12 +1,12 @@
 dependencies:
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.9.5
+  version: 0.9.6
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 10.1.2
+  version: 10.2.0
 - name: bb-common
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.9.1
-digest: sha256:fff4a573455435fae75e35060bc2e1710e09523469430bd94b7ca1e1d7250dd2
-generated: "2025-10-28T06:10:43.451285831Z"
+  version: 0.10.0
+digest: sha256:9684b37bbbb1c48ee6ed41e2a8d2b5acb1e01d12bbd1a584fc762dbf8e0acfc5
+generated: "2025-11-27T07:28:49.886867907Z"

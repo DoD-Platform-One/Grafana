@@ -34,8 +34,9 @@ neuvector:
 monitoring:
   enabled: true
 
-minioOperator:
-  enabled: true
+addons:
+  minioOperator:
+    enabled: true
 
 loki:
   enabled: true
