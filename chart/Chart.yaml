@@ -1,7 +1,7 @@
 apiVersion: v2
 name: grafana
-version: 10.1.2-bb.0
-appVersion: 12.2.1
+version: 10.2.0-bb.0
+appVersion: 12.3.0
 kubeVersion: "^1.8.0-0"
 description: The leading tool for querying and visualizing time series and metrics.
 home: https://grafana.com
@@ -12,36 +12,36 @@ sources:
 annotations:
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
-    - Grafana: 12.2.1
+    - Grafana: 12.3.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find our upstream chart's CHANGELOG here](https://github.com/grafana/helm-charts/tree/main/charts/grafana#upgrading-an-existing-release-to-a-new-major-version)
     - [and our upstream application release notes here](https://grafana.com/docs/grafana/latest/release-notes/)
   helm.sh/images: |
     - name: grafana
-      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.2.1
+      image: registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins:12.3.0
     - name: k8s-sidecar
       image: registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar:1.30.11
     - name: init-chown-data
-      image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.6
+      image: registry1.dso.mil/ironbank/redhat/ubi/ubi9-minimal:9.7
       condition: initChownData.enabled
     - name: test-framework
-      image: registry1.dso.mil/ironbank/opensource/bats/bats:1.12.0
+      image: registry1.dso.mil/ironbank/opensource/bats/bats:1.13.0
       condition: testFramework.enabled
     - name: base
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: image-renderer
-      image: registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer:v4.1.2
+      image: registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer:v5.0.10
 type: application
 dependencies:
   - name: gluon
-    version: "0.9.5"
+    version: "0.9.6"
     repository: oci://registry1.dso.mil/bigbang
   - name: grafana
-    version: 10.1.2
+    version: 10.2.0
     repository: https://grafana.github.io/helm-charts
     alias: upstream
   - name: bb-common
-    version: 0.9.1
+    version: 0.10.0
     repository: oci://registry1.dso.mil/bigbang
 keywords:
   - monitoring
