@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.3.1-bb.0] (2025-12-17)
+### Changed
+- bb-common updated from 0.10.0 to 0.11.3
+- gluon updated from 0.9.6 to 0.9.7
+- grafana updated from 10.2.0 to 10.3.1
+
 ## [10.2.0-bb.1] (2025-12-03)
 ### Changed
 - downgraded kiwigrid/k8s-sidecar from 1.30.11 to 1.30.9 per [this issue](https://github.com/kiwigrid/k8s-sidecar/issues/431)
