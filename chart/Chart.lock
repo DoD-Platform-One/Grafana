@@ -4,9 +4,9 @@ dependencies:
   version: 0.9.7
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 10.3.1
+  version: 10.5.5
 - name: bb-common
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.11.3
-digest: sha256:6ae052bbe89a8c2c67c500f76b3b4f2bfd9931be88d479c6b7b2283b7b26a7a0
-generated: "2025-12-17T07:32:06.302956373Z"
+  version: 0.12.3
+digest: sha256:91e10553d07d88af1a29070dd6f48bf30bb476caeb7d29f587a61824a9bbc245
+generated: "2026-01-10T07:28:59.605934565Z"
