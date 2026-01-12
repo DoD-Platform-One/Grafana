@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.5.5-bb.0] (2026-01-10)
+### Changed
+- bb-common updated from 0.11.3 to 0.12.3
+- grafana updated from 10.3.1 to 10.5.5
+- registry1.dso.mil/ironbank/big-bang/grafana/grafana-plugins updated from 12.3.0 -> 12.3.1
+- registry1.dso.mil/ironbank/kiwigrid/k8s-sidecar updated from 2.1.4 -> 2.2.3
+- registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer updated from v5.0.13 -> v5.2.1
+
 ## [10.3.1-bb.0] (2025-12-17)
 ### Changed
 - bb-common updated from 0.10.0 to 0.11.3
