@@ -360,7 +360,7 @@ upstream:
     image:
       registry: registry1.dso.mil
       repository: ironbank/opensource/grafana/grafana-image-renderer
-      tag: v5.2.1
+      tag: v5.2.2
       pullPolicy: Always
     service:
       enabled: true
