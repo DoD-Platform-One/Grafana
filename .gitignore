@@ -38,3 +38,4 @@ ignore/*
 hack/etcd.git/ 
 hack/kubernetes-mixin.git/
 
+helm-charts/
