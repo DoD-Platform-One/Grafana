@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [10.5.15-bb.0] (2026-02-27)
+### Changed
+- bb-common updated from 0.12.3 to 0.14.1
+- gluon updated from 0.9.7 to 0.9.8
+- grafana updated from 10.5.5 to 10.5.15
+
 ## [10.5.5-bb.1] (2026-01-27)
 ### Changed
 - updated registry1.dso.mil/ironbank/opensource/grafana/grafana-image-renderer from v5.2.1 to v5.2.2
