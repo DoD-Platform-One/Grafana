@@ -96,6 +96,17 @@ Refer to [docs/dev-overrides.yaml](https://repo1.dso.mil/big-bang/product/packag
 - Login to [Grafana](https://grafana.dev.bigbang.mil)
 - Navigate to `Dashboards` and then click on `Kubernetes / Compute Resources / Cluster` and validate that data is loaded
 
+## Packages That Depend on Grafana for Cypress Testing
+
+Some Big Bang packages include Grafana in their Cypress test network policies, meaning their test suites make outbound requests to Grafana during CI. Breaking changes in Grafana (e.g., dashboard URL structure, authentication flows, or UI changes) can cause these packages' Cypress tests to fail.
+
+| Package | What It Tests Against Grafana | Configuration Reference |
+|---------|-------------------------------|-------------------------|
+| **kyverno-reporter** | Cypress tests access Grafana dashboards to verify policy report visualization | [`bigbang/chart/templates/kyverno-reporter/values.yaml` (lines 48-54)](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-reporter/values.yaml) |
+| **bbctl** | Cypress tests access Grafana as part of validation | [`bigbang/chart/templates/bbctl/values.yaml` (lines 121-124)](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/bbctl/values.yaml) |
+
+**Maintainer action:** When introducing breaking changes to Grafana, create issues in the affected package repositories listed above to alert their teams of potential Cypress test impacts.
+
 ## Big Bang Modifications
 
 Modifications made to upstream chart
