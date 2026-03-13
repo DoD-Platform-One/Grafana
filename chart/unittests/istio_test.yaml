@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
+suite: test istio resources
+templates:
+  - templates/bigbang/routes.yaml
+capabilities:
+  apiVersions:
+    - networking.istio.io/v1
+    - security.istio.io/v1
+tests:
+  - it: should create VirtualService when istio is enabled
+    set:
+      istio.enabled: true
+      domain: bigbang.dev
+    documentSelector:
+      path: kind
+      value: VirtualService
+    asserts:
+      - isKind:
+          of: VirtualService
+      - equal:
+          path: metadata.name
+          value: grafana
+      - contains:
+          path: spec.hosts
+          content: grafana.bigbang.dev
+      - contains:
+          path: spec.gateways
+          content: istio-gateway/public-ingressgateway
