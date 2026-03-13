@@ -81,10 +81,17 @@ networkPolicies:
     from:
       grafana:
         to:
-          cidr: 
+          cidr:
             0.0.0.0/0: true
           definition:
             kubeAPI: true
+  ingress:
+    to:
+      grafana:
+        from:
+          k8s:
+            # Allow Kiali to access Grafana (generates NetworkPolicy + AuthorizationPolicy)
+            kiali-service-account@kiali/kiali: true
 
 domain: dev.bigbang.mil
 
@@ -95,15 +102,23 @@ autoRollingUpgrade:
     repository: registry1.dso.mil/ironbank/big-bang/base
     tag: 2.1.0
 
+# -- [bb-common Istio configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/istio/README.md)
 istio:
+  # -- Prepends the release name to istio resources created by bb-common
+  prependReleaseName: true
   enabled: false
-  namespace: istio-system
-  hardened:
+  # -- [bb-common Sidecar configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/istio/README.md#sidecar)
+  sidecar:
     enabled: false
     outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries: []
+  mtls:
+    # Note that setting this to STRICT requires additional configuration for Prometheus and monitors.
+    # Review `./docs/istio-mtls-metrics.md` for additional information.
+    mode: STRICT
+  # -- [bb-common ServiceEntry configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/istio/README.md#custom-serviceentries)
+  serviceEntries:
+    custom: []
       # - name: "allow-google"
-      #   enabled: true
       #   spec:
       #     hosts:
       #       - google.com
@@ -113,34 +128,37 @@ istio:
       #         protocol: TLS
       #         name: https
       #     resolution: DNS
-    customAuthorizationPolicies: []
-    # - name: "allow-nothing"
-    #   enabled: true
-    #   spec: {}
-    kiali:
-      enabled: true
-      namespaces:
-      - kiali
-      principals:
-      - cluster.local/ns/kiali/sa/kiali-service-account
-
-  grafana:
-    # Toggle vs creation
+  # -- [bb-common AuthorizationPolicy configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/authorization-policies/README.md)
+  authorizationPolicies:
     enabled: true
-    annotations: {}
-    labels: {}
-    gateways:
-      - istio-system/main
-    hosts:
-       - grafana.{{ .Values.domain }}
-    service: ""
-    port: ""
-    namespace: ""
-  injection: disabled
-  mtls:
-    # Note that setting this to STRICT requires additional configuration for Prometheus and monitors.
-    # Review `./docs/istio-mtls-metrics.md` for additional information.
-    mode: STRICT
+    generateFromNetpol: true
+    custom: []
+      # - name: "allow-nothing"
+      #   spec: {}
+
+# -- [bb-common Routes configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/routes/README.md)
+routes:
+  inbound:
+    grafana:
+      enabled: '{{ .Values.istio.enabled }}'
+      gateways:
+        - istio-gateway/public-ingressgateway
+      hosts:
+        - 'grafana.{{ .Values.domain }}'
+      # Custom HTTP routing to handle /metrics redirect
+      http:
+        - match:
+            - uri:
+                prefix: "/metrics"
+          redirect:
+            uri: "/"
+        - route:
+            - destination:
+                host: monitoring-grafana
+                port:
+                  number: 80
+      selector:
+        app.kubernetes.io/name: grafana
 
 sso:
   enabled: false

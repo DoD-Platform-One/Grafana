@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # grafana
 
-![Version: 10.5.15-bb.0](https://img.shields.io/badge/Version-10.5.15--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.4.0](https://img.shields.io/badge/AppVersion-12.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 10.5.15-bb.1](https://img.shields.io/badge/Version-10.5.15--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 12.4.0](https://img.shields.io/badge/AppVersion-12.4.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 The leading tool for querying and visualizing time series and metrics.
 
@@ -9,7 +9,7 @@ The leading tool for querying and visualizing time series and metrics.
 
 - <https://grafana.com>
 - <https://github.com/grafana/grafana>
-- <https://github.com/grafana/helm-charts>
+- <https://github.com/grafana-community/helm-charts>
 
 ## Upstream Release Notes
 
@@ -27,7 +27,7 @@ The leading tool for querying and visualizing time series and metrics.
 - Kubernetes config installed in `~/.kube/config`
 - Helm installed
 
-Kubernetes: `^1.8.0-0`
+Kubernetes: `^1.25.0-0`
 
 Install Helm
 
@@ -75,30 +75,17 @@ helm install grafana chart/
 | grafana.sidecar.dashboards.label | string | `"grafana_dashboard"` |  |
 | grafana.sidecar.dashboards.labelValue | string | `"1"` |  |
 | grafana.sidecar.dashboards.annotations | object | `{}` |  |
-| networkPolicies | object | `{"egress":{"from":{"grafana":{"to":{"cidr":{"0.0.0.0/0":true},"definition":{"kubeAPI":true}}}}},"enabled":true,"prependReleaseName":true}` | [bb-common Network Policies configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/network-policies/README.md?ref_type=heads) |
+| networkPolicies | object | `{"egress":{"from":{"grafana":{"to":{"cidr":{"0.0.0.0/0":true},"definition":{"kubeAPI":true}}}}},"enabled":true,"ingress":{"to":{"grafana":{"from":{"k8s":{"kiali-service-account@kiali/kiali":true}}}}},"prependReleaseName":true}` | [bb-common Network Policies configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/network-policies/README.md?ref_type=heads) |
 | domain | string | `"dev.bigbang.mil"` |  |
 | autoRollingUpgrade.enabled | bool | `true` | Enable BigBang specific autoRollingUpgrade support |
 | autoRollingUpgrade.image.repository | string | `"registry1.dso.mil/ironbank/big-bang/base"` |  |
 | autoRollingUpgrade.image.tag | string | `"2.1.0"` |  |
-| istio.enabled | bool | `false` |  |
-| istio.namespace | string | `"istio-system"` |  |
-| istio.hardened.enabled | bool | `false` |  |
-| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
-| istio.hardened.customServiceEntries | list | `[]` |  |
-| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
-| istio.hardened.kiali.enabled | bool | `true` |  |
-| istio.hardened.kiali.namespaces[0] | string | `"kiali"` |  |
-| istio.hardened.kiali.principals[0] | string | `"cluster.local/ns/kiali/sa/kiali-service-account"` |  |
-| istio.grafana.enabled | bool | `true` |  |
-| istio.grafana.annotations | object | `{}` |  |
-| istio.grafana.labels | object | `{}` |  |
-| istio.grafana.gateways[0] | string | `"istio-system/main"` |  |
-| istio.grafana.hosts[0] | string | `"grafana.{{ .Values.domain }}"` |  |
-| istio.grafana.service | string | `""` |  |
-| istio.grafana.port | string | `""` |  |
-| istio.grafana.namespace | string | `""` |  |
-| istio.injection | string | `"disabled"` |  |
-| istio.mtls.mode | string | `"STRICT"` |  |
+| istio | object | `{"authorizationPolicies":{"custom":[],"enabled":true,"generateFromNetpol":true},"enabled":false,"mtls":{"mode":"STRICT"},"prependReleaseName":true,"serviceEntries":{"custom":[]},"sidecar":{"enabled":false,"outboundTrafficPolicyMode":"REGISTRY_ONLY"}}` | [bb-common Istio configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/istio/README.md) |
+| istio.prependReleaseName | bool | `true` | Prepends the release name to istio resources created by bb-common |
+| istio.sidecar | object | `{"enabled":false,"outboundTrafficPolicyMode":"REGISTRY_ONLY"}` | [bb-common Sidecar configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/istio/README.md#sidecar) |
+| istio.serviceEntries | object | `{"custom":[]}` | [bb-common ServiceEntry configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/istio/README.md#custom-serviceentries) |
+| istio.authorizationPolicies | object | `{"custom":[],"enabled":true,"generateFromNetpol":true}` | [bb-common AuthorizationPolicy configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/authorization-policies/README.md) |
+| routes | object | `{"inbound":{"grafana":{"enabled":"{{ .Values.istio.enabled }}","gateways":["istio-gateway/public-ingressgateway"],"hosts":["grafana.{{ .Values.domain }}"],"http":[{"match":[{"uri":{"prefix":"/metrics"}}],"redirect":{"uri":"/"}},{"route":[{"destination":{"host":"monitoring-grafana","port":{"number":80}}}]}],"selector":{"app.kubernetes.io/name":"grafana"}}}}` | [bb-common Routes configuration](https://repo1.dso.mil/big-bang/product/packages/bb-common/-/blob/main/docs/routes/README.md) |
 | sso.enabled | bool | `false` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
